@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5556263583807929108}
   - component: {fileID: 5556263583807929195}
   - component: {fileID: 5556263583807929194}
+  - component: {fileID: 2288414811911802256}
   m_Layer: 0
   m_Name: Blubble
   m_TagString: Untagged
@@ -106,3 +107,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2288414811911802256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556263583807929109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab00ddaf66027fd4f9cfae274d9fe6bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixing: 1
+  minY: -20
+  maxY: 20
+  minZ: 0
+  maxZ: 15

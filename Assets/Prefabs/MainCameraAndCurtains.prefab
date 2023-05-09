@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 19380121874679950}
   - component: {fileID: 19380121874679947}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: CameraCanvasContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4098440290355997247}
   m_Layer: 0
-  m_Name: WorldContent
+  m_Name: CameraWorldContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
