@@ -62,7 +62,7 @@ Material:
     - _Hue: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Saturation: 0.278
+    - _Saturation: 0.38
     m_Colors:
     - _MultiplyColors: {r: 0.59, g: 0.19, b: 0, a: 0}
     - _SatIntensity: {r: -1.12, g: 0.48, b: 0.114, a: 0}

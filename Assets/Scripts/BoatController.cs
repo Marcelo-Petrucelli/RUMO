@@ -80,7 +80,11 @@ public class BoatController : MonoBehaviour
         }
 
         if(this.speed != 0) {
-            this.transform.position += new Vector3(this.left || this.right ? this.speed : 0f, this.up || this.down ? this.speed : 0f, 0f);
+            this.transform.position += new Vector3(
+                this.left || this.right ? this.speed : 0f,
+                this.up || this.down ? this.speed : 0f, 
+                0f
+            );
         }
     }
 }

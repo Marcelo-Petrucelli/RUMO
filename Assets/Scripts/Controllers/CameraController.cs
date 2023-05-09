@@ -5,14 +5,14 @@ public class CameraController:MonoBehaviour
 {
     public Transform cameraFollow;
     public Transform cameraLimits; //limits for the camera movement
-    public Vector2 smoothSpeed = new Vector2(1f, 1f);
+    public Vector2 smoothSpeed = new(1f, 1f);
     public float smoothDuration = 0.3f;
-    public Vector2 offset = new Vector2(0f, 0f); //how much the camera will move past the player
+    public Vector2 offset = new(0f, 0f); //how much the camera will move past the player
 
     private Camera myCamera;
     private Vector2 halfCam;
     private Vector3 actualSmoothSpeed;
-    private float farLeft => this.cameraLimits.position.x - (this.cameraLimits.localScale.x/2f);
+    private float farLeft => this.cameraLimits.position.x - (this.cameraLimits.localScale.x / 2f);
     private float farRight => this.cameraLimits.position.x + (this.cameraLimits.localScale.x / 2f);
     private float farUp => this.cameraLimits.position.y + (this.cameraLimits.localScale.y / 2f);
     private float farDown => this.cameraLimits.position.y - (this.cameraLimits.localScale.y / 2f);
@@ -35,7 +35,7 @@ public class CameraController:MonoBehaviour
         );
 
         //this.transform.position = Vector3.Lerp(this.transform.position, anchorPosition, Time.deltaTime); //smooths camera movement
-        var dist = Vector2.Distance(this.transform.position, anchorPosition);
+        //var dist = Vector2.Distance(this.transform.position, anchorPosition);
         this.transform.position = Vector3.SmoothDamp(this.transform.position, anchorPosition, ref this.actualSmoothSpeed, this.smoothDuration);
         //this.transform.position = new Vector3(this.cameraFollow.position.x, this.cameraFollow.position.y, this.transform.position.z);
 

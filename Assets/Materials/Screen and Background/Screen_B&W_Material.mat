@@ -57,15 +57,15 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: -1
     - _BUILTIN_QueueOffset: 0
-    - _Brightness: 0
-    - _Contrast: 1
+    - _Brightness: -0.44
+    - _Contrast: 0.81
     - _Hue: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Saturation: 0.278
+    - _Saturation: 0.8
     m_Colors:
     - _MultiplyColors: {r: 0.59, g: 0.19, b: 0, a: 0}
-    - _SatIntensity: {r: -1.12, g: 0.48, b: 0.114, a: 0}
+    - _SatIntensity: {r: -1.54, g: 0.46, b: -0.04, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7730654945531435926
 MonoBehaviour:
