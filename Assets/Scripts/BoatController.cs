@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class BoatController : MonoBehaviour
@@ -7,6 +8,7 @@ public class BoatController : MonoBehaviour
     [SerializeField] public float acceleration = 0f;
     [SerializeField] public float deceleration = 0f;
     [SerializeField] public float maxSpeed = 0f;
+    [SerializeField] public List<Transform> bubblePivots;
 
     [ShowNonSerializedField] private float speed = 0f;
     [ShowNonSerializedField] private bool left = false;
@@ -15,7 +17,9 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] private bool down = false;
 
     // Start is called before the first frame update
-    void Start() => this.anim = this.GetComponent<Animator>();
+    void Start() {
+        this.anim = this.GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update() {
@@ -85,6 +89,26 @@ public class BoatController : MonoBehaviour
                 this.up || this.down ? this.speed : 0f, 
                 0f
             );
+        }
+    }
+
+    public Vector3 GetBubblePivot() {
+        if(this.up) {
+            return this.bubblePivots[0].position;
+        } else if(this.right) {
+            return this.bubblePivots[1].position;
+        } else if(this.down) {
+            return this.bubblePivots[2].position;
+        } else { //Left
+            return this.bubblePivots[3].position;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        foreach(Transform t in bubblePivots) {
+            Gizmos.DrawWireSphere(t.position, 0.3f);
         }
     }
 }

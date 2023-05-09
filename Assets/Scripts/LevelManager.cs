@@ -19,6 +19,18 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("DEBUG")] public MaterialPropTransitioner test;
 
+    [ShowNonSerializedField] internal BoatController player;
+
+    public BoatController Player => this.player;
+
+    public static LevelManager currentInstance;
+
+    void Awake()
+    {
+        currentInstance = this;
+        this.player = FindObjectOfType<BoatController>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
