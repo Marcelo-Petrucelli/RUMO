@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public RectTransform itemController;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
+    [SerializeField, BoxGroup("References")] public GameObject messagesParent;
     [SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
     [SerializeField, BoxGroup("References")] public GameObject itemPrefab;
 
