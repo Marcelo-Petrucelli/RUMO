@@ -15,6 +15,10 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] private bool right = true;
     [ShowNonSerializedField] private bool up = false;
     [ShowNonSerializedField] private bool down = false;
+    [ShowNonSerializedField] private bool jammed = false;
+    [ShowNativeProperty] private int MayPopListSize => this.mayPopBubble.Count;
+
+    private List<BubbleController> mayPopBubble = new List<BubbleController>();
 
     // Start is called before the first frame update
     void Start() {
@@ -24,9 +28,25 @@ public class BoatController : MonoBehaviour
     // Update is called once per frame
     void Update() {
         this.Move();
+        this.CheckPop();
+    }
+
+    private void CheckPop() {
+        if(this.jammed) {
+            return;
+        }
+
+        if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space)) {
+            this.jammed = true;
+            this.mayPopBubble[0].Pop();
+        }
     }
 
     private void Move() {
+        if(this.jammed) {
+            return;
+        }
+
         var moving = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow);
         this.anim.SetBool("Moving", moving);
 
@@ -101,6 +121,21 @@ public class BoatController : MonoBehaviour
             return this.bubblePivots[2].position;
         } else { //Left
             return this.bubblePivots[3].position;
+        }
+    }
+
+    //Upon collision with another GameObject, this GameObject will reverse direction
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
+            this.mayPopBubble.Add(bubble);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
+            this.mayPopBubble.Remove(bubble);
         }
     }
 

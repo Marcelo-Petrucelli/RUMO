@@ -169,9 +169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967a393dc79896847bde1dc3a8ea58c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: Book
   active: 1
   maxMoveDelta: 0.006
   minDistToFollow: 5
+  bubbleInner: {fileID: 811162162696505010}
 --- !u!114 &2288414811911802256
 MonoBehaviour:
   m_ObjectHideFlags: 0

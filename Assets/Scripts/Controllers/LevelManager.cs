@@ -16,6 +16,7 @@ class ColorFilterFinalProperties
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField, BoxGroup("Config")] public int levelIndex;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
 
@@ -35,6 +36,10 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    public void PoppedBubble(BubbleController bubble) {
 
     }
 }

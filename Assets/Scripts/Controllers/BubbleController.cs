@@ -1,14 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
 public class BubbleController : MonoBehaviour
 {
+    [SerializeField, Dropdown("BubbleTypes")] public string type;
     [SerializeField] public bool active;
     [SerializeField] public float maxMoveDelta;
     [SerializeField] public float minDistToFollow;
+    [SerializeField] public Transform bubbleInner;
     private BoatController player;
+
+    private List<string> BubbleTypes => new() { "Book", "Controller", "Pets", "IceCream", "Shoes", "Camera" };
 
     private void Start()
     {
@@ -24,6 +27,13 @@ public class BubbleController : MonoBehaviour
             }
         }
     }
+
+    public void Pop() {
+        this.bubbleInner.GetComponent<Animator>().SetTrigger("Explode");
+        this.Invoke(nameof(ShowItem), 0.5f);
+    }
+
+    private void ShowItem() => LevelManager.currentInstance.PoppedBubble(this);
 
     private void OnDrawGizmosSelected()
     {
