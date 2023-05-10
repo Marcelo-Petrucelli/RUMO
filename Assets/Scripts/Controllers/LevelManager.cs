@@ -17,7 +17,7 @@ class ColorFilterFinalProperties
 public class LevelManager : MonoBehaviour
 {
     [SerializeField, BoxGroup("References")] public GameObject boat;
-    [SerializeField, BoxGroup("DEBUG")] public MaterialPropTransitioner test;
+    [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
 
     [ShowNonSerializedField] internal BoatController player;
 
@@ -28,20 +28,13 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         currentInstance = this;
-        this.player = FindObjectOfType<BoatController>();
+        this.player = this.boat.GetComponent<BoatController>();
+        this.waterAndReflex.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.T)) {
-            this.test.Transition();
-        }
     }
 }
