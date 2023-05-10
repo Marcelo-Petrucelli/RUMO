@@ -11,7 +11,7 @@ public class BubbleController : MonoBehaviour
     [SerializeField] public Transform bubbleInner;
     private BoatController player;
 
-    private List<string> BubbleTypes => new() { "Book", "Controller", "Pets", "IceCream", "Shoes", "Camera" };
+    private List<string> BubbleTypes => LevelManager.itemSpritesNames;
 
     private void Start()
     {

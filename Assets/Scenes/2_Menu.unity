@@ -5186,18 +5186,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCameraAndCurtains
       objectReference: {fileID: 0}
-    - target: {fileID: 19380121874679948, guid: ddb22551968277045895525545662008, type: 3}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19380121874679948, guid: ddb22551968277045895525545662008, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19380122567123993, guid: ddb22551968277045895525545662008, type: 3}
-      propertyPath: m_Color.a
-      value: 0.8156863
-      objectReference: {fileID: 0}
     - target: {fileID: 4763205218691208092, guid: ddb22551968277045895525545662008, type: 3}
       propertyPath: m_RootOrder
       value: 0
