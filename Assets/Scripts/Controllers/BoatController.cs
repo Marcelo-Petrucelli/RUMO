@@ -15,7 +15,7 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] private bool right = true;
     [ShowNonSerializedField] private bool up = false;
     [ShowNonSerializedField] private bool down = false;
-    [ShowNonSerializedField] private bool jammed = false;
+    [ShowNonSerializedField] internal bool jammed = false;
     [ShowNativeProperty] private int MayPopListSize => this.mayPopBubble.Count;
 
     private List<BubbleController> mayPopBubble = new List<BubbleController>();

@@ -1,63 +1,78 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NaughtyAttributes;
+using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ItemHUDController : MonoBehaviour
 {
     [SerializeField, BoxGroup("References")] public GameObject itemPrefab;
-    [SerializeField, BoxGroup("References")] public GameObject screenItemFrame;
-    [SerializeField, BoxGroup("Variation")] private float itemAnimationDuration;
-    [SerializeField, BoxGroup("Variation")] private float xVariation;
+    [SerializeField, BoxGroup("References")] public RectTransform screenItemFrame;
+
+    [SerializeField, BoxGroup("AnimationConfig")] private float xVariation = -300f;
+    [SerializeField, BoxGroup("AnimationConfig")] private float frameAnimationDuration = 0.3f;
+    [SerializeField, BoxGroup("AnimationConfig")] private float waitAnimationDuration = 1f;
+    [SerializeField, BoxGroup("AnimationConfig")] private float itemAnimationDuration = 0.3f;
 
     [SerializeField, ReadOnly, ReorderableList, BoxGroup("Debug")] private List<RectTransform> slots;
+    [ShowNonSerializedField, BoxGroup("Debug")] private int currentItemIndex = -1;
 
     void Start()
     {
         this.slots = new List<RectTransform>(this.transform.GetComponentsInChildren<RectTransform>());
         this.slots.Remove(this.GetComponent<RectTransform>());
         this.slots.Reverse();
+
+        this.screenItemFrame.localScale = Vector3.zero;
+        this.screenItemFrame.gameObject.SetActive(false);
     }
 
-    public void SpawnAndMoveToIventory(int slotIndex) { //Vector2 initialPosition, 
-        /*print(initialPosition);
-        var newItem = Instantiate(this.itemPrefab, this.transform.parent, false);
-        var item = newItem.GetComponent<RectTransform>();
+    void Update() {
 
-        item.localPosition = initialPosition;
-        item.localRotation = Quaternion.identity;
-        item.localScale = Vector3.zero;
+    }
 
-        item.SetParent(this.slots[slotIndex], true);
+    public void SpawnAndMoveToIventory() {
+        if(this.currentItemIndex >= this.slots.Count) {
+            return;
+        }
 
-        var sequence = DOTween.Sequence();
-        sequence.Append(item.DOScale(Vector3.one, 18f / 60f));
-        sequence.AppendInterval(1f);
-        sequence.Append(item.DOLocalMoveX(- this.xVariation, this.itemAnimationDuration / 2));
-        sequence.Join(item.DOLocalMoveX(0, this.itemAnimationDuration / 2));
-        sequence.Join(item.DOLocalMoveY(0, this.itemAnimationDuration));*/
+        this.currentItemIndex++;
 
         var newItem = Instantiate(this.itemPrefab, this.screenItemFrame.transform, false);
         var item = newItem.GetComponent<RectTransform>();
+        var image = newItem.GetComponent<Image>();
+        image.sprite = LevelManager.currentInstance.itemSprites[this.currentItemIndex];
+        item.GetComponent<Image>().SetNativeSize();
 
-        item.localPosition = this.screenItemFrame.transform.position;
-        item.localRotation = Quaternion.identity;
-        item.localScale = Vector3.zero;
-
-        item.SetParent(this.slots[slotIndex], true);
+        this.screenItemFrame.gameObject.SetActive(true);
 
         var sequence = DOTween.Sequence();
-        sequence.Append(item.DOScale(Vector3.one, 18f / 60f));
-        sequence.AppendInterval(1f);
-        sequence.Append(item.DOLocalMoveX(-this.xVariation, this.itemAnimationDuration / 2));
-        sequence.Join(item.DOLocalMoveX(0, this.itemAnimationDuration / 2));
-        sequence.Join(item.DOLocalMoveY(0, this.itemAnimationDuration));
+        sequence.Append(this.screenItemFrame.DOScale(Vector3.one, this.frameAnimationDuration));
+        sequence.AppendInterval(this.waitAnimationDuration);
+        sequence.OnComplete(() => this.FromFrameToSlot(item));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void FromFrameToSlot(RectTransform item) {
+        item.SetParent(this.slots[this.currentItemIndex], true);
+
+        var frameSequence = DOTween.Sequence();
+        frameSequence.Append(item.DOScale(new Vector3(
+            this.slots[0].rect.width / item.rect.width,
+            this.slots[0].rect.height / item.rect.height,
+            1
+        ), this.frameAnimationDuration));
+        frameSequence.Join(this.screenItemFrame.DOScale(Vector3.zero, this.frameAnimationDuration));
+
+        var itemSequence = DOTween.Sequence();
+        itemSequence.AppendInterval(this.frameAnimationDuration / 3);
+        itemSequence.Append(item.DOLocalMoveX(-this.xVariation, this.itemAnimationDuration / 2));
+        itemSequence.Join(item.DOLocalMoveX(0, this.itemAnimationDuration / 2, true));
+        itemSequence.Join(item.DOLocalMoveY(0, this.itemAnimationDuration, true));
+
+        itemSequence.OnComplete(() => {
+            item = null;
+            LevelManager.currentInstance.ItemObtained();
+        });
     }
 }
