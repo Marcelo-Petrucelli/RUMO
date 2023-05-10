@@ -110,6 +110,7 @@ public class BoatController : MonoBehaviour
                 this.up || this.down ? this.speed : 0f, 
                 0f
             );
+            this.transform.position = Camera.current.GetComponent<CameraController>().ClampMapPosition(this.transform.position);
         }
     }
 

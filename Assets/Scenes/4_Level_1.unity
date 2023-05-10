@@ -1250,7 +1250,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 800}
+  m_SizeDelta: {x: 2560, y: 1440}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1455727982
 MonoBehaviour:
@@ -1785,6 +1785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraFollow: {fileID: 1999482020}
   cameraLimits: {fileID: 1773521166}
+  playerLimitMargin: 5
   smoothSpeed: {x: 0.15, y: 0.15}
   smoothDuration: 0.5
   offset: {x: 0, y: 0}

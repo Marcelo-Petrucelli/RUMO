@@ -5,6 +5,7 @@ public class CameraController:MonoBehaviour
 {
     public Transform cameraFollow;
     public Transform cameraLimits; //limits for the camera movement
+    public float playerLimitMargin = 10; //limits for the camera movement
     public Vector2 smoothSpeed = new(1f, 1f);
     public float smoothDuration = 0.3f;
     public Vector2 offset = new(0f, 0f); //how much the camera will move past the player
@@ -54,6 +55,14 @@ public class CameraController:MonoBehaviour
         }
     }
 
+    public Vector3 ClampMapPosition(Vector3 worldPosition) {
+        return new Vector3(
+            Mathf.Clamp(worldPosition.x, this.farLeft + this.playerLimitMargin, this.farRight - this.playerLimitMargin), 
+            Mathf.Clamp(worldPosition.y, this.farDown + this.playerLimitMargin, this.farUp - this.playerLimitMargin), 
+            worldPosition.z
+        );
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -63,5 +72,25 @@ public class CameraController:MonoBehaviour
 
         Gizmos.DrawLine(new Vector2(this.farRight, this.farDown), new Vector2(this.farRight, this.farUp)); //BottomRight, TopRight
         Gizmos.DrawLine(new Vector2(this.farRight, this.farDown), new Vector2(this.farLeft, this.farDown)); //BottomRight, BottomLeft
+
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawLine( //TopLeft, TopRight
+            new Vector2(this.farLeft + this.playerLimitMargin, this.farUp - this.playerLimitMargin), 
+            new Vector2(this.farRight - this.playerLimitMargin, this.farUp - this.playerLimitMargin)
+        );
+        Gizmos.DrawLine( //TopLeft, BottomLeft
+            new Vector2(this.farLeft + this.playerLimitMargin, this.farUp - this.playerLimitMargin), 
+            new Vector2(this.farLeft + this.playerLimitMargin, this.farDown + this.playerLimitMargin)
+        );
+
+        Gizmos.DrawLine( //BottomRight, TopRight
+            new Vector2(this.farRight - this.playerLimitMargin, this.farDown + this.playerLimitMargin), 
+            new Vector2(this.farRight - this.playerLimitMargin, this.farUp - this.playerLimitMargin)
+        );
+        Gizmos.DrawLine( //BottomRight, BottomLeft
+            new Vector2(this.farRight - this.playerLimitMargin, this.farDown + this.playerLimitMargin), 
+            new Vector2(this.farLeft + this.playerLimitMargin, this.farDown + this.playerLimitMargin)
+        );
     }
 }
