@@ -144,7 +144,7 @@ public class BoatController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        foreach(Transform t in bubblePivots) {
+        foreach(Transform t in this.bubblePivots) {
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
     }
