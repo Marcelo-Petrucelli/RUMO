@@ -15,7 +15,9 @@ public class BubbleController : MonoBehaviour
 
     private void Start()
     {
-        this.player = LevelManager.currentInstance.Player;
+        if(active) {
+            this.player = LevelManager.currentInstance.Player;
+        }
     }
 
     private void Update()

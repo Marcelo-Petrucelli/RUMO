@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1346207131844168443}
   - component: {fileID: 611086108705589263}
   - component: {fileID: 8939664356228131734}
+  - component: {fileID: 2507694740569571383}
   m_Layer: 0
   m_Name: BubbleBody
   m_TagString: Untagged
@@ -123,6 +124,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.4}
   m_Size: {x: 2.35, y: 1.12}
   m_Direction: 1
+--- !u!114 &2507694740569571383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940370750850852330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd3a672c2e95114a8eab0c7f34b6b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPosition: {x: 0, y: -1, z: 50}
+  localRotation: {x: 0, y: 0, z: -180}
+  alpha: 0.3
+  sprite: {fileID: 1346207131844168443}
+  spriteLayer: Default
+  spriteLayerOrder: 0
 --- !u!1 &5556263583807929109
 GameObject:
   m_ObjectHideFlags: 0
