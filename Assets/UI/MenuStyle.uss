@@ -1,0 +1,20 @@
+.menu-button {
+    font-size: 50px;
+    -unity-text-align: upper-left;
+    -unity-font: url('project://database/Assets/Fonts/PatrickHand-Regular.ttf?fileID=12800000&guid=c687f2565e72e2c4b97d819296e1cb92&type=3#PatrickHand-Regular');
+    -unity-font-definition: url('project://database/Assets/Fonts/PatrickHand-Regular%20SDF.asset?fileID=11400000&guid=5b46ec3f9c865b446bfc3c8c4389e745&type=2#PatrickHand-Regular SDF');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 254, 234);
+    transition-duration: 0.3s;
+}
+
+.menu-button:hover {
+    scale: 1.3 1.3;
+    transform-origin: left 30%;
+    transition-duration: 0.3s;
+    color: rgba(255, 255, 255, 255);
+}
