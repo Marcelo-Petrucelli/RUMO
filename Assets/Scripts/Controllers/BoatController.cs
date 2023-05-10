@@ -39,6 +39,7 @@ public class BoatController : MonoBehaviour
         if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space)) {
             this.jammed = true;
             this.mayPopBubble[0].Pop();
+            this.mayPopBubble.RemoveAt(0);
         }
     }
 

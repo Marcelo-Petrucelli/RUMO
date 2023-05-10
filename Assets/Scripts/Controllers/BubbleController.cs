@@ -33,7 +33,7 @@ public class BubbleController : MonoBehaviour
         this.ShowItem(); //this.Invoke(nameof(ShowItem), 0.5f);
     }
 
-    private void ShowItem() => LevelManager.currentInstance.PoppedBubble(this);
+    private void ShowItem() => LevelManager.currentInstance.ObtainNextItem();
 
     private void OnDrawGizmosSelected()
     {

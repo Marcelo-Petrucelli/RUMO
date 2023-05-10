@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void PoppedBubble(BubbleController bubble) {
+    public void ObtainNextItem() {
         this.itemController.GetComponent<ItemHUDController>().SpawnAndMoveToIventory();
         this.player.jammed = true;
     }
