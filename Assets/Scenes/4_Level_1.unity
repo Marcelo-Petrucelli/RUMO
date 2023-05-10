@@ -877,7 +877,6 @@ MonoBehaviour:
   waterAndReflex: {fileID: 1773521164}
   messagesParent: {fileID: 1207744318}
   bubblePrefab: {fileID: 5556263583807929109, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
-  itemPrefab: {fileID: 7248078452754817824, guid: f812246e4b0e94143853f77534312954, type: 3}
   descSprites: Na ordem Book, Controller, Pets, IceCream, Shoes, Fish, Camera, Kid
   itemSprites:
   - {fileID: 21300000, guid: 9ea190f0c815984488ca367b7e7f29a7, type: 3}
@@ -888,6 +887,42 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e79a9e9d6396eba438900afb0357e808, type: 3}
   - {fileID: 21300000, guid: 7f326ba9c5f292d43b0a4e2823bb4e25, type: 3}
   - {fileID: 21300000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
+--- !u!1 &1455727980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455727981}
+  m_Layer: 0
+  m_Name: ItemFrame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1455727981
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455727980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 19380121805919456}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1497750483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1389,6 +1424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfd3b15b3fcd5148941e4f89ed64ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 7248078452754817824, guid: f812246e4b0e94143853f77534312954, type: 3}
+  screenItemFrame: {fileID: 0}
+  itemAnimationDuration: 1
+  xVariation: -400
   slots: []
 --- !u!114 &1817555990
 MonoBehaviour:
@@ -1849,11 +1888,16 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 19380121874679952, guid: ddb22551968277045895525545662008, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4763205218691208092, guid: ddb22551968277045895525545662008, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6609906610070386289, guid: ddb22551968277045895525545662008, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ddb22551968277045895525545662008, type: 3}
 --- !u!224 &19380121805919456 stripped
 RectTransform:

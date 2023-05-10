@@ -30,7 +30,7 @@ public class BubbleController : MonoBehaviour
 
     public void Pop() {
         this.bubbleInner.GetComponent<Animator>().SetTrigger("Explode");
-        this.Invoke(nameof(ShowItem), 0.5f);
+        this.ShowItem(); //this.Invoke(nameof(ShowItem), 0.5f);
     }
 
     private void ShowItem() => LevelManager.currentInstance.PoppedBubble(this);

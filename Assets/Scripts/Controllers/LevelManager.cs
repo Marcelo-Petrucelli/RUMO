@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
     [SerializeField, BoxGroup("References")] public GameObject messagesParent;
     [SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
-    [SerializeField, BoxGroup("References")] public GameObject itemPrefab;
 
     [SerializeField, ReadOnly, TextArea(maxLines:1, minLines:1), BoxGroup("References")] private string descSprites = "Na ordem " + string.Join(", ", LevelManager.itemSpritesNames.ToArray());
     [SerializeField, BoxGroup("References")] public List<Sprite> itemSprites;
@@ -58,9 +57,8 @@ public class LevelManager : MonoBehaviour
 
         this.currentItemIndex++;
 
-        var bubbleWorldPosition = Camera.current.WorldToViewportPoint(bubble.transform.position);
-        Instantiate(this.itemPrefab, bubbleWorldPosition, Quaternion.identity);
-
-        
+        //var bubbleWorldPosition = Camera.current.WorldToScreenPoint(bubble.transform.GetChild(0).position) - Camera.current.gameObject.GetComponentInChildren<Canvas>().transform.position;
+        //this.itemController.GetComponent<ItemHUDController>().SpawnAndMoveToIventory(bubbleWorldPosition, this.currentItemIndex);
+        this.itemController.GetComponent<ItemHUDController>().SpawnAndMoveToIventory(this.currentItemIndex);
     }
 }
