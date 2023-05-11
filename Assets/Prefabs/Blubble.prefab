@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1346207131844168443}
   - component: {fileID: 611086108705589263}
   - component: {fileID: 8939664356228131734}
+  - component: {fileID: 5522151364207875476}
   - component: {fileID: 2507694740569571383}
   - component: {fileID: 5170129514191037234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BubbleBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,12 +120,33 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.4}
   m_Size: {x: 2.35, y: 1.12}
   m_Direction: 1
+--- !u!50 &5522151364207875476
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940370750850852330}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &2507694740569571383
 MonoBehaviour:
   m_ObjectHideFlags: 0

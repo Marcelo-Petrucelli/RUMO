@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using FMODUnity;
 using NaughtyAttributes;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
+using FMODUnity;
 
 public class BoatController : MonoBehaviour
 {
-    private Animator anim;
     [SerializeField] public float acceleration = 0f;
     [SerializeField] public float deceleration = 0f;
     [SerializeField] public float maxSpeed = 0f;
@@ -21,19 +19,26 @@ public class BoatController : MonoBehaviour
 
     [ShowNativeProperty] private int MayPopListSize => this.mayPopBubble.Count;
 
+    private Animator anim;
+    private Rigidbody2D boatBody;
     private List<FMODUnity.StudioEventEmitter> soundEmitter;
     private List<BubbleController> mayPopBubble = new List<BubbleController>();
 
     // Start is called before the first frame update
     void Start() {
         this.anim = this.GetComponent<Animator>();
+        this.boatBody = this.GetComponent<Rigidbody2D>();
         this.soundEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
     }
 
     // Update is called once per frame
     void Update() {
-        this.Move();
         this.CheckPop();
+    }
+
+    void FixedUpdate()
+    {
+        this.Move();
     }
 
     private void CheckPop() {
@@ -112,7 +117,7 @@ public class BoatController : MonoBehaviour
 
         if(moving) {
             if(Mathf.Abs(this.speed) < this.maxSpeed) { //Not at Max Speed
-                this.speed += (this.left || this.down ? -1 : 1) * this.acceleration * Time.deltaTime;
+                this.speed += (this.left || this.down ? -1 : 1) * this.acceleration * Time.fixedDeltaTime;
             }/* else {
                 this.speed = (this.left || this.down ? -1 : 1) * this.maxSpeed;
             }*/
@@ -124,19 +129,22 @@ public class BoatController : MonoBehaviour
                 if(this.soundEmitter[0].IsPlaying()) {
                     this.soundEmitter[0].SetParameter("Push button", 1f);
                 }
-                this.speed += (this.left || this.down ? 1 : -1) * this.deceleration * Time.deltaTime;
+                this.speed += (this.left || this.down ? 1 : -1) * this.deceleration * Time.fixedDeltaTime;
             } else {
                 this.speed = 0;
             }
         }
 
         if(this.speed != 0) {
-            this.transform.position += new Vector3(
-                this.left || this.right ? this.speed * Time.deltaTime : 0f,
-                this.up || this.down ? this.speed * Time.deltaTime : 0f, 
-                0f
+             var speedVect = new Vector3( //this.transform.position
+                this.left || this.right ? this.speed * Time.fixedDeltaTime : 0f,
+                this.up || this.down ? this.speed * Time.fixedDeltaTime : 0f,
+            0f
             );
-            this.transform.position = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position);
+
+            //this.transform.position = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position);
+            var clamped = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position + speedVect);
+            this.boatBody.MovePosition(clamped);
         }
     }
 
@@ -153,14 +161,14 @@ public class BoatController : MonoBehaviour
     }
 
     //Upon collision with another GameObject, this GameObject will reverse direction
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void TriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
             this.mayPopBubble.Add(bubble);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void TriggerExit2D(Collider2D collision)
     {
         if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
             this.mayPopBubble.Remove(bubble);

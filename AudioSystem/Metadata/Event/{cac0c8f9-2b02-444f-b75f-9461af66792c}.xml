@@ -343,7 +343,7 @@
 			<value>1</value>
 		</property>
 		<property name="maximum">
-			<value>1.5</value>
+			<value>1</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{87c1fe88-a55d-4ba7-b2c4-d63c20abbca3}</destination>
