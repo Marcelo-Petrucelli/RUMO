@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using FMODUnity;
 using NaughtyAttributes;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class BoatController : MonoBehaviour
 {
@@ -16,13 +18,16 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] private bool up = false;
     [ShowNonSerializedField] private bool down = false;
     [ShowNonSerializedField] internal bool jammed = false;
+
     [ShowNativeProperty] private int MayPopListSize => this.mayPopBubble.Count;
 
+    private List<FMODUnity.StudioEventEmitter> soundEmitter;
     private List<BubbleController> mayPopBubble = new List<BubbleController>();
 
     // Start is called before the first frame update
     void Start() {
         this.anim = this.GetComponent<Animator>();
+        this.soundEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
     }
 
     // Update is called once per frame
@@ -52,6 +57,13 @@ public class BoatController : MonoBehaviour
         var moving = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow);
         this.anim.SetBool("Moving", moving);
 
+        if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)) {
+            this.soundEmitter[0].SetParameter("Push button", 0.0f);
+            if(!this.soundEmitter[0].IsPlaying()) {
+                this.soundEmitter[0].Play();
+            }
+        }
+
         if(Input.GetKeyDown(KeyCode.LeftArrow) && !this.left) {
             this.left = true;
             this.right = this.up = this.down = false;
@@ -61,6 +73,8 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
             this.anim.ResetTrigger("Down");
+            
+            this.soundEmitter[1].Play();
         } else if(Input.GetKeyDown(KeyCode.RightArrow) && !this.right) {
             this.right = true;
             this.left = this.up = this.down = false;
@@ -70,6 +84,8 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Up");
             this.anim.ResetTrigger("Down");
+            
+            this.soundEmitter[1].Play();
         } else if(Input.GetKeyDown(KeyCode.UpArrow) && !this.up) {
             this.up = true;
             this.left = this.right = this.down = false;
@@ -79,6 +95,8 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Down");
+
+            this.soundEmitter[1].Play();
         } else if(Input.GetKeyDown(KeyCode.DownArrow) && !this.down) {
             this.down = true;
             this.left = this.right = this.up = false;
@@ -88,6 +106,8 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
+
+            this.soundEmitter[1].Play();
         }
 
         if(moving) {
@@ -101,6 +121,9 @@ public class BoatController : MonoBehaviour
                 ((this.left || this.down) && this.speed < 0) ||
                 ((this.right || this.up) && this.speed > 0))
             {
+                if(this.soundEmitter[0].IsPlaying()) {
+                    this.soundEmitter[0].SetParameter("Push button", 1f);
+                }
                 this.speed += (this.left || this.down ? 1 : -1) * this.deceleration * Time.deltaTime;
             } else {
                 this.speed = 0;
