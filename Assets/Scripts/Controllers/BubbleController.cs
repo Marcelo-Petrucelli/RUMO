@@ -25,7 +25,7 @@ public class BubbleController : MonoBehaviour
         if(this.active) {
             var dist = Vector3.Distance(this.transform.position, this.player.transform.position);
             if(dist < this.minDistToFollow ) {
-                this.transform.position = Vector3.MoveTowards(this.transform.position, this.player.GetBubblePivot(), this.maxMoveDelta);
+                this.transform.position = Vector3.MoveTowards(this.transform.position, this.player.GetBubblePivot(), this.maxMoveDelta * Time.deltaTime);
             }
         }
     }

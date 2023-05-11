@@ -37,7 +37,8 @@ public class BoatController : MonoBehaviour
         }
 
         if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space)) {
-            this.jammed = true;
+            //this.jammed = true; //Will be set by LevelManager.ObtainNextItem()
+            this.speed = 0;
             this.mayPopBubble[0].Pop();
             this.mayPopBubble.RemoveAt(0);
         }
@@ -92,7 +93,9 @@ public class BoatController : MonoBehaviour
         if(moving) {
             if(Mathf.Abs(this.speed) < this.maxSpeed) { //Not at Max Speed
                 this.speed += (this.left || this.down ? -1 : 1) * this.acceleration * Time.deltaTime;
-            }
+            }/* else {
+                this.speed = (this.left || this.down ? -1 : 1) * this.maxSpeed;
+            }*/
         } else {
             if(
                 ((this.left || this.down) && this.speed < 0) ||
@@ -106,11 +109,11 @@ public class BoatController : MonoBehaviour
 
         if(this.speed != 0) {
             this.transform.position += new Vector3(
-                this.left || this.right ? this.speed : 0f,
-                this.up || this.down ? this.speed : 0f, 
+                this.left || this.right ? this.speed * Time.deltaTime : 0f,
+                this.up || this.down ? this.speed * Time.deltaTime : 0f, 
                 0f
             );
-            this.transform.position = Camera.current.GetComponent<CameraController>().ClampMapPosition(this.transform.position);
+            this.transform.position = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position);
         }
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2853761038698348930}
   - component: {fileID: 3285013317320331089}
   m_Layer: 0
-  m_Name: square
+  m_Name: ItemSlotSquaresquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 3636635008757767748}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.54155, y: 13.54155, z: 0.90277}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

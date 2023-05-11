@@ -66,9 +66,10 @@ public class ItemHUDController : MonoBehaviour
 
         var itemSequence = DOTween.Sequence();
         itemSequence.AppendInterval(this.frameAnimationDuration / 3);
-        itemSequence.Append(item.DOLocalMoveX(-this.xVariation, this.itemAnimationDuration / 2));
-        itemSequence.Join(item.DOLocalMoveX(0, this.itemAnimationDuration / 2, true));
-        itemSequence.Join(item.DOLocalMoveY(0, this.itemAnimationDuration, true));
+        itemSequence.Append(item.DOLocalMoveY(0, this.itemAnimationDuration, true));
+        itemSequence.Join(item.DOLocalMoveX(this.xVariation, this.itemAnimationDuration / 2).SetEase(Ease.OutSine).OnComplete(() => {
+            item.DOLocalMoveX(0, this.itemAnimationDuration / 2, true).SetEase(Ease.InSine);
+        }));
 
         itemSequence.OnComplete(() => {
             item = null;

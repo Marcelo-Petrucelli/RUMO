@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     public static List<string> itemSpritesNames = new() { "Book", "Controller", "Pets", "IceCream", "Shoes", "Fish", "Camera", "Kid" };
 
     [SerializeField, BoxGroup("Config")] public int levelIndex;
+    [SerializeField, BoxGroup("References")] public Camera levelCamera;
     [SerializeField, BoxGroup("References")] public RectTransform itemController;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
@@ -38,6 +39,7 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
         this.waterAndReflex.SetActive(true);
