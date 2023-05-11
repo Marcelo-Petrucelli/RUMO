@@ -15,7 +15,7 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] private bool right = true;
     [ShowNonSerializedField] private bool up = false;
     [ShowNonSerializedField] private bool down = false;
-    [ShowNonSerializedField] private bool jammed = false;
+    [ShowNonSerializedField] internal bool jammed = false;
     [ShowNativeProperty] private int MayPopListSize => this.mayPopBubble.Count;
 
     private List<BubbleController> mayPopBubble = new List<BubbleController>();
@@ -39,6 +39,7 @@ public class BoatController : MonoBehaviour
         if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space)) {
             this.jammed = true;
             this.mayPopBubble[0].Pop();
+            this.mayPopBubble.RemoveAt(0);
         }
     }
 
@@ -109,6 +110,7 @@ public class BoatController : MonoBehaviour
                 this.up || this.down ? this.speed : 0f, 
                 0f
             );
+            this.transform.position = Camera.current.GetComponent<CameraController>().ClampMapPosition(this.transform.position);
         }
     }
 
@@ -142,7 +144,7 @@ public class BoatController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        foreach(Transform t in bubblePivots) {
+        foreach(Transform t in this.bubblePivots) {
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
     }
