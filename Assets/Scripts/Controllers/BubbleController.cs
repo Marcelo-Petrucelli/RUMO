@@ -37,6 +37,8 @@ public class BubbleController : MonoBehaviour
 
     private void ShowItem() => LevelManager.currentInstance.ObtainNextItem();
 
+    public void DestroySelf() => Destroy(this.gameObject);
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

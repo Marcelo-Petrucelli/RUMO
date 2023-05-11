@@ -220,34 +220,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc5423f893a5c5d43a27c9d40900366f, type: 3}
---- !u!1 &117027926 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 940370750850852330, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
-  m_PrefabInstance: {fileID: 5556263583686954283}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &117027930 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1346207131844168443, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
-  m_PrefabInstance: {fileID: 5556263583686954283}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &117027931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117027926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fd3a672c2e95114a8eab0c7f34b6b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: -1, z: 50}
-  localRotation: {x: 0, y: 0, z: -180}
-  alpha: 0.3
-  sprite: {fileID: 117027930}
-  spriteLayer: Default
-  spriteLayerOrder: 0
 --- !u!4 &123139647 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5556263583807929108, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
@@ -801,34 +773,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5556263583807929108, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
   m_PrefabInstance: {fileID: 390405275}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &390405277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 940370750850852330, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
-  m_PrefabInstance: {fileID: 390405275}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &390405278 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1346207131844168443, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
-  m_PrefabInstance: {fileID: 390405275}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &390405279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390405277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fd3a672c2e95114a8eab0c7f34b6b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: -1, z: 50}
-  localRotation: {x: 0, y: 0, z: -180}
-  alpha: 0.3
-  sprite: {fileID: 390405278}
-  spriteLayer: Default
-  spriteLayerOrder: 0
 --- !u!1 &445355549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,34 +2757,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5556263583807929108, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
   m_PrefabInstance: {fileID: 1497750483}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1497750485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 940370750850852330, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
-  m_PrefabInstance: {fileID: 1497750483}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1497750486 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1346207131844168443, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
-  m_PrefabInstance: {fileID: 1497750483}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1497750487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497750485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fd3a672c2e95114a8eab0c7f34b6b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: -1, z: 50}
-  localRotation: {x: 0, y: 0, z: -180}
-  alpha: 0.3
-  sprite: {fileID: 1497750486}
-  spriteLayer: Default
-  spriteLayerOrder: 0
 --- !u!224 &1555265573 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4421739975930960986, guid: bc5423f893a5c5d43a27c9d40900366f, type: 3}
@@ -3329,7 +3245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1773521165
 SpriteRenderer:
   m_ObjectHideFlags: 0
