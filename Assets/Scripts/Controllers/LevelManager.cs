@@ -37,8 +37,7 @@ public class LevelManager : MonoBehaviour
     [ShowNonSerializedField] internal BoatController player;
     [ShowNonSerializedField] internal bool showingText =  false;
 
-    public BoatController Player => this.player;
-
+    public BoatController Player => this.player;    
     public static LevelManager currentInstance;
 
     void Awake()
@@ -46,7 +45,7 @@ public class LevelManager : MonoBehaviour
         Application.targetFrameRate = 60;
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
-        this.waterAndReflex.SetActive(true);
+        this.waterAndReflex.SetActive(true);        
     }
 
     // Start is called before the first frame update
@@ -59,6 +58,7 @@ public class LevelManager : MonoBehaviour
         var msg = this.messages[index];
         var originalColor = msg.color;
         var transp = originalColor - Color.black;
+        var colorTeste = Color.blue;
 
         msg.color = transp;
         msg.gameObject.SetActive(true);
@@ -67,10 +67,29 @@ public class LevelManager : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(msg.DOColor(originalColor, this.messagesFadeDuration));
         sequence.AppendInterval(this.messagesDuration);
-        sequence.Append(msg.DOColor(transp, this.messagesFadeDuration));
         sequence.OnComplete(() => {
+        var sequenceFadeOut = DOTween.Sequence();
+        var actualDirection = new Vector3(0, 0, 0);
+        var actualPosition = msg.rectTransform.position;
+
+        if(Player.right) {
+            actualDirection = new Vector3(300, 0, 0);
+        } else if(Player.left) {
+            actualDirection = new Vector3(-300, 0, 0);
+        } else if(Player.up) {
+            actualDirection = new Vector3(0, 300, 0);
+        } else if(Player.down) {
+            actualDirection = new Vector3(0, -300, 0);
+        }       
+            
+        sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
+        sequenceFadeOut.Join(msg.DOColor(transp, this.messagesFadeDuration));
+        sequenceFadeOut.OnComplete(() => {
             msg.gameObject.SetActive(false);
             this.showingText = false;
+
+        });
+            
         });
     }
 

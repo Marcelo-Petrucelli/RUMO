@@ -1970,6 +1970,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e79a9e9d6396eba438900afb0357e808, type: 3}
   - {fileID: 21300000, guid: 7f326ba9c5f292d43b0a4e2823bb4e25, type: 3}
   - {fileID: 21300000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
+  actualDirection: 
 --- !u!1 &1455727980
 GameObject:
   m_ObjectHideFlags: 0

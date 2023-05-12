@@ -13,10 +13,10 @@ public class BoatController : MonoBehaviour
     [SerializeField] public List<Transform> bubblePivots;
 
     [ShowNonSerializedField] private float speed = 0f;
-    [ShowNonSerializedField] private bool left = false;
-    [ShowNonSerializedField] private bool right = true;
-    [ShowNonSerializedField] private bool up = false;
-    [ShowNonSerializedField] private bool down = false;
+    [ShowNonSerializedField] internal bool left = false;
+    [ShowNonSerializedField] internal bool right = true;
+    [ShowNonSerializedField] internal bool up = false;
+    [ShowNonSerializedField] internal bool down = false;
     [ShowNonSerializedField] internal bool jammed = false;
 
     [ShowNativeProperty] internal int MayPopListSize => this.mayPopBubbles.Count;
