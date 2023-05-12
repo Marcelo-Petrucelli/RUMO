@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 19380121421458592}
   - component: {fileID: 7456994562430773045}
   - component: {fileID: 2095556670724622164}
+  - component: {fileID: 7097686823287901021}
   m_Layer: 0
   m_Name: MainCameraAndCurtains
   m_TagString: MainCamera
@@ -141,6 +142,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!114 &7097686823287901021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19380121421458595}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58645db0fbaa57458b94985caf00d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraFollow: {fileID: 0}
+  cameraLimits: {fileID: 0}
+  playerLimitMargin: 5
+  smoothSpeed: {x: 0.15, y: 0.15}
+  smoothDuration: 0.5
+  offset: {x: 0, y: 0}
 --- !u!1 &19380121874679952
 GameObject:
   m_ObjectHideFlags: 0

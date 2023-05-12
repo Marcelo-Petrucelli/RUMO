@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class CameraController:MonoBehaviour
 {
-    public Transform cameraFollow;
-    public Transform cameraLimits; //limits for the camera movement
-    public float playerLimitMargin = 10; //limits for the camera movement
-    public Vector2 smoothSpeed = new(1f, 1f);
-    public float smoothDuration = 0.3f;
-    public Vector2 offset = new(0f, 0f); //how much the camera will move past the player
+    [SerializeField] public Transform cameraFollow;
+    [SerializeField] public Transform cameraLimits; //limits for the camera movement
+    [SerializeField] public float playerLimitMargin = 10; //limits for the camera movement
+    [SerializeField] public Vector2 smoothSpeed = new(1f, 1f);
+    [SerializeField] public float smoothDuration = 0.3f;
+    [SerializeField] public Vector2 offset = new(0f, 0f); //how much the camera will move past the player
+    [SerializeField] public bool startAtFollow = true;
 
     private Camera myCamera;
     private Vector2 halfCam;
@@ -21,9 +22,11 @@ public class CameraController:MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         this.myCamera = this.GetComponent<Camera>();
-        this.transform.position = new Vector3(this.cameraFollow.transform.position.x, this.cameraFollow.transform.position.y, this.transform.position.z);
         this.halfCam = new Vector2(this.myCamera.orthographicSize * this.myCamera.aspect, this.myCamera.orthographicSize);
         this.actualSmoothSpeed = this.smoothSpeed;
+        if(this.startAtFollow) {
+            this.transform.position = new Vector3(this.cameraFollow.transform.position.x, this.cameraFollow.transform.position.y, this.transform.position.z);
+        }
     }
 
     // Update is called once per frame
@@ -65,32 +68,34 @@ public class CameraController:MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        if(this.cameraLimits != null) {
+            Gizmos.color = Color.yellow;
 
-        Gizmos.DrawLine(new Vector2(this.farLeft, this.farUp), new Vector2(this.farRight, this.farUp)); //TopLeft, TopRight
-        Gizmos.DrawLine(new Vector2(this.farLeft, this.farUp), new Vector2(this.farLeft, this.farDown)); //TopLeft, BottomLeft
+            Gizmos.DrawLine(new Vector2(this.farLeft, this.farUp), new Vector2(this.farRight, this.farUp)); //TopLeft, TopRight
+            Gizmos.DrawLine(new Vector2(this.farLeft, this.farUp), new Vector2(this.farLeft, this.farDown)); //TopLeft, BottomLeft
 
-        Gizmos.DrawLine(new Vector2(this.farRight, this.farDown), new Vector2(this.farRight, this.farUp)); //BottomRight, TopRight
-        Gizmos.DrawLine(new Vector2(this.farRight, this.farDown), new Vector2(this.farLeft, this.farDown)); //BottomRight, BottomLeft
+            Gizmos.DrawLine(new Vector2(this.farRight, this.farDown), new Vector2(this.farRight, this.farUp)); //BottomRight, TopRight
+            Gizmos.DrawLine(new Vector2(this.farRight, this.farDown), new Vector2(this.farLeft, this.farDown)); //BottomRight, BottomLeft
 
-        Gizmos.color = Color.green;
+            Gizmos.color = Color.green;
 
-        Gizmos.DrawLine( //TopLeft, TopRight
-            new Vector2(this.farLeft + this.playerLimitMargin, this.farUp - this.playerLimitMargin), 
-            new Vector2(this.farRight - this.playerLimitMargin, this.farUp - this.playerLimitMargin)
-        );
-        Gizmos.DrawLine( //TopLeft, BottomLeft
-            new Vector2(this.farLeft + this.playerLimitMargin, this.farUp - this.playerLimitMargin), 
-            new Vector2(this.farLeft + this.playerLimitMargin, this.farDown + this.playerLimitMargin)
-        );
+            Gizmos.DrawLine( //TopLeft, TopRight
+                new Vector2(this.farLeft + this.playerLimitMargin, this.farUp - this.playerLimitMargin), 
+                new Vector2(this.farRight - this.playerLimitMargin, this.farUp - this.playerLimitMargin)
+            );
+            Gizmos.DrawLine( //TopLeft, BottomLeft
+                new Vector2(this.farLeft + this.playerLimitMargin, this.farUp - this.playerLimitMargin), 
+                new Vector2(this.farLeft + this.playerLimitMargin, this.farDown + this.playerLimitMargin)
+            );
 
-        Gizmos.DrawLine( //BottomRight, TopRight
-            new Vector2(this.farRight - this.playerLimitMargin, this.farDown + this.playerLimitMargin), 
-            new Vector2(this.farRight - this.playerLimitMargin, this.farUp - this.playerLimitMargin)
-        );
-        Gizmos.DrawLine( //BottomRight, BottomLeft
-            new Vector2(this.farRight - this.playerLimitMargin, this.farDown + this.playerLimitMargin), 
-            new Vector2(this.farLeft + this.playerLimitMargin, this.farDown + this.playerLimitMargin)
-        );
+            Gizmos.DrawLine( //BottomRight, TopRight
+                new Vector2(this.farRight - this.playerLimitMargin, this.farDown + this.playerLimitMargin), 
+                new Vector2(this.farRight - this.playerLimitMargin, this.farUp - this.playerLimitMargin)
+            );
+            Gizmos.DrawLine( //BottomRight, BottomLeft
+                new Vector2(this.farRight - this.playerLimitMargin, this.farDown + this.playerLimitMargin), 
+                new Vector2(this.farLeft + this.playerLimitMargin, this.farDown + this.playerLimitMargin)
+            );
+        }
     }
 }

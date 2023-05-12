@@ -17,7 +17,7 @@ public class ItemHUDController : MonoBehaviour
     [SerializeField, BoxGroup("AnimationConfig")] private float itemAnimationDuration = 0.3f;
 
     [SerializeField, ReadOnly, ReorderableList, BoxGroup("Debug")] private List<RectTransform> slots;
-    [ShowNonSerializedField, BoxGroup("Debug")] private int currentItemIndex = -1;
+    [ShowNonSerializedField, BoxGroup("Debug")] internal int currentItemIndex = -1;
 
     void Start()
     {
@@ -75,7 +75,7 @@ public class ItemHUDController : MonoBehaviour
 
         itemSequence.OnComplete(() => {
             item = null;
-            LevelManager.currentInstance.ItemObtained();
+            LevelManager.currentInstance.ItemObtained(this.currentItemIndex);
         });
     }
 }

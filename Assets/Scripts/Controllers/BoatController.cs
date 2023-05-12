@@ -52,10 +52,11 @@ public class BoatController : MonoBehaviour
             return;
         }
 
-        if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space)) {
+        if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space) && !LevelManager.currentInstance.showingText) {
             //this.jammed = true; //Will be set by LevelManager.ObtainNextItem()
             this.speed = 0;
             this.mayPopBubbles[0].Pop();
+            this.chasingBubbles.RemoveAt(0);
             this.mayPopBubbles.RemoveAt(0);
         }
     }

@@ -631,11 +631,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6410101286927456138, guid: e2736c37943064c4bb2480881a0f8ced, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -3.93
       objectReference: {fileID: 0}
     - target: {fileID: 6410101286927456138, guid: e2736c37943064c4bb2480881a0f8ced, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.79
+      value: 2.22
       objectReference: {fileID: 0}
     - target: {fileID: 6410101286927456138, guid: e2736c37943064c4bb2480881a0f8ced, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1944,8 +1944,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelIndex: 0
+  messagesFadeDuration: 0.8
+  messagesDuration: 5
   levelCamera: {fileID: 1826247275}
-  itemController: {fileID: 1817555988}
+  itemController: {fileID: 1817555989}
+  messages:
+  - {fileID: 2056641799}
+  - {fileID: 655800360}
+  - {fileID: 206835132}
+  - {fileID: 445355551}
+  - {fileID: 1625387547}
+  - {fileID: 1573246297}
+  - {fileID: 1150232057}
   boat: {fileID: 1999482018}
   waterAndReflex: {fileID: 1773521164}
   messagesParent: {fileID: 1207744318}
@@ -1960,7 +1970,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e79a9e9d6396eba438900afb0357e808, type: 3}
   - {fileID: 21300000, guid: 7f326ba9c5f292d43b0a4e2823bb4e25, type: 3}
   - {fileID: 21300000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
-  itemTexts: []
 --- !u!1 &1455727980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,29 +2914,6 @@ MonoBehaviour:
   m_Spacing: {x: 25, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!1 &1826247269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 19380121421458595, guid: ddb22551968277045895525545662008, type: 3}
-  m_PrefabInstance: {fileID: 19380121805919455}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1826247273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826247269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58645db0fbaa57458b94985caf00d7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraFollow: {fileID: 1999482020}
-  cameraLimits: {fileID: 1773521166}
-  playerLimitMargin: 5
-  smoothSpeed: {x: 0.15, y: 0.15}
-  smoothDuration: 0.5
-  offset: {x: 0, y: 0}
 --- !u!20 &1826247275 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 19380121421458592, guid: ddb22551968277045895525545662008, type: 3}
@@ -3455,6 +3441,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7097686823287901021, guid: ddb22551968277045895525545662008, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097686823287901021, guid: ddb22551968277045895525545662008, type: 3}
+      propertyPath: cameraFollow
+      value: 
+      objectReference: {fileID: 1999482020}
+    - target: {fileID: 7097686823287901021, guid: ddb22551968277045895525545662008, type: 3}
+      propertyPath: cameraLimits
+      value: 
+      objectReference: {fileID: 1773521166}
     m_RemovedComponents:
     - {fileID: 6609906610070386289, guid: ddb22551968277045895525545662008, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ddb22551968277045895525545662008, type: 3}
@@ -3553,11 +3551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7821182310245235659, guid: d9ba0cfe689269a4bb3ca7d9fb215d39, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 4.86
       objectReference: {fileID: 0}
     - target: {fileID: 7821182310245235659, guid: d9ba0cfe689269a4bb3ca7d9fb215d39, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7
+      value: -1.14
       objectReference: {fileID: 0}
     - target: {fileID: 7821182310245235659, guid: d9ba0cfe689269a4bb3ca7d9fb215d39, type: 3}
       propertyPath: m_LocalPosition.z
