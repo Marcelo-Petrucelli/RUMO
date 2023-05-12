@@ -95,9 +95,6 @@
 		<property name="volume">
 			<value>-1</value>
 		</property>
-		<property name="pitch">
-			<value>-1.20000005</value>
-		</property>
 		<relationship name="modulators">
 			<destination>{2a3e1758-fb16-4d03-b016-a7458d20f673}</destination>
 		</relationship>
@@ -133,7 +130,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>2.5</value>
+			<value>1.5</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{f4c3cc72-f50f-48ad-80d3-0948fb673541}">
