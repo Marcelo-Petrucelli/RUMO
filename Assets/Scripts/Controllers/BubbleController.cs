@@ -38,13 +38,15 @@ public class BubbleController : MonoBehaviour
         }
     }
 
-    public void Pop() {
+    public void Pop(bool fake = false) {
         if(this.active) {
             this.active = false;
             var popEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
             popEmitter.Play();
             this.bubbleInner.GetComponent<Animator>().SetTrigger("Explode");
-            this.ShowItem(); //this.Invoke(nameof(ShowItem), 0.5f);
+            if(!fake) {
+                this.ShowItem(); //this.Invoke(nameof(ShowItem), 0.5f);
+            }
         }
     }
 

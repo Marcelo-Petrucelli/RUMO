@@ -1422,7 +1422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &977758181
 Transform:
   m_ObjectHideFlags: 0
@@ -1431,7 +1431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977758180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.8, y: 0, z: 0}
+  m_LocalPosition: {x: -64.1, y: 4.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1782,7 +1782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177036567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.8, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2058,6 +2058,7 @@ MonoBehaviour:
   messagesFadeDuration: 0.8
   messagesDuration: 5
   compassInterval: 0.3
+  whaleWaitingInterval: 1.2
   levelCamera: {fileID: 1826247275}
   compassPointer: {fileID: 833443082}
   itemController: {fileID: 1817555989}
@@ -2072,6 +2073,8 @@ MonoBehaviour:
   boat: {fileID: 1999482018}
   waterAndReflex: {fileID: 1773521164}
   messagesParent: {fileID: 1207744318}
+  whale: {fileID: 0}
+  island: {fileID: 0}
   descSprites: Na ordem Book, Controller, Pets, IceCream, Shoes, Fish, Camera, Kid
   itemSprites:
   - {fileID: 21300000, guid: 9ea190f0c815984488ca367b7e7f29a7, type: 3}
@@ -3298,13 +3301,18 @@ MonoBehaviour:
   deceleration: 2.5
   maxSpeed: 4
   maxChasingBubbles: 1
+  whaleTrollDistance: 7
   bubblePivots:
   - {fileID: 1780495827}
   - {fileID: 687329727}
   - {fileID: 1842039641}
   - {fileID: 1104199562}
-  whalePivots: {fileID: 1177036568}
-  islandPivots: {fileID: 871573213}
+  whalePivots: {fileID: 1865374692}
+  islandPivots: {fileID: 1438806877}
+  verticalSize: {x: 0.5, y: 1.5}
+  verticalOffset: {x: 0.025, y: 0}
+  horizontalSize: {x: 2, y: 0.4583282}
+  horizontalOffset: {x: -0.01640372, y: -0.3568905}
 --- !u!95 &1999482022
 Animator:
   serializedVersion: 5
@@ -3375,7 +3383,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01640372, y: -0.35689047}
-  m_Size: {x: 2.072679, y: 0.4583282}
+  m_Size: {x: 2, y: 0.4583282}
   m_Direction: 1
 --- !u!50 &1999482026
 Rigidbody2D:

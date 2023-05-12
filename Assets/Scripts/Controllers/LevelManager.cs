@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float messagesFadeDuration = 0.8f;
     [SerializeField, BoxGroup("Config")] public float messagesDuration = 4f;
     [SerializeField, BoxGroup("Config")] public float compassInterval = 0.3f;
+    [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
     [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
@@ -32,6 +33,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
     [SerializeField, BoxGroup("References")] public GameObject messagesParent;
+    [SerializeField, BoxGroup("References")] public GameObject whale;
+    [SerializeField, BoxGroup("References")] public GameObject island;
     //[SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
 
     [SerializeField, ReadOnly, TextArea(maxLines:1, minLines:1), BoxGroup("References")] private string descSprites = "Na ordem " + string.Join(", ", LevelManager.itemSpritesNames.ToArray());
@@ -80,8 +83,7 @@ public class LevelManager : MonoBehaviour
             }
         }
         if(found == null) {
-            //No more bubbles
-
+            this.compassPointer.DORotate(new Vector3(0f, 0f, -90f), this.compassInterval, RotateMode.Fast).SetRelative(true).SetEase(Ease.Linear);
         } else {
             var angle = this.AngleLocal(found.transform.position, this.player.transform.position) + 90;
             this.compassPointer.DORotate(new Vector3(0f, 0f, angle), this.compassInterval, RotateMode.Fast);
@@ -102,28 +104,27 @@ public class LevelManager : MonoBehaviour
         sequence.Append(msg.DOColor(originalColor, this.messagesFadeDuration));
         sequence.AppendInterval(this.messagesDuration);
         sequence.OnComplete(() => {
-        var sequenceFadeOut = DOTween.Sequence();
-        var actualDirection = new Vector3(0, 0, 0);
-        var actualPosition = msg.rectTransform.position;
+            var sequenceFadeOut = DOTween.Sequence();
+            var actualDirection = new Vector3(0, 0, 0);
+            var actualPosition = msg.rectTransform.position;
 
-        if(Player.right) {
-            actualDirection = new Vector3(300, 0, 0);
-        } else if(Player.left) {
-            actualDirection = new Vector3(-300, 0, 0);
-        } else if(Player.up) {
-            actualDirection = new Vector3(0, 300, 0);
-        } else if(Player.down) {
-            actualDirection = new Vector3(0, -300, 0);
-        }       
+            if(this.Player.right) {
+                actualDirection = new Vector3(300, 0, 0);
+            } else if(this.Player.left) {
+                actualDirection = new Vector3(-300, 0, 0);
+            } else if(this.Player.up) {
+                actualDirection = new Vector3(0, 300, 0);
+            } else if(this.Player.down) {
+                actualDirection = new Vector3(0, -300, 0);
+            }       
             
-        sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
-        sequenceFadeOut.Join(msg.DOColor(transp, this.messagesFadeDuration));
-        sequenceFadeOut.OnComplete(() => {
-            msg.gameObject.SetActive(false);
-            this.showingText = false;
+            sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
+            sequenceFadeOut.Join(msg.DOColor(transp, this.messagesFadeDuration));
+            sequenceFadeOut.OnComplete(() => {
+                msg.gameObject.SetActive(false);
+                this.showingText = false;
 
-        });
-            
+            });
         });
     }
 
@@ -132,18 +133,33 @@ public class LevelManager : MonoBehaviour
         this.player.jammed = true;
     }
 
+    public void WhaleItAllUp() {
+        //SHOW whale Animation
+        //this.whale.
+        this.whale.gameObject.SetActive(true);
+        this.whale.GetComponentInChildren<Animator>().SetTrigger("Jump");
+
+        this.ExecuteAfter(() => {
+            foreach(var b in this.player.chasingBubbles) { 
+                b.Pop(true);
+            }
+        }, this.whaleWaitingInterval);
+        this.player.jammed = false;
+    }
+
     public void ItemObtained(int index) {
         //Mudar caso seja necessário mudar as mensagens
         switch(index) {
             case 0:
                 this.ShowMessage(0); //Livro de receitas
+                this.player.WhaleTime();
                 break;
             case 1:
                 this.ShowMessage(1); //VideoGame controller
                 break;
             case 2:
                 this.ShowMessage(2); //Pets
-                this.player.WhaleTime(3f);
+                this.player.WhaleTime();
                 break;
             case 3:
                 this.ShowMessage(3); //IceCream
@@ -151,6 +167,7 @@ public class LevelManager : MonoBehaviour
             case 4:
                 this.ShowMessage(4); //Shoes
                 this.player.FishTime(3f);
+                this.player.WhaleTime();
                 break;
             case 5:
                 this.ShowMessage(5); //Camera
