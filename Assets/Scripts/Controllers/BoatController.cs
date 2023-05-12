@@ -164,7 +164,9 @@ public class BoatController : MonoBehaviour
     public void TriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
-            this.mayPopBubble.Add(bubble);
+            if(!this.mayPopBubble.Contains(bubble)) {
+                this.mayPopBubble.Add(bubble);
+            }
         }
     }
 
