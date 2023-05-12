@@ -10,7 +10,8 @@ public class ItemHUDController : MonoBehaviour
     [SerializeField, BoxGroup("References")] public GameObject itemPrefab;
     [SerializeField, BoxGroup("References")] public RectTransform screenItemFrame;
 
-    [SerializeField, BoxGroup("AnimationConfig")] private float xVariation = -300f;
+    //[SerializeField, BoxGroup("AnimationConfig")] private float xVariation = -300f;
+    [SerializeField, BoxGroup("AnimationConfig")] private float itemMultiplier = 1.3f;
     [SerializeField, BoxGroup("AnimationConfig")] private float frameAnimationDuration = 0.3f;
     [SerializeField, BoxGroup("AnimationConfig")] private float waitAnimationDuration = 1f;
     [SerializeField, BoxGroup("AnimationConfig")] private float itemAnimationDuration = 0.3f;
@@ -58,8 +59,8 @@ public class ItemHUDController : MonoBehaviour
 
         var frameSequence = DOTween.Sequence();
         frameSequence.Append(item.DOScale(new Vector3(
-            this.slots[0].rect.width / item.rect.width,
-            this.slots[0].rect.height / item.rect.height,
+            this.slots[0].rect.width * this.itemMultiplier / item.rect.width,
+            this.slots[0].rect.height * this.itemMultiplier / item.rect.height,
             1
         ), this.frameAnimationDuration));
         frameSequence.Join(this.screenItemFrame.DOScale(Vector3.zero, this.frameAnimationDuration));
@@ -67,9 +68,10 @@ public class ItemHUDController : MonoBehaviour
         var itemSequence = DOTween.Sequence();
         itemSequence.AppendInterval(this.frameAnimationDuration / 3);
         itemSequence.Append(item.DOLocalMoveY(0, this.itemAnimationDuration, true));
-        itemSequence.Join(item.DOLocalMoveX(this.xVariation, this.itemAnimationDuration / 2).SetEase(Ease.OutSine).OnComplete(() => {
+        itemSequence.Join(item.DOLocalMoveX(0, this.itemAnimationDuration / 2).SetEase(Ease.OutSine));
+        /*itemSequence.Join(item.DOLocalMoveX(this.xVariation, this.itemAnimationDuration / 2).SetEase(Ease.OutSine).OnComplete(() => {
             item.DOLocalMoveX(0, this.itemAnimationDuration / 2, true).SetEase(Ease.InSine);
-        }));
+        }));*/
 
         itemSequence.OnComplete(() => {
             item = null;
