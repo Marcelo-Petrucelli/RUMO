@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using System;
+using System.Collections;
 
 /*[Serializable]
 class ColorFilterFinalProperties
@@ -22,18 +23,21 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public int levelIndex;
     [SerializeField, BoxGroup("Config")] public float messagesFadeDuration = 0.8f;
     [SerializeField, BoxGroup("Config")] public float messagesDuration = 4f;
+    [SerializeField, BoxGroup("Config")] public float compassInterval = 0.3f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
+    [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
     [SerializeField, BoxGroup("References")] public ItemHUDController itemController;
     [SerializeField, BoxGroup("References")] public List<TextMeshProUGUI> messages;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
     [SerializeField, BoxGroup("References")] public GameObject messagesParent;
-    [SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
+    //[SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
 
     [SerializeField, ReadOnly, TextArea(maxLines:1, minLines:1), BoxGroup("References")] private string descSprites = "Na ordem " + string.Join(", ", LevelManager.itemSpritesNames.ToArray());
     [SerializeField, BoxGroup("References")] public List<Sprite> itemSprites;
 
+    [SerializeField, ReorderableList, ReadOnly] internal List<BubbleController> allBubbles = new();
     [ShowNonSerializedField] internal BoatController player;
     [ShowNonSerializedField] internal bool showingText =  false;
 
@@ -41,16 +45,50 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager currentInstance;
 
+    private bool shouldPoolCompass = true;
+
     void Awake()
     {
         Application.targetFrameRate = 60;
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
         this.waterAndReflex.SetActive(true);
+        this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
     }
 
     // Start is called before the first frame update
     void Start() {}
+
+    void Update()
+    {
+        if(this.shouldPoolCompass) {
+            this.shouldPoolCompass = false;
+            this.PoolCompassDirection();
+            this.ExecuteAfter(() => {
+                this.shouldPoolCompass = true;
+            }, this.compassInterval);
+        }
+    }
+
+    void PoolCompassDirection() {
+        var min = Mathf.Infinity;
+        BubbleController found = null;
+        foreach(var b in this.allBubbles) {
+            var dist = Vector2.Distance(this.player.transform.position, b.transform.position);
+            if(dist < min) {
+                min = dist;
+                found = b;
+            }
+        }
+        if(found == null) {
+            //No more bubbles
+
+        } else {
+            var angle = this.player.transform.position.SignedAngle(found.transform.position, );
+            print(angle.ToString() + " -> bubble>" + found.name);
+            this.compassPointer.DORotate(new Vector3(0f, 0f, angle), this.compassInterval, RotateMode.Fast);
+        }
+    }
 
     private void ShowMessage(int index) {
         var msg = this.messages[index];
@@ -107,5 +145,14 @@ public class LevelManager : MonoBehaviour
 
         //Check if all items were grabbed or even toggle more events;
         this.player.jammed = false;
+    }
+
+    private void ExecuteAfter(Action stuff, float waitingTime) {
+        StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
+    }
+
+    private IEnumerator ExecuteAfterCR(Action stuff, float waitingTime) {
+        yield return new WaitForSeconds(waitingTime);
+        stuff?.Invoke();
     }
 }
