@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 using FMODUnity;
-using System.Collections;
+using System;
 
 public class BoatController : MonoBehaviour
 {
@@ -18,11 +19,12 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] private bool up = false;
     [ShowNonSerializedField] private bool down = false;
     [ShowNonSerializedField] internal bool jammed = false;
+    [ShowNonSerializedField] internal bool chaseBlocked = false;
 
     [ShowNativeProperty] internal int MayPopListSize => this.mayPopBubbles.Count;
 
     [ShowNativeProperty] internal int ChaseListSize => this.chasingBubbles.Count;
-    internal bool MayBeBubbleChasedBy(BubbleController bubble) => this.chasingBubbles.Count < this.maxChasingBubbles || this.chasingBubbles.Contains(bubble);
+    internal bool MayBeBubbleChasedBy(BubbleController bubble) => (this.chasingBubbles.Count < this.maxChasingBubbles || this.chasingBubbles.Contains(bubble)) && !this.chaseBlocked;
 
     private Animator anim;
     private Rigidbody2D boatBody;
@@ -206,6 +208,35 @@ public class BoatController : MonoBehaviour
         if(this.mayPopBubbles.Contains(bubble)) {
             this.mayPopBubbles.Remove(bubble);
         }
+    }
+
+    public void WhaleTime(float durationSec) {
+        this.chaseBlocked = true;
+        this.ExecuteAfter(() => {
+            this.jammed = true;
+
+
+            //this.chaseBlocked = false;
+        }, durationSec);
+    }
+
+    public void FishTime(float durationSec) {
+        this.chaseBlocked = true;
+        //DO STUFF
+    }
+
+    public void KidTime(float durationSec) {
+        this.chaseBlocked = true;
+        //DO STUFF
+    }
+
+    private void ExecuteAfter(Action stuff, float waitingTime) {
+        StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
+    }
+
+    private IEnumerator ExecuteAfterCR(Action stuff, float waitingTime) {
+        yield return new WaitForSeconds(waitingTime);
+        stuff?.Invoke();
     }
 
     private void OnDrawGizmosSelected()
