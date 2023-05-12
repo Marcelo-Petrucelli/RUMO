@@ -14,6 +14,10 @@ public class BoatController : MonoBehaviour
     [SerializeField] public List<Transform> bubblePivots;
     [SerializeField] public Transform whalePivots;
     [SerializeField] public Transform islandPivots;
+    [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalSize = new Vector2(0.5f, 1.5f);
+    [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalOffset = new Vector2(0.025f, 0f);
+    [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalSize = new Vector2(2f, 0.4583282f);
+    [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalOffset = new Vector2(-0.01640372f, -0.3568905f);
 
     [ShowNonSerializedField] private float speed = 0f;
     [ShowNonSerializedField] private bool moving = false;
@@ -31,6 +35,7 @@ public class BoatController : MonoBehaviour
 
     private Animator anim;
     private Rigidbody2D boatBody;
+    private CapsuleCollider2D capsuleCollider;
     private List<FMODUnity.StudioEventEmitter> soundEmitter;
     private List<BubbleController> mayPopBubbles = new List<BubbleController>();
     private List<BubbleController> chasingBubbles = new List<BubbleController>();
@@ -39,7 +44,11 @@ public class BoatController : MonoBehaviour
     void Start() {
         this.anim = this.GetComponent<Animator>();
         this.boatBody = this.GetComponent<Rigidbody2D>();
+        this.capsuleCollider = this.GetComponent<CapsuleCollider2D>();
         this.soundEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
+        this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
+        this.capsuleCollider.size = new Vector2(2f, 0.4583282f);        
+        this.capsuleCollider.offset = new Vector2(-0.01640372f, -0.3568905f);
     }
 
     // Update is called once per frame
@@ -89,6 +98,10 @@ public class BoatController : MonoBehaviour
             this.right = this.up = this.down = false;
             this.speed = 0f;
 
+            this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
+            this.capsuleCollider.size = horizontalSize;
+            this.capsuleCollider.offset = horizontalOffset;
+
             this.anim.SetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
@@ -99,6 +112,10 @@ public class BoatController : MonoBehaviour
             this.right = true;
             this.left = this.up = this.down = false;
             this.speed = 0f;
+
+            this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
+            this.capsuleCollider.size = horizontalSize;
+            this.capsuleCollider.offset = horizontalOffset;
 
             this.anim.SetTrigger("Right");
             this.anim.ResetTrigger("Left");
@@ -111,6 +128,10 @@ public class BoatController : MonoBehaviour
             this.left = this.right = this.down = false;
             this.speed = 0f;
 
+            this.capsuleCollider.direction = CapsuleDirection2D.Vertical;
+            this.capsuleCollider.size = verticalSize;
+            this.capsuleCollider.offset = verticalOffset;
+
             this.anim.SetTrigger("Up");
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Right");
@@ -121,6 +142,10 @@ public class BoatController : MonoBehaviour
             this.down = true;
             this.left = this.right = this.up = false;
             this.speed = 0f;
+
+            this.capsuleCollider.direction = CapsuleDirection2D.Vertical;
+            this.capsuleCollider.size = verticalSize;
+            this.capsuleCollider.offset = verticalOffset;
 
             this.anim.SetTrigger("Down");
             this.anim.ResetTrigger("Left");
