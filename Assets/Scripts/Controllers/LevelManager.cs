@@ -83,8 +83,7 @@ public class LevelManager : MonoBehaviour
             //No more bubbles
 
         } else {
-            var angle = this.player.transform.position.SignedAngle(found.transform.position, );
-            print(angle.ToString() + " -> bubble>" + found.name);
+            var angle = this.AngleLocal(found.transform.position, this.player.transform.position) + 90;
             this.compassPointer.DORotate(new Vector3(0f, 0f, angle), this.compassInterval, RotateMode.Fast);
         }
     }
@@ -165,6 +164,8 @@ public class LevelManager : MonoBehaviour
         //Check if all items were grabbed or even toggle more events;
         this.player.jammed = false;
     }
+
+    private float AngleLocal(Vector2 p1, Vector2 p2) => Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI;
 
     private void ExecuteAfter(Action stuff, float waitingTime) {
         StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
