@@ -12,8 +12,11 @@ public class BoatController : MonoBehaviour
     [SerializeField] public float maxSpeed = 0f;
     [SerializeField] public int maxChasingBubbles = 1;
     [SerializeField] public List<Transform> bubblePivots;
+    [SerializeField] public Transform whalePivots;
+    [SerializeField] public Transform islandPivots;
 
     [ShowNonSerializedField] private float speed = 0f;
+    [ShowNonSerializedField] private bool moving = false;
     [ShowNonSerializedField] private bool left = false;
     [ShowNonSerializedField] private bool right = true;
     [ShowNonSerializedField] private bool up = false;
@@ -68,11 +71,11 @@ public class BoatController : MonoBehaviour
             return;
         }
 
-        var moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
+        this.moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
                         (Input.GetKey(KeyCode.RightArrow) && this.right) || 
                         (Input.GetKey(KeyCode.UpArrow) && this.up)       || 
                         (Input.GetKey(KeyCode.DownArrow) && this.down);
-        this.anim.SetBool("Moving", moving);
+        this.anim.SetBool("Moving", this.moving);
 
         if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)) {
             this.soundEmitter[0].SetParameter("Push button", 0.0f);
@@ -127,7 +130,7 @@ public class BoatController : MonoBehaviour
             this.soundEmitter[1].Play();
         }
 
-        if(moving) {
+        if(this.moving) {
             if(Mathf.Abs(this.speed) < this.maxSpeed) { //Not at Max Speed
                 this.speed += (this.left || this.down ? -1 : 1) * this.acceleration * Time.fixedDeltaTime;
             }/* else {
@@ -215,6 +218,10 @@ public class BoatController : MonoBehaviour
         this.ExecuteAfter(() => {
             this.jammed = true;
 
+            this.anim.ResetTrigger("Down");
+            this.anim.ResetTrigger("Left");
+            this.anim.ResetTrigger("Right");
+            this.anim.ResetTrigger("Up");
 
             //this.chaseBlocked = false;
         }, durationSec);
@@ -245,5 +252,7 @@ public class BoatController : MonoBehaviour
         foreach(Transform t in this.bubblePivots) {
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
+        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);
+        Gizmos.DrawWireSphere(this.islandPivots.position, 0.3f);
     }
 }

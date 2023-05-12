@@ -31,12 +31,12 @@ public class Reflectable2D:MonoBehaviour
         reflectGo.transform.parent = this.transform;
         reflectGo.transform.localPosition = localPosition;
         reflectGo.transform.localRotation = Quaternion.Euler(localRotation);
-        reflectGo.transform.localScale = new Vector3(-reflectGo.transform.localScale.x, reflectGo.transform.localScale.y, reflectGo.transform.localScale.z);
+        reflectGo.transform.localScale = new Vector3(-1, 1, 1); //new Vector3(-reflectGo.transform.localScale.x, reflectGo.transform.localScale.y, reflectGo.transform.localScale.z);
 
         spriteRenderer = reflectGo.AddComponent<SpriteRenderer>();
         spriteRenderer.sortingLayerName = spriteLayer;
         spriteRenderer.sortingOrder = spriteLayerOrder;
-        spriteRenderer.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha);
+        spriteRenderer.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha * sprite.color.a);
 
         spriteSource = GetComponent<SpriteRenderer>();
     }
@@ -56,7 +56,7 @@ public class Reflectable2D:MonoBehaviour
             }
             spriteRenderer.flipX = spriteSource.flipX;
             spriteRenderer.flipY = spriteSource.flipY;
-            spriteRenderer.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha);
+            spriteRenderer.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha * sprite.color.a);
         }
     }
 
