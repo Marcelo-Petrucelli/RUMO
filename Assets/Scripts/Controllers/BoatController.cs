@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 using FMODUnity;
-using System.Collections;
+using System;
 
 public class BoatController : MonoBehaviour
 {
@@ -11,18 +12,22 @@ public class BoatController : MonoBehaviour
     [SerializeField] public float maxSpeed = 0f;
     [SerializeField] public int maxChasingBubbles = 1;
     [SerializeField] public List<Transform> bubblePivots;
+    [SerializeField] public Transform whalePivots;
+    [SerializeField] public Transform islandPivots;
 
     [ShowNonSerializedField] private float speed = 0f;
+    [ShowNonSerializedField] private bool moving = false;
     [ShowNonSerializedField] internal bool left = false;
     [ShowNonSerializedField] internal bool right = true;
     [ShowNonSerializedField] internal bool up = false;
     [ShowNonSerializedField] internal bool down = false;
     [ShowNonSerializedField] internal bool jammed = false;
+    [ShowNonSerializedField] internal bool chaseBlocked = false;
 
     [ShowNativeProperty] internal int MayPopListSize => this.mayPopBubbles.Count;
 
     [ShowNativeProperty] internal int ChaseListSize => this.chasingBubbles.Count;
-    internal bool MayBeBubbleChasedBy(BubbleController bubble) => this.chasingBubbles.Count < this.maxChasingBubbles || this.chasingBubbles.Contains(bubble);
+    internal bool MayBeBubbleChasedBy(BubbleController bubble) => (this.chasingBubbles.Count < this.maxChasingBubbles || this.chasingBubbles.Contains(bubble)) && !this.chaseBlocked;
 
     private Animator anim;
     private Rigidbody2D boatBody;
@@ -66,11 +71,11 @@ public class BoatController : MonoBehaviour
             return;
         }
 
-        var moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
+        this.moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
                         (Input.GetKey(KeyCode.RightArrow) && this.right) || 
                         (Input.GetKey(KeyCode.UpArrow) && this.up)       || 
                         (Input.GetKey(KeyCode.DownArrow) && this.down);
-        this.anim.SetBool("Moving", moving);
+        this.anim.SetBool("Moving", this.moving);
 
         if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)) {
             this.soundEmitter[0].SetParameter("Push button", 0.0f);
@@ -125,7 +130,7 @@ public class BoatController : MonoBehaviour
             this.soundEmitter[1].Play();
         }
 
-        if(moving) {
+        if(this.moving) {
             if(Mathf.Abs(this.speed) < this.maxSpeed) { //Not at Max Speed
                 this.speed += (this.left || this.down ? -1 : 1) * this.acceleration * Time.fixedDeltaTime;
             }/* else {
@@ -208,11 +213,46 @@ public class BoatController : MonoBehaviour
         }
     }
 
+    public void WhaleTime(float durationSec) {
+        this.chaseBlocked = true;
+        this.ExecuteAfter(() => {
+            this.jammed = true;
+
+            this.anim.ResetTrigger("Down");
+            this.anim.ResetTrigger("Left");
+            this.anim.ResetTrigger("Right");
+            this.anim.ResetTrigger("Up");
+
+            //this.chaseBlocked = false;
+        }, durationSec);
+    }
+
+    public void FishTime(float durationSec) {
+        this.chaseBlocked = true;
+        //DO STUFF
+    }
+
+    public void KidTime(float durationSec) {
+        this.chaseBlocked = true;
+        //DO STUFF
+    }
+
+    private void ExecuteAfter(Action stuff, float waitingTime) {
+        StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
+    }
+
+    private IEnumerator ExecuteAfterCR(Action stuff, float waitingTime) {
+        yield return new WaitForSeconds(waitingTime);
+        stuff?.Invoke();
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         foreach(Transform t in this.bubblePivots) {
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
+        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);
+        Gizmos.DrawWireSphere(this.islandPivots.position, 0.3f);
     }
 }

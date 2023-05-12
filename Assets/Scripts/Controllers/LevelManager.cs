@@ -49,10 +49,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    void Start() {}
 
     private void ShowMessage(int index) {
         var msg = this.messages[index];
@@ -108,16 +105,22 @@ public class LevelManager : MonoBehaviour
                 this.ShowMessage(1); //VideoGame controller
                 break;
             case 2:
-                this.ShowMessage(2);
+                this.ShowMessage(2); //Pets
+                this.player.WhaleTime(3f);
                 break;
             case 3:
-                this.ShowMessage(3);
+                this.ShowMessage(3); //IceCream
                 break;
             case 4:
-                this.ShowMessage(4);
+                this.ShowMessage(4); //Shoes
+                this.player.FishTime(3f);
+                break;
+            case 5:
+                this.ShowMessage(5); //Camera
+                this.player.KidTime(3f); //Also Spawn BIRD
                 break;
             case 99:
-                this.ShowMessage(5);
+                this.ShowMessage(5); //Final Text
                 break;
         }
 
