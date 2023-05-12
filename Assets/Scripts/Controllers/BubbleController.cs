@@ -9,6 +9,7 @@ public class BubbleController : MonoBehaviour
     [SerializeField] public float maxMoveDelta;
     [SerializeField] public float minDistToFollow;
     [SerializeField] public Transform bubbleInner;
+    [ShowNonSerializedField] internal bool chasing;
     private BoatController player;
 
     private List<string> BubbleTypes => LevelManager.itemSpritesNames;
@@ -20,19 +21,31 @@ public class BubbleController : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(this.active) {
             var dist = Vector3.Distance(this.transform.position, this.player.transform.position);
-            if(dist < this.minDistToFollow ) {
-                this.transform.position = Vector3.MoveTowards(this.transform.position, this.player.GetBubblePivot(), this.maxMoveDelta * Time.deltaTime);
+            if(dist < this.minDistToFollow && this.player.MayBeBubbleChasedBy(this)) {
+                if(!this.chasing) {
+                    this.chasing = true;
+                    this.player.TryAddToChasing(this);
+                }
+                this.transform.position = Vector3.MoveTowards(this.transform.position, this.player.GetBubblePivot(), this.maxMoveDelta * Time.fixedDeltaTime);
+            } else if(this.chasing){
+                this.player.TryRemoveFromChasing(this);
+                this.chasing = false;
             }
         }
     }
 
     public void Pop() {
-        this.bubbleInner.GetComponent<Animator>().SetTrigger("Explode");
-        this.ShowItem(); //this.Invoke(nameof(ShowItem), 0.5f);
+        if(this.active) {
+            this.active = false;
+            var popEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
+            popEmitter.Play();
+            this.bubbleInner.GetComponent<Animator>().SetTrigger("Explode");
+            this.ShowItem(); //this.Invoke(nameof(ShowItem), 0.5f);
+        }
     }
 
     private void ShowItem() => LevelManager.currentInstance.ObtainNextItem();

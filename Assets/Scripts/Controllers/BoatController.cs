@@ -2,12 +2,14 @@
 using NaughtyAttributes;
 using UnityEngine;
 using FMODUnity;
+using System.Collections;
 
 public class BoatController : MonoBehaviour
 {
     [SerializeField] public float acceleration = 0f;
     [SerializeField] public float deceleration = 0f;
     [SerializeField] public float maxSpeed = 0f;
+    [SerializeField] public int maxChasingBubbles = 1;
     [SerializeField] public List<Transform> bubblePivots;
 
     [ShowNonSerializedField] private float speed = 0f;
@@ -17,12 +19,16 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] private bool down = false;
     [ShowNonSerializedField] internal bool jammed = false;
 
-    [ShowNativeProperty] private int MayPopListSize => this.mayPopBubble.Count;
+    [ShowNativeProperty] internal int MayPopListSize => this.mayPopBubbles.Count;
+
+    [ShowNativeProperty] internal int ChaseListSize => this.chasingBubbles.Count;
+    internal bool MayBeBubbleChasedBy(BubbleController bubble) => this.chasingBubbles.Count < this.maxChasingBubbles || this.chasingBubbles.Contains(bubble);
 
     private Animator anim;
     private Rigidbody2D boatBody;
     private List<FMODUnity.StudioEventEmitter> soundEmitter;
-    private List<BubbleController> mayPopBubble = new List<BubbleController>();
+    private List<BubbleController> mayPopBubbles = new List<BubbleController>();
+    private List<BubbleController> chasingBubbles = new List<BubbleController>();
 
     // Start is called before the first frame update
     void Start() {
@@ -49,8 +55,8 @@ public class BoatController : MonoBehaviour
         if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space)) {
             //this.jammed = true; //Will be set by LevelManager.ObtainNextItem()
             this.speed = 0;
-            this.mayPopBubble[0].Pop();
-            this.mayPopBubble.RemoveAt(0);
+            this.mayPopBubbles[0].Pop();
+            this.mayPopBubbles.RemoveAt(0);
         }
     }
 
@@ -59,7 +65,10 @@ public class BoatController : MonoBehaviour
             return;
         }
 
-        var moving = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow);
+        var moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
+                        (Input.GetKey(KeyCode.RightArrow) && this.right) || 
+                        (Input.GetKey(KeyCode.UpArrow) && this.up)       || 
+                        (Input.GetKey(KeyCode.DownArrow) && this.down);
         this.anim.SetBool("Moving", moving);
 
         if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -160,18 +169,41 @@ public class BoatController : MonoBehaviour
         }
     }
 
+    public void TryAddToChasing(BubbleController bubble) {
+        if(!this.chasingBubbles.Contains(bubble)) {
+            this.chasingBubbles.Add(bubble);
+        }
+    }
+
+    public void TryRemoveFromChasing(BubbleController bubble) {
+        if(this.chasingBubbles.Contains(bubble)) {
+            this.chasingBubbles.Remove(bubble);
+        }
+    }
+
     //Upon collision with another GameObject, this GameObject will reverse direction
     public void TriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
-            this.mayPopBubble.Add(bubble);
+            if(!this.mayPopBubbles.Contains(bubble) && bubble.chasing) {
+                this.soundEmitter[2].Play();
+                this.mayPopBubbles.Add(bubble);
+            }
         }
     }
 
     public void TriggerExit2D(Collider2D collision)
     {
         if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
-            this.mayPopBubble.Remove(bubble);
+            //We create a delay to remove the bubble, to avoid it reentering right after being removed.
+            this.StartCoroutine(nameof(InstaRemoveFromPopList), bubble);         
+        }
+    }
+
+    private IEnumerator InstaRemoveFromPopList(BubbleController bubble) {
+        yield return new WaitForSeconds(0.2f);
+        if(this.mayPopBubbles.Contains(bubble)) {
+            this.mayPopBubbles.Remove(bubble);
         }
     }
 

@@ -47,7 +47,7 @@ MonoBehaviour:
     Data3: -1412110436
     Data4: -932504744
   Banks:
-  - {fileID: 5332590998669917498}
+  - {fileID: 4748261874364214496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -55,6 +55,53 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2118
+--- !u!114 &-7787671108613638441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enter game
+  m_EditorClassIdentifier: 
+  Path: event:/Enter game
+  Guid:
+    Data1: 1088687393
+    Data2: 1284089710
+    Data3: -1288310122
+    Data4: 765950656
+  Banks:
+  - {fileID: -7178406582537068527}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2810
+--- !u!114 &-7178406582537068527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/U.I.bank
+  m_EditorClassIdentifier: 
+  Path: AudioSystem/Build/Desktop/U.I.bank
+  Name: U.I
+  StudioPath: bank:/U.I
+  lastModified: 638194351700861357
+  FileSizes:
+  - Name: Desktop
+    Value: 68608
+  Exists: 1
 --- !u!114 &-5699348212099446212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +122,31 @@ MonoBehaviour:
   - Name: Desktop
     Value: 764
   Exists: 1
---- !u!114 &-4977724103225130248
+--- !u!114 &-3411243405710066679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BoAT/Push button
+  m_EditorClassIdentifier: 
+  Name: Push button
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 2192678758
+    data2: 394297925
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-2113763283380728284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,25 +156,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BOAT
+  m_Name: event:/Bolha
   m_EditorClassIdentifier: 
-  Path: event:/BOAT
+  Path: event:/Bolha
   Guid:
-    Data1: -893335303
-    Data2: 1146039042
-    Data3: 1637113783
-    Data4: 746153647
+    Data1: -522096336
+    Data2: 1257327002
+    Data3: -162754114
+    Data4: -1781057343
   Banks:
-  - {fileID: 5332590998669917498}
   - {fileID: 4748261874364214496}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 7842336968737599598}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 6202
+  Length: 1045
 --- !u!114 &-1944315443881491308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,10 +188,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638194184609946870
+  lastModified: 638194351699542178
   FileSizes:
   - Name: Desktop
-    Value: 1024
+    Value: 1602
   Exists: 1
 --- !u!114 &-1539280242066401737
 MonoBehaviour:
@@ -167,18 +236,52 @@ MonoBehaviour:
   - {fileID: -1944315443881491308}
   - {fileID: 5332590998669917498}
   - {fileID: 4748261874364214496}
+  - {fileID: -7178406582537068527}
   EditorEvents:
   - {fileID: -8412230383846292887}
   - {fileID: -8145058049135957274}
-  - {fileID: -4977724103225130248}
   - {fileID: -1539280242066401737}
+  - {fileID: 5618705362749103380}
+  - {fileID: -2113763283380728284}
+  - {fileID: 8027042233145699173}
+  - {fileID: 3037139864431708150}
+  - {fileID: 8912835751718472098}
+  - {fileID: -7787671108613638441}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5332590998669917498}
   StringsBanks:
   - {fileID: -1944315443881491308}
-  cacheTime: 638194184610393163
+  cacheTime: 638194351700861357
   cacheVersion: 131603
+--- !u!114 &3037139864431708150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BoAT
+  m_EditorClassIdentifier: 
+  Path: event:/BoAT
+  Guid:
+    Data1: -893335303
+    Data2: 1146039042
+    Data3: 1637113783
+    Data4: 746153647
+  Banks:
+  - {fileID: 4748261874364214496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3411243405710066679}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6625
 --- !u!114 &4748261874364214496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,10 +297,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638194184610393163
+  lastModified: 638194351700191781
   FileSizes:
   - Name: Desktop
-    Value: 79968
+    Value: 212576
   Exists: 1
 --- !u!114 &5332590998669917498
 MonoBehaviour:
@@ -214,11 +317,38 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638194184609936867
+  lastModified: 638194351699472214
   FileSizes:
   - Name: Desktop
-    Value: 2421280
+    Value: 2302368
   Exists: 1
+--- !u!114 &5618705362749103380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/Pause
+  m_EditorClassIdentifier: 
+  Path: snapshot:/Pause
+  Guid:
+    Data1: -713956629
+    Data2: 1283243054
+    Data3: -1601241420
+    Data4: -707115191
+  Banks:
+  - {fileID: 5332590998669917498}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &6344697254964086319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,30 +368,6 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1036
-  Exists: 1
---- !u!114 &7842336968737599598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/BOAT/Push button
-  m_EditorClassIdentifier: 
-  Name: Push button
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2192678758
-    data2: 394297925
-  Type: 0
-  IsGlobal: 0
-  Labels: []
   Exists: 1
 --- !u!114 &7992862797439138930
 MonoBehaviour:
@@ -287,3 +393,57 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &8027042233145699173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Aten\xE7\xE3o"
+  m_EditorClassIdentifier: 
+  Path: "event:/Aten\xE7\xE3o"
+  Guid:
+    Data1: 1750768474
+    Data2: 1091742164
+    Data3: 2137602231
+    Data4: -1112676658
+  Banks:
+  - {fileID: 4748261874364214496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 750
+--- !u!114 &8912835751718472098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/U.I MENU
+  m_EditorClassIdentifier: 
+  Path: event:/U.I MENU
+  Guid:
+    Data1: 859723805
+    Data2: 1138622924
+    Data3: 538458535
+    Data4: -1219647217
+  Banks:
+  - {fileID: -7178406582537068527}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2810
