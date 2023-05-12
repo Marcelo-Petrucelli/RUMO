@@ -183,10 +183,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6775532715264283678, guid: 4f69a6fad48f3f14e8addb2e66873c73, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f69a6fad48f3f14e8addb2e66873c73, type: 3}
 --- !u!1 &206835130
@@ -2323,6 +2319,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1999482021}
+        m_TargetAssemblyTypeName: BoatController, Assembly-CSharp
+        m_MethodName: TriggerEnter2D
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onTriggerExit:
     m_PersistentCalls:
       m_Calls:
@@ -2971,6 +2982,7 @@ GameObject:
   - component: {fileID: 1999482026}
   - component: {fileID: 1999482027}
   - component: {fileID: 1999482028}
+  - component: {fileID: 1999482029}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -3061,6 +3073,7 @@ MonoBehaviour:
   acceleration: 2.5
   deceleration: 2.5
   maxSpeed: 4
+  maxChasingBubbles: 1
   bubblePivots:
   - {fileID: 1780495827}
   - {fileID: 687329727}
@@ -3212,6 +3225,37 @@ MonoBehaviour:
       Data3: -1412110436
       Data4: -932504744
     Path: event:/CURVAS
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1999482029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999482018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1750768474
+      Data2: 1091742164
+      Data3: 2137602231
+      Data4: -1112676658
+    Path: "event:/Aten\xE7\xE3o"
   Event: 
   PlayEvent: 0
   StopEvent: 0

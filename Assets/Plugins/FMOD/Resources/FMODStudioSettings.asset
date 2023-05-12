@@ -309,6 +309,7 @@ MonoBehaviour:
   - Master
   Banks:
   - SFX
+  - U.I
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
