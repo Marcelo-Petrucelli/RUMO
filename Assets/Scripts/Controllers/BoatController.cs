@@ -12,6 +12,7 @@ public class BoatController : MonoBehaviour
     [SerializeField] public float maxSpeed = 0f;
     [SerializeField] public int maxChasingBubbles = 1;
     [SerializeField] public float whaleTrollDistance = 7f;
+    [SerializeField] public Animator trails;
     [SerializeField] public List<Transform> bubblePivots;
     [SerializeField] public Transform whalePivots;
     [SerializeField] public Transform islandPivots;
