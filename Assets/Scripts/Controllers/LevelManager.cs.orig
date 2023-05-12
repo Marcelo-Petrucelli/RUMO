@@ -51,8 +51,12 @@ public class LevelManager : MonoBehaviour
         Application.targetFrameRate = 60;
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
+<<<<<<< HEAD
         this.waterAndReflex.SetActive(true);
         this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
+=======
+        this.waterAndReflex.SetActive(true);        
+>>>>>>> d0713dd6b76e9b2523b12a2f090254fc01529d54
     }
 
     // Start is called before the first frame update
