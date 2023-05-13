@@ -75,7 +75,7 @@ public class SceneController:MonoBehaviour
             case 0:
                 this.End("4_Level_1");
                 break;
-            case 1:
+            /*case 1:
                 this.End("5_Level_2");
                 break;
             case 2:
@@ -89,7 +89,7 @@ public class SceneController:MonoBehaviour
                 break;
             case 5:
                 this.End("9_Level_6");
-                break;
+                break;*/
             default:
                 this.End("2_Menu");
                 break;
