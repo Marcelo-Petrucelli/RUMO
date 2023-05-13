@@ -189,6 +189,7 @@ public class LevelManager : MonoBehaviour
                 break;
             case 1:
                 this.ShowMessage(1); //VideoGame controller
+                AudioController.Instance.FirstAdvanceMusic();
                 this.player.WhaleTime();
                 break;
             case 2:
@@ -201,6 +202,7 @@ public class LevelManager : MonoBehaviour
                 break;
             case 4:
                 this.ShowMessage(4); //Shoes
+                AudioController.Instance.SecondAdvanceMusic();
                 this.player.FishTime(5f);
                 this.player.WhaleTime();
                 break;
@@ -212,7 +214,8 @@ public class LevelManager : MonoBehaviour
                 this.player.KidTime(5f);
                 break;
             case 7:
-                this.EndTime(6f);
+                AudioController.Instance.FinalizeNormalAndStartWOWMusic();
+                this.EndTime(4f);
                 break;
             case 99:
                 this.ShowMessage(6); //Final Text
@@ -234,8 +237,8 @@ public class LevelManager : MonoBehaviour
             this.islandSpawns.Sort((a, b) => Vector2.Distance(a.transform.position, this.player.transform.position) < Vector2.Distance(b.transform.position, this.player.transform.position) ? -1 : 1);
 
             Transform selected;
-            if(this.islandSpawns.Count > 2) {
-                selected = this.islandSpawns[^2];
+            if(this.islandSpawns.Count > 3) {
+                selected = this.islandSpawns[^3];
             } else {
                 selected = this.islandSpawns[^1];
             }
@@ -244,17 +247,20 @@ public class LevelManager : MonoBehaviour
             this.island.transform.position = selected.position;
             this.island.gameObject.SetActive(true);
             this.ending = true;
+            AudioController.Instance.StartEUFOMusic();
         }, durationSec);
     }
 
     public void EndGame() {
         this.ItemObtained(99);
         this.player.jammed = true;
+        AudioController.Instance.FoundIslandMusicEnding();
 
         this.character.gameObject.SetActive(true);
     }
 
     public void CharacterReachedEnd() {
+        this.whale.GetComponentInChildren<FMODUnity.StudioEventEmitter>().Play();
         this.ExecuteAfter(() => {
             this.sceneController.GotoCredits();
         }, this.characterFinalSceneWaitingTime);

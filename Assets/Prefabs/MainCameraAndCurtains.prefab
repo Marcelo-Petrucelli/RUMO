@@ -47,8 +47,8 @@ GameObject:
   - component: {fileID: 4763205218691208092}
   - component: {fileID: 19380121421458592}
   - component: {fileID: 7456994562430773045}
-  - component: {fileID: 2095556670724622164}
   - component: {fileID: 7097686823287901021}
+  - component: {fileID: 1831887786042875145}
   m_Layer: 0
   m_Name: MainCameraAndCurtains
   m_TagString: MainCamera
@@ -129,19 +129,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frontDrop: {fileID: 19380122567123995}
   fadeInAndOutDuration: {x: 1.2, y: 1.2}
---- !u!114 &2095556670724622164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19380121421458595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
 --- !u!114 &7097686823287901021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +147,38 @@ MonoBehaviour:
   smoothSpeed: {x: 0.15, y: 0.15}
   smoothDuration: 0.5
   offset: {x: 0, y: 0}
+  startAtFollow: 1
+--- !u!114 &1831887786042875145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19380121421458595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 859723805
+      Data2: 1138622924
+      Data3: 538458535
+      Data4: -1219647217
+    Path: event:/U.I MENU
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &19380121874679952
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +191,6 @@ GameObject:
   - component: {fileID: 19380121874679948}
   - component: {fileID: 19380121874679949}
   - component: {fileID: 19380121874679950}
-  - component: {fileID: 19380121874679947}
   m_Layer: 0
   m_Name: CameraCanvasContent
   m_TagString: Untagged
@@ -263,20 +281,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &19380121874679947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19380121874679952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60795ee741a7554bb14288e9880a343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frontDrop: {fileID: 19380122567123995}
-  fadeInAndOutDuration: {x: 1.2, y: 1.2}
 --- !u!1 &19380122567123995
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,15 +2,12 @@
 using NaughtyAttributes;
 using UnityEngine;
 using System;
-using UnityEditorInternal;
 
 public class AudioController:MonoBehaviour
 {
     public static AudioController Instance = null;
-    private FMOD.Studio.EventInstance FMODinstance;
+    private FMODUnity.StudioEventEmitter musicEmitter;
 
-    [SerializeField, Range(0f, 10f)] private float transitionValue;
-   
     void Awake() {        
         if(Instance == null) {
             Instance = this;
@@ -18,10 +15,34 @@ public class AudioController:MonoBehaviour
         } else {
             Destroy(this.gameObject);
         }
+        this.musicEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
     }
 
-    public void ChangeAudioTransition() {
-        FMODinstance.setParameterByName("transition", transitionValue);
+    public void GameStartedMusic() {
+        this.musicEmitter.SetParameter("Transition", 1.1f); //1~1.5
     }
-    
+
+    public void FirstAdvanceMusic() {
+        this.musicEmitter.SetParameter("Transition", 2.1f); //2~2.5
+    }
+
+    public void SecondAdvanceMusic() {
+        this.musicEmitter.SetParameter("Transition", 3.1f); //3~3.5
+    }
+
+    public void FinalizeNormalAndStartWOWMusic() {
+        this.musicEmitter.SetParameter("Transition", 4.1f); //4~4.5
+    }
+
+    public void StartEUFOMusic() {
+        this.musicEmitter.SetParameter("Transition", 5.1f); //5~5.5
+    }
+
+    public void FoundIslandMusicEnding() {
+        this.musicEmitter.SetParameter("Transition", 6.1f); //5~5.5
+    }
+
+    public void ReturnedToMenuFromWinningCredits() {
+        this.musicEmitter.SetParameter("Transition", 7.1f); //7~7.1
+    }
 }

@@ -24,7 +24,7 @@ public class MenuController : MonoBehaviour
         this.exitButton.clicked += this.ExitButtonClicked;
     }
 
-    private void PlayButtonClicked() => this.sceneController.GoToLevel(0);
+    private void PlayButtonClicked() => this.sceneController.PlayGame();
 
     private void CreditsButtonClicked() => this.sceneController.GotoCredits();
 

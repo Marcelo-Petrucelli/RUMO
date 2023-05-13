@@ -61,9 +61,12 @@ public class SceneController:MonoBehaviour
         });
     }
 
-    public void ButtonPressed() { } //AudioController.Instance?.Play("ButtonSFX");
+    public void ButtonPressed() {
+        var uiSFXEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
+        uiSFXEmitter.Play();
+    }
 
-    public void PlayGame() { this.End("4_Level_1"); this.ButtonPressed(); }
+    public void PlayGame() { this.End("4_Level_1"); this.ButtonPressed(); AudioController.Instance.GameStartedMusic(); }
 
     public void GotoCredits() { this.End("3_Credits"); this.ButtonPressed(); }
 

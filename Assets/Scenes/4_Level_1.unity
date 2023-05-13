@@ -331,7 +331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143520068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.47, y: -1.34, z: -1}
+  m_LocalPosition: {x: -2.76, y: -0.79, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1818,6 +1818,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 823877293}
+  - component: {fileID: 823877294}
   m_Layer: 0
   m_Name: Island
   m_TagString: Untagged
@@ -1841,6 +1842,23 @@ Transform:
   m_Father: {fileID: 89730376}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &823877294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823877292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab00ddaf66027fd4f9cfae274d9fe6bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixing: 1
+  minY: -20
+  maxY: 20
+  minZ: 0
+  maxZ: 15
 --- !u!1 &833443081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,7 +3111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd3a672c2e95114a8eab0c7f34b6b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: -3, z: 51}
+  localPosition: {x: 0, y: -2.92, z: 51}
   localRotation: {x: 0, y: 0, z: -180}
   alpha: 0.3
   sprite: {fileID: 1438806879}
@@ -3140,7 +3158,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c46f836857cd73e47ab994807740fc4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: afa9b7c4a7cd25746a6ee9aac722fc30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3164,8 +3182,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000014406967, y: -1.2085441}
-  m_Size: {x: 9.670004, y: 4.378604}
+  m_Offset: {x: 0.020709133, y: -1.2215528}
+  m_Size: {x: 7.342754, y: 1.6256547}
   m_Direction: 1
 --- !u!1 &1573246295
 GameObject:

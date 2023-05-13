@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,5 +18,8 @@ public class CreditsController : MonoBehaviour
         this.backButton.clicked += this.BackButtonClicked;
     }
 
-    private void BackButtonClicked() => this.sceneController.BackToMenu();
+    private void BackButtonClicked() {
+        AudioController.Instance.ReturnedToMenuFromWinningCredits();
+        this.sceneController.BackToMenu();
+    }
 }
