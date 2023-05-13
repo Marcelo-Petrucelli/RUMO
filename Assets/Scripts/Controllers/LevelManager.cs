@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public GameObject messagesParent;
     [SerializeField, BoxGroup("References")] public GameObject whale;
     [SerializeField, BoxGroup("References")] public GameObject island;
+    [SerializeField, BoxGroup("References")] public List<Transform> islandSpawns;
     //[SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
 
     [SerializeField, ReadOnly, TextArea(maxLines:1, minLines:1), BoxGroup("References")] private string descSprites = "Na ordem " + string.Join(", ", LevelManager.itemSpritesNames.ToArray());
@@ -48,6 +49,9 @@ public class LevelManager : MonoBehaviour
     public static LevelManager currentInstance;
 
     private bool shouldPoolCompass = true;
+    private List<BubbleController> whaledBubbles;
+    private bool ending = false;
+    private bool ended = false;
 
     void Awake()
     {
@@ -77,13 +81,18 @@ public class LevelManager : MonoBehaviour
 
     void PoolCompassDirection() {
         var min = Mathf.Infinity;
-        BubbleController found = null;
-        foreach(var b in this.allBubbles) {
-            var dist = Vector2.Distance(this.player.transform.position, b.transform.position);
-            if(dist < min) {
-                min = dist;
-                found = b;
+        GameObject found = null;
+
+        if(!this.ending) { 
+            foreach(var b in this.allBubbles) {
+                var dist = Vector2.Distance(this.player.transform.position, b.transform.position);
+                if(dist < min) {
+                    min = dist;
+                    found = b.gameObject;
+                }
             }
+        } else {
+            found = this.island.gameObject;
         }
         if(found == null) {
             this.compassPointer.DORotate(new Vector3(0f, 0f, -90f), this.compassInterval, RotateMode.Fast).SetRelative(true).SetEase(Ease.Linear);
@@ -137,19 +146,20 @@ public class LevelManager : MonoBehaviour
     }
 
     public void WhaleItAllUp() {
+        this.whaledBubbles = new List<BubbleController>(this.player.chasingBubbles.ToArray());
         this.whale.transform.position = new Vector3(this.player.whalePivot.position.x, this.player.whalePivot.position.y + UnityEngine.Random.Range(-2.2f, 2.2f), this.whale.transform.position.z);
         this.whale.gameObject.SetActive(true);
         this.whale.GetComponentInChildren<Animator>().SetTrigger("Jump");
+    }
 
+    public void Whaled() {
         this.ExecuteAfter(() => {
-            var toRemove = new List<BubbleController>();
-            foreach(var b in this.player.chasingBubbles) { 
+            foreach(var b in this.whaledBubbles) {
                 b.Pop(true);
-                toRemove.Add(b);
-            }
-            foreach(var b in toRemove) {
                 this.player.RemoveBubbleReferences(b);
             }
+
+            this.player.chaseBlocked = false;
             this.player.jammed = false;
         }, this.whaleWaitingInterval);
     }
@@ -163,6 +173,7 @@ public class LevelManager : MonoBehaviour
                 break;
             case 1:
                 this.ShowMessage(1); //VideoGame controller
+                this.player.WhaleTime();
                 break;
             case 2:
                 this.ShowMessage(2); //Pets
@@ -170,15 +181,22 @@ public class LevelManager : MonoBehaviour
                 break;
             case 3:
                 this.ShowMessage(3); //IceCream
+                this.player.WhaleTime();
                 break;
             case 4:
                 this.ShowMessage(4); //Shoes
-                this.player.FishTime(3f);
+                this.player.FishTime(5f);
                 this.player.WhaleTime();
                 break;
             case 5:
+                this.player.chaseBlocked = false;
+                break;
+            case 6:
                 this.ShowMessage(5); //Camera
-                this.player.KidTime(3f); //Also Spawn BIRD
+                this.player.KidTime(5f); //Also Spawn BIRD
+                break;
+            case 7:
+                this.EndTime(10f); //Also Spawn BIRD
                 break;
             case 99:
                 this.ShowMessage(5); //Final Text
@@ -187,6 +205,23 @@ public class LevelManager : MonoBehaviour
 
         //Check if all items were grabbed or even toggle more events;
         this.player.jammed = false;
+    }
+
+    public void EndTime(float durationSec) {
+        this.player.chaseBlocked = true;
+        this.player.jammed = true;
+        this.ExecuteAfter(() => {
+            this.islandSpawns.Sort((a, b) => Vector2.Distance(a.transform.position, this.player.transform.position) < Vector2.Distance(b.transform.position, this.player.transform.position) ? -1 : 1);
+
+            Transform selected;
+            if(this.islandSpawns.Count > 2) {
+                selected = this.islandSpawns[^2];
+            } else {
+                selected = this.islandSpawns[^1];
+            }
+            this.island.transform.position = selected.position;
+            this.ending = true;
+        }, durationSec);
     }
 
     private float AngleLocal(Vector2 p1, Vector2 p2) => Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI;
@@ -198,5 +233,13 @@ public class LevelManager : MonoBehaviour
     private IEnumerator ExecuteAfterCR(Action stuff, float waitingTime) {
         yield return new WaitForSeconds(waitingTime);
         stuff?.Invoke();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        foreach(var sSpot in this.islandSpawns) {
+            Gizmos.DrawWireCube(sSpot.transform.position, Vector3.one * 3);
+        }
     }
 }

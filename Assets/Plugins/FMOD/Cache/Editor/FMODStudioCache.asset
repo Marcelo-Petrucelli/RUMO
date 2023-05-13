@@ -97,7 +97,7 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/U.I.bank
   Name: U.I
   StudioPath: bank:/U.I
-  lastModified: 638195080789126986
+  lastModified: 638194351700861357
   FileSizes:
   - Name: Desktop
     Value: 68608
@@ -188,7 +188,7 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638195080789116988
+  lastModified: 638194351699542178
   FileSizes:
   - Name: Desktop
     Value: 1602
@@ -252,7 +252,7 @@ MonoBehaviour:
   - {fileID: 5332590998669917498}
   StringsBanks:
   - {fileID: -1944315443881491308}
-  cacheTime: 638195080789126986
+  cacheTime: 638194351700861357
   cacheVersion: 131603
 --- !u!114 &3037139864431708150
 MonoBehaviour:
@@ -297,7 +297,7 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638195080789126986
+  lastModified: 638194351700191781
   FileSizes:
   - Name: Desktop
     Value: 212576
@@ -317,7 +317,7 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638195080789106979
+  lastModified: 638194351699472214
   FileSizes:
   - Name: Desktop
     Value: 2302368

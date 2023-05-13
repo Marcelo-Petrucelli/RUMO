@@ -71,6 +71,8 @@ public class BoatController : MonoBehaviour
             foreach(var b in this.chasingBubbles) {
                 if(Vector2.Distance(b.transform.position, this.transform.position) < this.whaleTrollDistance) {
                     this.jammed = true;
+                    this.chaseBlocked = true;
+
                     LevelManager.currentInstance.WhaleItAllUp();
                     this.whaleTime = false;
                     break;
@@ -303,20 +305,23 @@ public class BoatController : MonoBehaviour
     public void FishTime(float durationSec) {
         this.chaseBlocked = true;
         this.ExecuteAfter(() => {
-            this.jammed = true;
-
             this.anim.ResetTrigger("Down");
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
-
-            //this.chaseBlocked = false;
+            LevelManager.currentInstance.ObtainNextItem();
         }, durationSec);
     }
 
     public void KidTime(float durationSec) {
         this.chaseBlocked = true;
-        //DO STUFF
+        this.ExecuteAfter(() => {
+            this.anim.ResetTrigger("Down");
+            this.anim.ResetTrigger("Left");
+            this.anim.ResetTrigger("Right");
+            this.anim.ResetTrigger("Up");
+            LevelManager.currentInstance.ObtainNextItem();
+        }, durationSec);
     }
 
     private void ExecuteAfter(Action stuff, float waitingTime) {
