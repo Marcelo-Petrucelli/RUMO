@@ -21,7 +21,6 @@ public class BoatController : MonoBehaviour
     [SerializeField, BoxGroup("References")] public List<Transform> bubblePivots;
     [SerializeField, BoxGroup("References")] public Transform whalePivots;
     [SerializeField, BoxGroup("References")] public GameObject warning;
-
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalSize = new Vector2(0.5f, 1.5f);
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalOffset = new Vector2(0.025f, 0f);
     [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalSize = new Vector2(2f, 0.4583282f);
@@ -79,6 +78,7 @@ public class BoatController : MonoBehaviour
                 if(Vector2.Distance(b.transform.position, this.transform.position) < this.whaleTrollDistance) {
                     this.jammed = true;
                     LevelManager.currentInstance.WhaleItAllUp();
+                    this.whaleTime = false;
                     break;
                 }
             }
@@ -97,6 +97,11 @@ public class BoatController : MonoBehaviour
             this.chasingBubbles.RemoveAt(0);
             this.mayPopBubbles.RemoveAt(0);
         }
+    }
+
+    public void RemoveBubbleReferences(BubbleController bubble) {
+        this.chasingBubbles.Remove(bubble);
+        this.mayPopBubbles.Remove(bubble);
     }
 
     private void Move() {
@@ -354,7 +359,8 @@ public class BoatController : MonoBehaviour
         foreach(Transform t in this.bubblePivots) {
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
-        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);        
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.whaleTrollDistance);
