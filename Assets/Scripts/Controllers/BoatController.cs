@@ -19,7 +19,7 @@ public class BoatController : MonoBehaviour
 
     [SerializeField, BoxGroup("References")] public Animator trails;
     [SerializeField, BoxGroup("References")] public List<Transform> bubblePivots;
-    [SerializeField, BoxGroup("References")] public Transform whalePivots;
+    [SerializeField, BoxGroup("References")] public Transform whalePivot;
     [SerializeField, BoxGroup("References")] public GameObject warning;
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalSize = new Vector2(0.5f, 1.5f);
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalOffset = new Vector2(0.025f, 0f);
@@ -365,7 +365,7 @@ public class BoatController : MonoBehaviour
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);
+        Gizmos.DrawWireSphere(this.whalePivot.position, 0.3f);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.whaleTrollDistance);
