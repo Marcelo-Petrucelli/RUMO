@@ -4,18 +4,24 @@ using NaughtyAttributes;
 using UnityEngine;
 using FMODUnity;
 using System;
+using Unity.VisualScripting;
+using DG.Tweening;
 
 public class BoatController : MonoBehaviour
 {
-    [SerializeField] public float acceleration = 0f;
-    [SerializeField] public float deceleration = 0f;
-    [SerializeField] public float maxSpeed = 0f;
-    [SerializeField] public int maxChasingBubbles = 1;
-    [SerializeField] public float whaleTrollDistance = 7f;
-    [SerializeField] public Animator trails;
-    [SerializeField] public List<Transform> bubblePivots;
-    [SerializeField] public Transform whalePivots;
-    [SerializeField] public Transform islandPivots;
+    [SerializeField, BoxGroup("Config")] public float acceleration = 0f;
+    [SerializeField, BoxGroup("Config")] public float deceleration = 0f;
+    [SerializeField, BoxGroup("Config")] public float maxSpeed = 0f;
+    [SerializeField, BoxGroup("Config")] public int maxChasingBubbles = 1;
+    [SerializeField, BoxGroup("Config")] public float whaleTrollDistance = 7f;
+    [SerializeField, BoxGroup("Config")] public float warningFadeInOutTime = 0.5f;
+    [SerializeField, BoxGroup("Config")] public float warningFadeInterval = 4f;
+
+    [SerializeField, BoxGroup("References")] public Animator trails;
+    [SerializeField, BoxGroup("References")] public List<Transform> bubblePivots;
+    [SerializeField, BoxGroup("References")] public Transform whalePivots;
+    [SerializeField, BoxGroup("References")] public GameObject warning;
+
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalSize = new Vector2(0.5f, 1.5f);
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalOffset = new Vector2(0.025f, 0f);
     [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalSize = new Vector2(2f, 0.4583282f);
@@ -49,6 +55,7 @@ public class BoatController : MonoBehaviour
         this.anim = this.GetComponent<Animator>();
         this.boatBody = this.GetComponent<Rigidbody2D>();
         this.capsuleCollider = this.GetComponent<CapsuleCollider2D>();
+        this.warning.gameObject.SetActive(false);
         this.soundEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
         this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
         this.capsuleCollider.size = horizontalSize;        
@@ -254,6 +261,24 @@ public class BoatController : MonoBehaviour
         }
     }
 
+    public void ShowWarning() {
+        this.warning.gameObject.SetActive(true);
+        var sprite = this.warning.GetComponent<SpriteRenderer>();
+        var originalColor = sprite.color;
+        var transpWarning = sprite.color - Color.black;          
+        sprite.color = transpWarning;
+
+        var sequence = DOTween.Sequence();
+        sequence.Append(sprite.DOColor(originalColor, warningFadeInOutTime));
+        sequence.AppendInterval(warningFadeInterval);
+        sequence.Append(sprite.DOColor(transpWarning, warningFadeInOutTime));
+        sequence.OnComplete(() => {
+            sprite.color = originalColor;
+            sprite.gameObject.SetActive(false);
+        });
+    }
+
+
     public void TryAddToChasing(BubbleController bubble) {
         if(!this.chasingBubbles.Contains(bubble)) {
             this.chasingBubbles.Add(bubble);
@@ -272,6 +297,7 @@ public class BoatController : MonoBehaviour
         if(collision.transform.parent.TryGetComponent<BubbleController>(out var bubble)) {
             if(!this.mayPopBubbles.Contains(bubble) && bubble.chasing) {
                 this.soundEmitter[2].Play();
+                this.ShowWarning();
                 this.mayPopBubbles.Add(bubble);
             }
         }
@@ -328,8 +354,7 @@ public class BoatController : MonoBehaviour
         foreach(Transform t in this.bubblePivots) {
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
-        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);
-        Gizmos.DrawWireSphere(this.islandPivots.position, 0.3f);
+        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);        
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.whaleTrollDistance);
