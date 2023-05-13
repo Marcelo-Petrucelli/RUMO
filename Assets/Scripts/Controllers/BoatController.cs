@@ -14,8 +14,8 @@ public class BoatController : MonoBehaviour
     [SerializeField] public float whaleTrollDistance = 7f;
     [SerializeField] public Animator trails;
     [SerializeField] public List<Transform> bubblePivots;
-    [SerializeField] public Transform whalePivots;
-    [SerializeField] public Transform islandPivots;
+    [SerializeField] public Transform whalePivot;
+    [SerializeField] public Transform islandPivot;
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalSize = new Vector2(0.5f, 1.5f);
     [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalOffset = new Vector2(0.025f, 0f);
     [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalSize = new Vector2(2f, 0.4583282f);
@@ -72,6 +72,7 @@ public class BoatController : MonoBehaviour
                 if(Vector2.Distance(b.transform.position, this.transform.position) < this.whaleTrollDistance) {
                     this.jammed = true;
                     LevelManager.currentInstance.WhaleItAllUp();
+                    this.whaleTime = false;
                     break;
                 }
             }
@@ -90,6 +91,11 @@ public class BoatController : MonoBehaviour
             this.chasingBubbles.RemoveAt(0);
             this.mayPopBubbles.RemoveAt(0);
         }
+    }
+
+    public void RemoveBubbleReferences(BubbleController bubble) {
+        this.chasingBubbles.Remove(bubble);
+        this.mayPopBubbles.Remove(bubble);
     }
 
     private void Move() {
@@ -291,8 +297,10 @@ public class BoatController : MonoBehaviour
         foreach(Transform t in this.bubblePivots) {
             Gizmos.DrawWireSphere(t.position, 0.3f);
         }
-        Gizmos.DrawWireSphere(this.whalePivots.position, 0.3f);
-        Gizmos.DrawWireSphere(this.islandPivots.position, 0.3f);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.whalePivot.position, 0.3f);
+        Gizmos.DrawWireSphere(this.islandPivot.position, 0.3f);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.whaleTrollDistance);

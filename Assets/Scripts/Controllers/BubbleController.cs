@@ -44,6 +44,8 @@ public class BubbleController : MonoBehaviour
             var popEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
             popEmitter.Play();
             this.bubbleInner.GetComponent<Animator>().SetTrigger("Explode");
+
+            LevelManager.currentInstance.allBubbles.Remove(this);
             if(!fake) {
                 this.ShowItem(); //this.Invoke(nameof(ShowItem), 0.5f);
             }

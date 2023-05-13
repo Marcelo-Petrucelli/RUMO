@@ -54,8 +54,11 @@ public class LevelManager : MonoBehaviour
         Application.targetFrameRate = 60;
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
-        this.waterAndReflex.SetActive(true);
         this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
+
+        this.waterAndReflex.SetActive(true);
+        this.whale.gameObject.SetActive(false);
+        this.island.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -134,17 +137,21 @@ public class LevelManager : MonoBehaviour
     }
 
     public void WhaleItAllUp() {
-        //SHOW whale Animation
-        //this.whale.
+        this.whale.transform.position = new Vector3(this.player.whalePivot.position.x, this.player.whalePivot.position.y + UnityEngine.Random.Range(-2.2f, 2.2f), this.whale.transform.position.z);
         this.whale.gameObject.SetActive(true);
         this.whale.GetComponentInChildren<Animator>().SetTrigger("Jump");
 
         this.ExecuteAfter(() => {
+            var toRemove = new List<BubbleController>();
             foreach(var b in this.player.chasingBubbles) { 
                 b.Pop(true);
+                toRemove.Add(b);
             }
+            foreach(var b in toRemove) {
+                this.player.RemoveBubbleReferences(b);
+            }
+            this.player.jammed = false;
         }, this.whaleWaitingInterval);
-        this.player.jammed = false;
     }
 
     public void ItemObtained(int index) {
