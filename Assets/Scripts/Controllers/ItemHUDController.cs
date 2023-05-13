@@ -3,7 +3,6 @@ using NaughtyAttributes;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class ItemHUDController : MonoBehaviour
 {
