@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 19380121874679949, guid: ddb22551968277045895525545662008, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4763205218691208092, guid: ddb22551968277045895525545662008, type: 3}
       propertyPath: m_RootOrder
       value: 1
