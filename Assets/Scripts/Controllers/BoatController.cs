@@ -130,13 +130,15 @@ public class BoatController : MonoBehaviour
         var changingDown = Input.GetKeyDown(KeyCode.DownArrow) && !this.down;
 
         var changedDirection = changingLeft || changingUp || changingRight || changingDown;
-        var moving = changedDirection || keepLeft || keepUp || keepRight || keepDown;
+        var tryingToMove = changedDirection || keepLeft || keepUp || keepRight || keepDown;
+        var moving = tryingToMove && this.speed != 0;
         var holding = moving && (
                             Input.GetKeyDown(KeyCode.LeftArrow) ||
                             Input.GetKeyDown(KeyCode.RightArrow) ||
                             Input.GetKeyDown(KeyCode.UpArrow) ||
                             Input.GetKeyDown(KeyCode.DownArrow)
                         );
+        var decelerating = !changedDirection && !holding && this.speed != 0;
 
         /*this.moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
                         (Input.GetKey(KeyCode.RightArrow) && this.right) || 
@@ -150,6 +152,10 @@ public class BoatController : MonoBehaviour
             if(!this.soundEmitter[0].IsPlaying()) {
                 this.soundEmitter[0].Play();
             }
+        } else if(decelerating) {
+            if(this.soundEmitter[0].IsPlaying()) {
+                this.soundEmitter[0].SetParameter("Push button", 1f);
+            }
         }
 
         if(moving) {
@@ -157,29 +163,36 @@ public class BoatController : MonoBehaviour
                 this.trails.SetTrigger("Horizontal");                
                 this.trails.ResetTrigger("Idle");
                 this.trails.ResetTrigger("Vertical");
+                this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
             } else if(this.left) {                
                 this.trails.SetTrigger("Horizontal");
                 this.trails.ResetTrigger("Idle");
                 this.trails.ResetTrigger("Vertical");
+                if(Mathf.Sign(this.trails.transform.localScale.x) > 0) {
+                    this.trails.transform.localScale = new Vector3(this.trails.transform.localScale.x * -1, Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
+                }
             } else if(this.up) {                
                 this.trails.SetTrigger("Vertical");
                 this.trails.ResetTrigger("Idle");
                 this.trails.ResetTrigger("Horizontal");
+                this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
             } else if(this.down) {                
                 this.trails.SetTrigger("Vertical");
                 this.trails.ResetTrigger("Idle");
                 this.trails.ResetTrigger("Horizontal");
+                if(Mathf.Sign(this.trails.transform.localScale.y) > 0) {
+                    this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), this.trails.transform.localScale.y * -1, this.trails.transform.localScale.z);
+                }
             }
         } else if(this.speed == 0) {
             this.trails.SetTrigger("Idle");
             this.trails.ResetTrigger("Vertical");
             this.trails.ResetTrigger("Horizontal");
 
-            this.trails.transform.localScale = new Vector3((this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-
+            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && !this.left) {
+        if(changingLeft) {
             this.left = true;
             this.right = this.up = this.down = false;
             this.speed = 0f;
@@ -193,11 +206,9 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Up");
             this.anim.ResetTrigger("Down");
 
-            this.trails.transform.localScale = new Vector3((this.trails.transform.localScale.x * -1), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-
             this.soundEmitter[1].Play();
             this.FadeTutorial();
-        } else if(Input.GetKeyDown(KeyCode.RightArrow) && !this.right) {
+        } else if(changingRight) {
             this.right = true;
             this.left = this.up = this.down = false;
             this.speed = 0f;
@@ -211,12 +222,9 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Up");
             this.anim.ResetTrigger("Down");
 
-            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-
-
             this.soundEmitter[1].Play();
             this.FadeTutorial();
-        } else if(Input.GetKeyDown(KeyCode.UpArrow) && !this.up) {
+        } else if(changingUp) {
             this.up = true;
             this.left = this.right = this.down = false;
             this.speed = 0f;
@@ -230,11 +238,9 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Down");
 
-            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-
             this.soundEmitter[1].Play();
             this.FadeTutorial();
-        } else if(Input.GetKeyDown(KeyCode.DownArrow) && !this.down) {
+        } else if(changingDown) {
             this.down = true;
             this.left = this.right = this.up = false;
             this.speed = 0f;
@@ -248,13 +254,11 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
 
-            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), (this.trails.transform.localScale.y * -1), this.trails.transform.localScale.z);            
-
             this.soundEmitter[1].Play();
             this.FadeTutorial();
         }
 
-        if(this.moving) {
+        if(tryingToMove) {
             if(Mathf.Abs(this.speed) < this.maxSpeed) { //Not at Max Speed
                 this.speed += (this.left || this.down ? -1 : 1) * this.acceleration * Time.fixedDeltaTime;
             }/* else {
@@ -265,9 +269,6 @@ public class BoatController : MonoBehaviour
                 ((this.left || this.down) && this.speed < 0) ||
                 ((this.right || this.up) && this.speed > 0))
             {
-                if(this.soundEmitter[0].IsPlaying()) {
-                    this.soundEmitter[0].SetParameter("Push button", 1f);
-                }
                 this.speed += (this.left || this.down ? 1 : -1) * this.deceleration * Time.fixedDeltaTime;
             } else { 
                 this.speed = 0;
