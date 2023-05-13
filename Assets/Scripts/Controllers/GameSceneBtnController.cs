@@ -13,7 +13,7 @@ public class GameSceneBtnController : MonoBehaviour
 
         this.doc = this.GetComponent<UIDocument>();
         
-        this.backButton = this.doc.rootVisualElement.Q<Button>("ExitButton");
+        this.backButton = this.doc.rootVisualElement.Q<Button>("BacktButton");
         this.backButton.clicked += this.ExitButtonClicked;
     }
 
