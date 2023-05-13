@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{563cb643-2943-4ca5-ad4c-78cc5d2cc463}">
+		<property name="assetPath">
+			<value>NB sweep 1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>18.857165532879819</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{bd3f6e78-5b64-49a6-a7e1-dbe1f609ec8d}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{24efdbbf-8bc7-4330-b853-0ab868ac4271}">
+		<property name="volume">
+			<value>3</value>
+		</property>
+		<property name="name">
+			<value>BALEIA</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{125e6982-5230-4066-9ced-3b8016671e9e}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{e2a5d49a-ded5-4e5c-86ad-0bdbd3b8e22d}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{54729347-a419-49b8-bc76-15e5c6e8d2f6}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{125e6982-5230-4066-9ced-3b8016671e9e}">
+		<relationship name="effects">
+			<destination>{6c7a28f7-909a-458e-9646-2bddba96065d}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{e2a5d49a-ded5-4e5c-86ad-0bdbd3b8e22d}" />
+	<object class="MixerBusFader" id="{6c7a28f7-909a-458e-9646-2bddba96065d}" />
+</objects>
