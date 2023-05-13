@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager currentInstance;
 
     private bool shouldPoolCompass = true;
-    private List<BubbleController> whaledBubbles;
+    private List<BubbleController> whaledBubbles;   
     [ShowNonSerializedField] private bool ending = false;
     [ShowNonSerializedField] internal bool ended = false;
 
@@ -63,11 +63,11 @@ public class LevelManager : MonoBehaviour
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
         this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
-
         this.tutorialMessage.gameObject.SetActive(true);
         this.waterAndReflex.SetActive(true);
         this.whale.gameObject.SetActive(false);
         this.island.gameObject.SetActive(false);
+        
     }
 
     // Start is called before the first frame update
@@ -160,6 +160,7 @@ public class LevelManager : MonoBehaviour
         this.whale.transform.position = new Vector3(this.player.whalePivot.position.x, this.player.whalePivot.position.y + UnityEngine.Random.Range(-2.2f, 2.2f), this.whale.transform.position.z);
         this.whale.gameObject.SetActive(true);
         this.whale.GetComponentInChildren<Animator>().SetTrigger("Jump");
+        this.whale.GetComponentInChildren<FMODUnity.StudioEventEmitter>().Play();
     }
 
     public void Whaled() {
@@ -180,6 +181,7 @@ public class LevelManager : MonoBehaviour
             case 0:
                 this.ShowMessage(0); //Livro de receitas
                 this.player.WhaleTime();
+                
                 break;
             case 1:
                 this.ShowMessage(1); //VideoGame controller
