@@ -116,6 +116,33 @@ public class BoatController : MonoBehaviour
             }
         }
 
+        if(this.moving) {
+            if(this.right) {                
+                this.trails.SetTrigger("Horizontal");                
+                this.trails.ResetTrigger("Idle");
+                this.trails.ResetTrigger("Vertical");
+            } else if(this.left) {                
+                this.trails.SetTrigger("Horizontal");
+                this.trails.ResetTrigger("Idle");
+                this.trails.ResetTrigger("Vertical");
+            } else if(this.up) {                
+                this.trails.SetTrigger("Vertical");
+                this.trails.ResetTrigger("Idle");
+                this.trails.ResetTrigger("Horizontal");
+            } else if(this.down) {                
+                this.trails.SetTrigger("Vertical");
+                this.trails.ResetTrigger("Idle");
+                this.trails.ResetTrigger("Horizontal");
+            }
+        } else if(this.speed == 0) {
+            this.trails.SetTrigger("Idle");
+            this.trails.ResetTrigger("Vertical");
+            this.trails.ResetTrigger("Horizontal");
+
+            this.trails.transform.localScale = new Vector3((this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
+
+        }
+
         if(Input.GetKeyDown(KeyCode.LeftArrow) && !this.left) {
             this.left = true;
             this.right = this.up = this.down = false;
@@ -123,13 +150,15 @@ public class BoatController : MonoBehaviour
 
             this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
             this.capsuleCollider.size = horizontalSize;
-            this.capsuleCollider.offset = horizontalOffset;
+            this.capsuleCollider.offset = horizontalOffset;            
 
             this.anim.SetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
             this.anim.ResetTrigger("Down");
-            
+
+            this.trails.transform.localScale = new Vector3((this.trails.transform.localScale.x * -1), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
+
             this.soundEmitter[1].Play();
         } else if(Input.GetKeyDown(KeyCode.RightArrow) && !this.right) {
             this.right = true;
@@ -144,7 +173,10 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Up");
             this.anim.ResetTrigger("Down");
-            
+
+            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
+
+
             this.soundEmitter[1].Play();
         } else if(Input.GetKeyDown(KeyCode.UpArrow) && !this.up) {
             this.up = true;
@@ -160,6 +192,8 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Down");
 
+            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
+
             this.soundEmitter[1].Play();
         } else if(Input.GetKeyDown(KeyCode.DownArrow) && !this.down) {
             this.down = true;
@@ -174,6 +208,8 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
+
+            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), (this.trails.transform.localScale.y * -1), this.trails.transform.localScale.z);            
 
             this.soundEmitter[1].Play();
         }
@@ -193,8 +229,9 @@ public class BoatController : MonoBehaviour
                     this.soundEmitter[0].SetParameter("Push button", 1f);
                 }
                 this.speed += (this.left || this.down ? 1 : -1) * this.deceleration * Time.fixedDeltaTime;
-            } else {
+            } else { 
                 this.speed = 0;
+                
             }
         }
 
