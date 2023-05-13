@@ -591,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &258479194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2587,7 +2587,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5a2dc0b06cb5976479aafe61ff5b865f, type: 3}
   - {fileID: 21300000, guid: 439b910c910eb964aaf1619c9e80524a, type: 3}
   - {fileID: 21300000, guid: 7f326ba9c5f292d43b0a4e2823bb4e25, type: 3}
-  - {fileID: 21300000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
+  - {fileID: 21300000, guid: 01ebf8d28ef82e04b9807df3d747cbec, type: 3}
   allBubbles: []
 --- !u!1 &1438806876
 GameObject:
@@ -3767,6 +3767,7 @@ GameObject:
   - component: {fileID: 1865374695}
   - component: {fileID: 1865374694}
   - component: {fileID: 1865374696}
+  - component: {fileID: 1865374697}
   m_Layer: 0
   m_Name: WhaleAnim
   m_TagString: Untagged
@@ -3783,7 +3784,7 @@ Transform:
   m_GameObject: {fileID: 1865374691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13, y: 13, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 977758181}
@@ -3830,7 +3831,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 831315846, guid: 1fbb408756b183d4398a630f264e663e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e462c1a0006104f47b954d20ef0be1d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3853,7 +3854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd3a672c2e95114a8eab0c7f34b6b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: -0.34, z: 51}
+  localPosition: {x: 0, y: -5.78, z: 51}
   localRotation: {x: 0, y: 0, z: -180}
   alpha: 0.3
   sprite: {fileID: 1865374693}
@@ -3939,6 +3940,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1865374697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865374691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 143284549
+      Data2: 1293603932
+      Data3: 610600602
+      Data4: -1511276673
+    Path: event:/BALEIA SOM
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1983362949
 GameObject:
   m_ObjectHideFlags: 0
