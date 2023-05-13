@@ -11,11 +11,11 @@ public class GameSceneBtnController : MonoBehaviour
     {
         this.sceneController = FindObjectOfType<SceneController>();
 
-        this.doc = this.GetComponent<UIDocument>();
+        //this.doc = this.GetComponent<UIDocument>();
         
-        this.backButton = this.doc.rootVisualElement.Q<Button>("BacktButton");
-        this.backButton.clicked += this.ExitButtonClicked;
+        //this.backButton = this.doc.rootVisualElement.Q<Button>("BacktButton");
+        //this.backButton.clicked += this.ExitButtonClicked;
     }
 
-    private void ExitButtonClicked() => this.sceneController.BackToMenu();
+    public void ExitButtonClicked() => this.sceneController.BackToMenu();
 }
