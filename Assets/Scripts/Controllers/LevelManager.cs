@@ -6,6 +6,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /*[Serializable]
 class ColorFilterFinalProperties
@@ -27,8 +28,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float compassInterval = 0.3f;
     [SerializeField, BoxGroup("Config")] public Color compassEndingColor = Color.red;
     [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
+    [SerializeField, BoxGroup("Config")] public float characterFinalSceneWaitingTime = 10f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
+    [SerializeField, BoxGroup("References")] public SceneController sceneController;
     [SerializeField, BoxGroup("References")] public RectTransform compassBg;
     [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
     [SerializeField, BoxGroup("References")] public ItemHUDController itemController;
@@ -39,6 +42,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public GameObject messagesParent;
     [SerializeField, BoxGroup("References")] public GameObject whale;
     [SerializeField, BoxGroup("References")] public GameObject island;
+    [SerializeField, BoxGroup("References")] public GameObject character;
     [SerializeField, BoxGroup("References")] public List<Transform> islandSpawns;
     //[SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
 
@@ -206,7 +210,7 @@ public class LevelManager : MonoBehaviour
                 this.player.KidTime(5f);
                 break;
             case 7:
-                this.EndTime(10f);
+                this.EndTime(6f);
                 break;
             case 99:
                 this.ShowMessage(6); //Final Text
@@ -244,7 +248,14 @@ public class LevelManager : MonoBehaviour
     public void EndGame() {
         this.ItemObtained(99);
         this.player.jammed = true;
-        //TODO - Make End of the Game!
+
+        this.character.gameObject.SetActive(true);
+    }
+
+    public void CharacterReachedEnd() {
+        this.ExecuteAfter(() => {
+            this.sceneController.GotoCredits();
+        }, this.characterFinalSceneWaitingTime);
     }
 
     private float AngleLocal(Vector2 p1, Vector2 p2) => Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI;

@@ -116,6 +116,14 @@ public class BoatController : MonoBehaviour
 
     private void Move() {
         if(this.jammed) {
+            if(this.speed != 0) {
+                this.speed = 0;
+                this.anim.SetBool("Moving", false);
+                this.trails.SetTrigger("Idle");
+                this.trails.ResetTrigger("Vertical");
+                this.trails.ResetTrigger("Horizontal");
+                this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
+            }
             return;
         }
 
