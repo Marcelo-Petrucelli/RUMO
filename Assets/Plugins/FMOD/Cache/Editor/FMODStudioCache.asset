@@ -27,7 +27,7 @@ MonoBehaviour:
   - {fileID: 7992862797439138930}
   MinDistance: 1
   MaxDistance: 20
-  Length: 178323
+  Length: 334883
 --- !u!114 &-8145058049135957274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     Data3: -1412110436
     Data4: -932504744
   Banks:
-  - {fileID: 4748261874364214496}
+  - {fileID: 5332590998669917498}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -97,10 +97,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/U.I.bank
   Name: U.I
   StudioPath: bank:/U.I
-  lastModified: 638194351700861357
+  lastModified: 638195932730903892
   FileSizes:
   - Name: Desktop
-    Value: 68608
+    Value: 68896
   Exists: 1
 --- !u!114 &-5699348212099446212
 MonoBehaviour:
@@ -137,7 +137,7 @@ MonoBehaviour:
   Name: Push button
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 1
   Default: 0
   ID:
     data1: 2192678758
@@ -188,11 +188,38 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638194351699542178
+  lastModified: 638195932730853879
   FileSizes:
   - Name: Desktop
-    Value: 1602
+    Value: 1740
   Exists: 1
+--- !u!114 &-1544301140148543874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PULONA AGUA BALEIA
+  m_EditorClassIdentifier: 
+  Path: event:/PULONA AGUA BALEIA
+  Guid:
+    Data1: -1786793429
+    Data2: 1218377739
+    Data3: -9411683
+    Data4: -738560294
+  Banks:
+  - {fileID: 4748261874364214496}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5000
 --- !u!114 &-1539280242066401737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,12 +274,14 @@ MonoBehaviour:
   - {fileID: 3037139864431708150}
   - {fileID: 8912835751718472098}
   - {fileID: -7787671108613638441}
+  - {fileID: -1544301140148543874}
+  - {fileID: 4040234598263575065}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5332590998669917498}
   StringsBanks:
   - {fileID: -1944315443881491308}
-  cacheTime: 638194351700861357
+  cacheTime: 638195932730903892
   cacheVersion: 131603
 --- !u!114 &3037139864431708150
 MonoBehaviour:
@@ -282,6 +311,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6625
+--- !u!114 &4040234598263575065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BALEIA SOM
+  m_EditorClassIdentifier: 
+  Path: event:/BALEIA SOM
+  Guid:
+    Data1: 143284549
+    Data2: 1293603932
+    Data3: 610600602
+    Data4: -1511276673
+  Banks:
+  - {fileID: 4748261874364214496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8739
 --- !u!114 &4748261874364214496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,10 +353,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638194351700191781
+  lastModified: 638195932730893875
   FileSizes:
   - Name: Desktop
-    Value: 212576
+    Value: 614304
   Exists: 1
 --- !u!114 &5332590998669917498
 MonoBehaviour:
@@ -317,10 +373,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638194351699472214
+  lastModified: 638195932730843879
   FileSizes:
   - Name: Desktop
-    Value: 2302368
+    Value: 4515712
   Exists: 1
 --- !u!114 &5618705362749103380
 MonoBehaviour:
@@ -384,7 +440,7 @@ MonoBehaviour:
   Name: Transition
   StudioPath: 
   Min: 0
-  Max: 5
+  Max: 10
   Default: 0
   ID:
     data1: 551972466
