@@ -145,6 +145,11 @@ public class LevelManager : MonoBehaviour
         });
     }
 
+    public void HideTutorial() {
+        var transp = this.tutorialMessage.color - Color.black;
+        this.tutorialMessage.DOColor(transp, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
+    }
+
     public void ObtainNextItem() {
         this.itemController.SpawnAndMoveToIventory();
         this.player.jammed = true;
@@ -198,10 +203,10 @@ public class LevelManager : MonoBehaviour
                 break;
             case 6:
                 this.ShowMessage(5); //Camera
-                this.player.KidTime(5f); //Also Spawn BIRD
+                this.player.KidTime(5f);
                 break;
             case 7:
-                this.EndTime(10f); //Also Spawn BIRD
+                this.EndTime(10f);
                 break;
             case 99:
                 this.ShowMessage(6); //Final Text
@@ -215,6 +220,10 @@ public class LevelManager : MonoBehaviour
     public void EndTime(float durationSec) {
         this.player.chaseBlocked = true;
         this.player.jammed = true;
+        foreach(var b in this.allBubbles.ToArray()) {
+            b.Pop(true);
+            this.player.RemoveBubbleReferences(b);
+        }
         this.ExecuteAfter(() => {
             this.islandSpawns.Sort((a, b) => Vector2.Distance(a.transform.position, this.player.transform.position) < Vector2.Distance(b.transform.position, this.player.transform.position) ? -1 : 1);
 
@@ -234,6 +243,7 @@ public class LevelManager : MonoBehaviour
 
     public void EndGame() {
         this.ItemObtained(99);
+        this.player.jammed = true;
         //TODO - Make End of the Game!
     }
 

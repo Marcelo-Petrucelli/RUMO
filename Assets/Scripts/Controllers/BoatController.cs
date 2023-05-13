@@ -176,6 +176,7 @@ public class BoatController : MonoBehaviour
             this.trails.transform.localScale = new Vector3((this.trails.transform.localScale.x * -1), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
 
             this.soundEmitter[1].Play();
+            this.FadeTutorial();
         } else if(Input.GetKeyDown(KeyCode.RightArrow) && !this.right) {
             this.right = true;
             this.left = this.up = this.down = false;
@@ -194,6 +195,7 @@ public class BoatController : MonoBehaviour
 
 
             this.soundEmitter[1].Play();
+            this.FadeTutorial();
         } else if(Input.GetKeyDown(KeyCode.UpArrow) && !this.up) {
             this.up = true;
             this.left = this.right = this.down = false;
@@ -211,6 +213,7 @@ public class BoatController : MonoBehaviour
             this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
 
             this.soundEmitter[1].Play();
+            this.FadeTutorial();
         } else if(Input.GetKeyDown(KeyCode.DownArrow) && !this.down) {
             this.down = true;
             this.left = this.right = this.up = false;
@@ -228,6 +231,7 @@ public class BoatController : MonoBehaviour
             this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), (this.trails.transform.localScale.y * -1), this.trails.transform.localScale.z);            
 
             this.soundEmitter[1].Play();
+            this.FadeTutorial();
         }
 
         if(this.moving) {
@@ -274,6 +278,8 @@ public class BoatController : MonoBehaviour
             return this.bubblePivots[3].position;
         }
     }
+
+    public void FadeTutorial() => LevelManager.currentInstance.HideTutorial();
 
     public void ShowWarning() {
         this.warning.gameObject.SetActive(true);
