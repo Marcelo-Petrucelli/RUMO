@@ -1,0 +1,18 @@
+.game-button {
+    -unity-font: url('project://database/Assets/Fonts/Handlee-Regular.ttf?fileID=12800000&guid=e53cf7d3d59096342aacf2e8faa0368e&type=3#Handlee-Regular');
+    -unity-font-definition: resource('Handlee-Regular SDF');
+    font-size: 18px;
+    color: rgba(217, 217, 217, 255);
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    transition-duration: 0.3s;
+}
+
+.game-button:hover {
+    transform-origin: left;
+    scale: 1.3 1.3;
+    transition-duration: 0.3s;
+}

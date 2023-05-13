@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GameStyle.uss?fileID=7433441132597879392&amp;guid=69ff01985d045c545b9322af054c48cd&amp;type=3#GameStyle" />
+    <ui:VisualElement name="Buttons" style="flex-grow: 0; width: 10%; height: 10%; padding-top: 17px;">
+        <ui:Button text="Voltar ao Menu" display-tooltip-when-elided="true" name="BacktButton" class="game-button" />
+    </ui:VisualElement>
+</ui:UXML>
