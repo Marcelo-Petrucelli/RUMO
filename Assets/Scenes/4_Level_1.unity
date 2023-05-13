@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6775532715264283678, guid: 4f69a6fad48f3f14e8addb2e66873c73, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f69a6fad48f3f14e8addb2e66873c73, type: 3}
 --- !u!1 &192241122
@@ -1678,7 +1682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &977758181
 Transform:
   m_ObjectHideFlags: 0
@@ -2210,7 +2214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d548e40a23d5c6342a6b9edc4da82cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 0.018, y: 0}
+  speed: {x: 0.008, y: 0}
 --- !u!23 &1268196340
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2314,10 +2318,13 @@ MonoBehaviour:
   messagesFadeDuration: 0.8
   messagesDuration: 5
   compassInterval: 0.3
+  compassEndingColor: {r: 0.41568628, g: 0.07058824, b: 0.07058824, a: 1}
   whaleWaitingInterval: 0.2
   levelCamera: {fileID: 1826247275}
+  compassBg: {fileID: 735731798}
   compassPointer: {fileID: 833443082}
   itemController: {fileID: 1817555989}
+  tutorialMessage: {fileID: 869547990}
   messages:
   - {fileID: 2056641799}
   - {fileID: 655800360}
@@ -2360,9 +2367,10 @@ GameObject:
   - component: {fileID: 1438806877}
   - component: {fileID: 1438806879}
   - component: {fileID: 1438806878}
+  - component: {fileID: 1438806880}
   m_Layer: 0
   m_Name: IslandAnim
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2394,7 +2402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd3a672c2e95114a8eab0c7f34b6b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: -4.57, z: 51}
+  localPosition: {x: 0, y: -3, z: 51}
   localRotation: {x: 0, y: 0, z: -180}
   alpha: 0.3
   sprite: {fileID: 1438806879}
@@ -2452,6 +2460,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &1438806880
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438806876}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000014406967, y: -1.2085441}
+  m_Size: {x: 9.670004, y: 4.378604}
+  m_Direction: 1
 --- !u!1 &1455727980
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,7 +3861,7 @@ MonoBehaviour:
   - {fileID: 1842039641}
   - {fileID: 1104199562}
   whalePivot: {fileID: 1177036568}
-  warning: {fileID: 0}
+  warning: {fileID: 253260140}
   verticalSize: {x: 0.5, y: 1.5}
   verticalOffset: {x: 0.025, y: 0}
   horizontalSize: {x: 2, y: 0.4583282}

@@ -2,10 +2,9 @@
 using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
+using DG.Tweening;
 using FMODUnity;
 using System;
-using Unity.VisualScripting;
-using DG.Tweening;
 
 public class BoatController : MonoBehaviour
 {
@@ -36,6 +35,7 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] internal bool down = false;
     [ShowNonSerializedField] internal bool jammed = false;
     [ShowNonSerializedField] internal bool chaseBlocked = false;
+    [ShowNonSerializedField] internal bool waitingAnchor = false;
 
     [ShowNativeProperty] internal int MayPopListSize => this.mayPopBubbles.Count;
 
@@ -57,14 +57,15 @@ public class BoatController : MonoBehaviour
         this.warning.gameObject.SetActive(false);
         this.soundEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
         this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
-        this.capsuleCollider.size = horizontalSize;        
-        this.capsuleCollider.offset = horizontalOffset;
+        this.capsuleCollider.size = this.horizontalSize;        
+        this.capsuleCollider.offset = this.horizontalOffset;
     }
 
     // Update is called once per frame
     void Update() {
         this.CheckWhale();
         this.CheckPop();
+        this.CheckAnchor();
     }
 
     void FixedUpdate()
@@ -104,6 +105,13 @@ public class BoatController : MonoBehaviour
     public void RemoveBubbleReferences(BubbleController bubble) {
         this.chasingBubbles.Remove(bubble);
         this.mayPopBubbles.Remove(bubble);
+    }
+
+    private void CheckAnchor() {
+        if(this.waitingAnchor && Input.GetKeyDown(KeyCode.A)) {
+            this.waitingAnchor = false;
+            LevelManager.currentInstance.ObtainNextItem();
+        }
     }
 
     private void Move() {
@@ -157,8 +165,8 @@ public class BoatController : MonoBehaviour
             this.speed = 0f;
 
             this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
-            this.capsuleCollider.size = horizontalSize;
-            this.capsuleCollider.offset = horizontalOffset;            
+            this.capsuleCollider.size = this.horizontalSize;
+            this.capsuleCollider.offset = this.horizontalOffset;            
 
             this.anim.SetTrigger("Left");
             this.anim.ResetTrigger("Right");
@@ -174,8 +182,8 @@ public class BoatController : MonoBehaviour
             this.speed = 0f;
 
             this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
-            this.capsuleCollider.size = horizontalSize;
-            this.capsuleCollider.offset = horizontalOffset;
+            this.capsuleCollider.size = this.horizontalSize;
+            this.capsuleCollider.offset = this.horizontalOffset;
 
             this.anim.SetTrigger("Right");
             this.anim.ResetTrigger("Left");
@@ -192,8 +200,8 @@ public class BoatController : MonoBehaviour
             this.speed = 0f;
 
             this.capsuleCollider.direction = CapsuleDirection2D.Vertical;
-            this.capsuleCollider.size = verticalSize;
-            this.capsuleCollider.offset = verticalOffset;
+            this.capsuleCollider.size = this.verticalSize;
+            this.capsuleCollider.offset = this.verticalOffset;
 
             this.anim.SetTrigger("Up");
             this.anim.ResetTrigger("Left");
@@ -209,8 +217,8 @@ public class BoatController : MonoBehaviour
             this.speed = 0f;
 
             this.capsuleCollider.direction = CapsuleDirection2D.Vertical;
-            this.capsuleCollider.size = verticalSize;
-            this.capsuleCollider.offset = verticalOffset;
+            this.capsuleCollider.size = this.verticalSize;
+            this.capsuleCollider.offset = this.verticalOffset;
 
             this.anim.SetTrigger("Down");
             this.anim.ResetTrigger("Left");
@@ -244,13 +252,12 @@ public class BoatController : MonoBehaviour
         }
 
         if(this.speed != 0) {
-             var speedVect = new Vector3( //this.transform.position
+             var speedVect = new Vector3(
                 this.left || this.right ? this.speed * Time.fixedDeltaTime : 0f,
                 this.up || this.down ? this.speed * Time.fixedDeltaTime : 0f,
-            0f
+                0f
             );
 
-            //this.transform.position = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position);
             var clamped = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position + speedVect);
             this.boatBody.MovePosition(clamped);
         }
@@ -318,6 +325,13 @@ public class BoatController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Finish") && !LevelManager.currentInstance.ended) {
+            LevelManager.currentInstance.EndGame();
+        }
+    }
+
     private IEnumerator InstaRemoveFromPopList(BubbleController bubble) {
         yield return new WaitForSeconds(0.2f);
         if(this.mayPopBubbles.Contains(bubble)) {
@@ -334,7 +348,11 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
-            LevelManager.currentInstance.ObtainNextItem();
+            this.soundEmitter[2].Play();
+            this.ShowWarning();
+
+            this.jammed = true;
+            this.waitingAnchor = true;
         }, durationSec);
     }
 
@@ -345,7 +363,11 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Left");
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
-            LevelManager.currentInstance.ObtainNextItem();
+            this.soundEmitter[2].Play();
+            this.ShowWarning();
+
+            this.jammed = true;
+            this.waitingAnchor = true;
         }, durationSec);
     }
 

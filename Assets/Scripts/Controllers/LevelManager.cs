@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using NaughtyAttributes;
+using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
 using System;
-using System.Collections;
+using TMPro;
 
 /*[Serializable]
 class ColorFilterFinalProperties
@@ -24,11 +25,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float messagesFadeDuration = 0.8f;
     [SerializeField, BoxGroup("Config")] public float messagesDuration = 4f;
     [SerializeField, BoxGroup("Config")] public float compassInterval = 0.3f;
+    [SerializeField, BoxGroup("Config")] public Color compassEndingColor = Color.red;
     [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
+    [SerializeField, BoxGroup("References")] public RectTransform compassBg;
     [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
     [SerializeField, BoxGroup("References")] public ItemHUDController itemController;
+    [SerializeField, BoxGroup("References")] public TextMeshProUGUI tutorialMessage;
     [SerializeField, BoxGroup("References")] public List<TextMeshProUGUI> messages;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
@@ -50,8 +54,8 @@ public class LevelManager : MonoBehaviour
 
     private bool shouldPoolCompass = true;
     private List<BubbleController> whaledBubbles;
-    private bool ending = false;
-    private bool ended = false;
+    [ShowNonSerializedField] private bool ending = false;
+    [ShowNonSerializedField] internal bool ended = false;
 
     void Awake()
     {
@@ -60,6 +64,7 @@ public class LevelManager : MonoBehaviour
         this.player = this.boat.GetComponent<BoatController>();
         this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
 
+        this.tutorialMessage.gameObject.SetActive(true);
         this.waterAndReflex.SetActive(true);
         this.whale.gameObject.SetActive(false);
         this.island.gameObject.SetActive(false);
@@ -199,7 +204,7 @@ public class LevelManager : MonoBehaviour
                 this.EndTime(10f); //Also Spawn BIRD
                 break;
             case 99:
-                this.ShowMessage(5); //Final Text
+                this.ShowMessage(6); //Final Text
                 break;
         }
 
@@ -219,9 +224,17 @@ public class LevelManager : MonoBehaviour
             } else {
                 selected = this.islandSpawns[^1];
             }
+
+            this.compassBg.GetComponent<Image>().color = Color.red;
             this.island.transform.position = selected.position;
+            this.island.gameObject.SetActive(true);
             this.ending = true;
         }, durationSec);
+    }
+
+    public void EndGame() {
+        this.ItemObtained(99);
+        //TODO - Make End of the Game!
     }
 
     private float AngleLocal(Vector2 p1, Vector2 p2) => Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI;
