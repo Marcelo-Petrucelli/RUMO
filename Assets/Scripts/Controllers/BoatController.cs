@@ -119,20 +119,40 @@ public class BoatController : MonoBehaviour
             return;
         }
 
-        this.moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
+        var keepLeft = Input.GetKey(KeyCode.LeftArrow) && this.left;
+        var keepUp = Input.GetKey(KeyCode.UpArrow) && this.up;
+        var keepRight = Input.GetKey(KeyCode.RightArrow) && this.right;
+        var keepDown = Input.GetKey(KeyCode.DownArrow) && this.down;
+
+        var changingLeft = Input.GetKeyDown(KeyCode.LeftArrow) && !this.left;
+        var changingUp = Input.GetKeyDown(KeyCode.UpArrow) && !this.up;
+        var changingRight = Input.GetKeyDown(KeyCode.RightArrow) && !this.right;
+        var changingDown = Input.GetKeyDown(KeyCode.DownArrow) && !this.down;
+
+        var changedDirection = changingLeft || changingUp || changingRight || changingDown;
+        var moving = changedDirection || keepLeft || keepUp || keepRight || keepDown;
+        var holding = moving && (
+                            Input.GetKeyDown(KeyCode.LeftArrow) ||
+                            Input.GetKeyDown(KeyCode.RightArrow) ||
+                            Input.GetKeyDown(KeyCode.UpArrow) ||
+                            Input.GetKeyDown(KeyCode.DownArrow)
+                        );
+
+        /*this.moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
                         (Input.GetKey(KeyCode.RightArrow) && this.right) || 
                         (Input.GetKey(KeyCode.UpArrow) && this.up)       || 
-                        (Input.GetKey(KeyCode.DownArrow) && this.down);
+                        (Input.GetKey(KeyCode.DownArrow) && this.down);*/
+        this.moving = moving;
         this.anim.SetBool("Moving", this.moving);
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)) {
+        if(holding) {
             this.soundEmitter[0].SetParameter("Push button", 0.0f);
             if(!this.soundEmitter[0].IsPlaying()) {
                 this.soundEmitter[0].Play();
             }
         }
 
-        if(this.moving) {
+        if(moving) {
             if(this.right) {                
                 this.trails.SetTrigger("Horizontal");                
                 this.trails.ResetTrigger("Idle");
