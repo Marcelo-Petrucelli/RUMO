@@ -11,7 +11,7 @@
     <ui:VisualElement name="Names" style="height: 506%; width: 50%; left: 861px; top: -252px;">
         <ui:Label text="Ariel Abans                 Lia Godoy" display-tooltip-when-elided="true" name="Art" class="name-text" style="width: 40%; left: 16px; top: 162px;" />
         <ui:Label text="Ana Lins                  Felipe Yatri" display-tooltip-when-elided="true" name="Narrative" class="name-text" style="top: 313px; left: 41px; width: 40%;" />
-        <ui:Label text="Marcelo Petrucelli           Lucas&#10;" display-tooltip-when-elided="true" name="Prog01" class="name-text" style="top: 483px; left: 1px;" />
+        <ui:Label text="Marcelo Petrucelli          Lucas Squariz&#10;" display-tooltip-when-elided="true" name="Prog01" class="name-text" style="top: 483px; left: 1px;" />
     </ui:VisualElement>
     <ui:VisualElement name="Buttons" style="width: 250px; height: 500px; left: 34px; top: -49px;">
         <ui:Button text="Back to Menu" display-tooltip-when-elided="true" name="BackButton" class="back-button" />

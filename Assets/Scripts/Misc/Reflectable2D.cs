@@ -19,8 +19,8 @@ public class Reflectable2D:MonoBehaviour
     public string spriteLayer = "Default";
     public int spriteLayerOrder = -5;
 
-    private SpriteRenderer spriteSource;
-    private SpriteRenderer spriteRenderer;
+    internal SpriteRenderer spriteSource;
+    internal SpriteRenderer spriteRenderer;
 
     #endregion
 

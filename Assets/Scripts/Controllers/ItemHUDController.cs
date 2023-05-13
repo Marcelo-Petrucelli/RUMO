@@ -3,7 +3,6 @@ using NaughtyAttributes;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class ItemHUDController : MonoBehaviour
 {
@@ -35,6 +34,7 @@ public class ItemHUDController : MonoBehaviour
 
     public void SpawnAndMoveToIventory() {
         if(this.currentItemIndex >= this.slots.Count) {
+            print("Request to Spawn an item on with index " + this.currentItemIndex + " but there are only " + this.slots.Count + " slots...");
             return;
         }
 

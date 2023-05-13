@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using NaughtyAttributes;
+using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
 using System;
-using System.Collections;
+using TMPro;
 
 /*[Serializable]
 class ColorFilterFinalProperties
@@ -24,14 +25,21 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float messagesFadeDuration = 0.8f;
     [SerializeField, BoxGroup("Config")] public float messagesDuration = 4f;
     [SerializeField, BoxGroup("Config")] public float compassInterval = 0.3f;
+    [SerializeField, BoxGroup("Config")] public Color compassEndingColor = Color.red;
+    [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
+    [SerializeField, BoxGroup("References")] public RectTransform compassBg;
     [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
     [SerializeField, BoxGroup("References")] public ItemHUDController itemController;
+    [SerializeField, BoxGroup("References")] public TextMeshProUGUI tutorialMessage;
     [SerializeField, BoxGroup("References")] public List<TextMeshProUGUI> messages;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
     [SerializeField, BoxGroup("References")] public GameObject messagesParent;
+    [SerializeField, BoxGroup("References")] public GameObject whale;
+    [SerializeField, BoxGroup("References")] public GameObject island;
+    [SerializeField, BoxGroup("References")] public List<Transform> islandSpawns;
     //[SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
 
     [SerializeField, ReadOnly, TextArea(maxLines:1, minLines:1), BoxGroup("References")] private string descSprites = "Na ordem " + string.Join(", ", LevelManager.itemSpritesNames.ToArray());
@@ -45,14 +53,21 @@ public class LevelManager : MonoBehaviour
     public static LevelManager currentInstance;
 
     private bool shouldPoolCompass = true;
+    private List<BubbleController> whaledBubbles;
+    [ShowNonSerializedField] private bool ending = false;
+    [ShowNonSerializedField] internal bool ended = false;
 
     void Awake()
     {
         Application.targetFrameRate = 60;
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
-        this.waterAndReflex.SetActive(true);
         this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
+
+        this.tutorialMessage.gameObject.SetActive(true);
+        this.waterAndReflex.SetActive(true);
+        this.whale.gameObject.SetActive(false);
+        this.island.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -71,17 +86,21 @@ public class LevelManager : MonoBehaviour
 
     void PoolCompassDirection() {
         var min = Mathf.Infinity;
-        BubbleController found = null;
-        foreach(var b in this.allBubbles) {
-            var dist = Vector2.Distance(this.player.transform.position, b.transform.position);
-            if(dist < min) {
-                min = dist;
-                found = b;
+        GameObject found = null;
+
+        if(!this.ending) { 
+            foreach(var b in this.allBubbles) {
+                var dist = Vector2.Distance(this.player.transform.position, b.transform.position);
+                if(dist < min) {
+                    min = dist;
+                    found = b.gameObject;
+                }
             }
+        } else {
+            found = this.island.gameObject;
         }
         if(found == null) {
-            //No more bubbles
-
+            this.compassPointer.DORotate(new Vector3(0f, 0f, -90f), this.compassInterval, RotateMode.Fast).SetRelative(true).SetEase(Ease.Linear);
         } else {
             var angle = this.AngleLocal(found.transform.position, this.player.transform.position) + 90;
             this.compassPointer.DORotate(new Vector3(0f, 0f, angle), this.compassInterval, RotateMode.Fast);
@@ -102,29 +121,33 @@ public class LevelManager : MonoBehaviour
         sequence.Append(msg.DOColor(originalColor, this.messagesFadeDuration));
         sequence.AppendInterval(this.messagesDuration);
         sequence.OnComplete(() => {
-        var sequenceFadeOut = DOTween.Sequence();
-        var actualDirection = new Vector3(0, 0, 0);
-        var actualPosition = msg.rectTransform.position;
+            var sequenceFadeOut = DOTween.Sequence();
+            var actualDirection = new Vector3(0, 0, 0);
+            var actualPosition = msg.rectTransform.position;
 
-        if(Player.right) {
-            actualDirection = new Vector3(300, 0, 0);
-        } else if(Player.left) {
-            actualDirection = new Vector3(-300, 0, 0);
-        } else if(Player.up) {
-            actualDirection = new Vector3(0, 300, 0);
-        } else if(Player.down) {
-            actualDirection = new Vector3(0, -300, 0);
-        }       
+            if(this.Player.right) {
+                actualDirection = new Vector3(300, 0, 0);
+            } else if(this.Player.left) {
+                actualDirection = new Vector3(-300, 0, 0);
+            } else if(this.Player.up) {
+                actualDirection = new Vector3(0, 300, 0);
+            } else if(this.Player.down) {
+                actualDirection = new Vector3(0, -300, 0);
+            }       
             
-        sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
-        sequenceFadeOut.Join(msg.DOColor(transp, this.messagesFadeDuration));
-        sequenceFadeOut.OnComplete(() => {
-            msg.gameObject.SetActive(false);
-            this.showingText = false;
+            sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
+            sequenceFadeOut.Join(msg.DOColor(transp, this.messagesFadeDuration));
+            sequenceFadeOut.OnComplete(() => {
+                msg.gameObject.SetActive(false);
+                this.showingText = false;
 
+            });
         });
-            
-        });
+    }
+
+    public void HideTutorial() {
+        var transp = this.tutorialMessage.color - Color.black;
+        this.tutorialMessage.DOColor(transp, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
     }
 
     public void ObtainNextItem() {
@@ -132,37 +155,96 @@ public class LevelManager : MonoBehaviour
         this.player.jammed = true;
     }
 
+    public void WhaleItAllUp() {
+        this.whaledBubbles = new List<BubbleController>(this.player.chasingBubbles.ToArray());
+        this.whale.transform.position = new Vector3(this.player.whalePivot.position.x, this.player.whalePivot.position.y + UnityEngine.Random.Range(-2.2f, 2.2f), this.whale.transform.position.z);
+        this.whale.gameObject.SetActive(true);
+        this.whale.GetComponentInChildren<Animator>().SetTrigger("Jump");
+    }
+
+    public void Whaled() {
+        this.ExecuteAfter(() => {
+            foreach(var b in this.whaledBubbles) {
+                b.Pop(true);
+                this.player.RemoveBubbleReferences(b);
+            }
+
+            this.player.chaseBlocked = false;
+            this.player.jammed = false;
+        }, this.whaleWaitingInterval);
+    }
+
     public void ItemObtained(int index) {
         //Mudar caso seja necessário mudar as mensagens
         switch(index) {
             case 0:
                 this.ShowMessage(0); //Livro de receitas
+                this.player.WhaleTime();
                 break;
             case 1:
                 this.ShowMessage(1); //VideoGame controller
+                this.player.WhaleTime();
                 break;
             case 2:
                 this.ShowMessage(2); //Pets
-                this.player.WhaleTime(3f);
+                this.player.WhaleTime();
                 break;
             case 3:
                 this.ShowMessage(3); //IceCream
+                this.player.WhaleTime();
                 break;
             case 4:
                 this.ShowMessage(4); //Shoes
-                this.player.FishTime(3f);
+                this.player.FishTime(5f);
+                this.player.WhaleTime();
                 break;
             case 5:
+                this.player.chaseBlocked = false;
+                break;
+            case 6:
                 this.ShowMessage(5); //Camera
-                this.player.KidTime(3f); //Also Spawn BIRD
+                this.player.KidTime(5f);
+                break;
+            case 7:
+                this.EndTime(10f);
                 break;
             case 99:
-                this.ShowMessage(5); //Final Text
+                this.ShowMessage(6); //Final Text
                 break;
         }
 
         //Check if all items were grabbed or even toggle more events;
         this.player.jammed = false;
+    }
+
+    public void EndTime(float durationSec) {
+        this.player.chaseBlocked = true;
+        this.player.jammed = true;
+        foreach(var b in this.allBubbles.ToArray()) {
+            b.Pop(true);
+            this.player.RemoveBubbleReferences(b);
+        }
+        this.ExecuteAfter(() => {
+            this.islandSpawns.Sort((a, b) => Vector2.Distance(a.transform.position, this.player.transform.position) < Vector2.Distance(b.transform.position, this.player.transform.position) ? -1 : 1);
+
+            Transform selected;
+            if(this.islandSpawns.Count > 2) {
+                selected = this.islandSpawns[^2];
+            } else {
+                selected = this.islandSpawns[^1];
+            }
+
+            this.compassBg.GetComponent<Image>().color = Color.red;
+            this.island.transform.position = selected.position;
+            this.island.gameObject.SetActive(true);
+            this.ending = true;
+        }, durationSec);
+    }
+
+    public void EndGame() {
+        this.ItemObtained(99);
+        this.player.jammed = true;
+        //TODO - Make End of the Game!
     }
 
     private float AngleLocal(Vector2 p1, Vector2 p2) => Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI;
@@ -174,5 +256,13 @@ public class LevelManager : MonoBehaviour
     private IEnumerator ExecuteAfterCR(Action stuff, float waitingTime) {
         yield return new WaitForSeconds(waitingTime);
         stuff?.Invoke();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        foreach(var sSpot in this.islandSpawns) {
+            Gizmos.DrawWireCube(sSpot.transform.position, Vector3.one * 3);
+        }
     }
 }
