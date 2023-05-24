@@ -2,7 +2,7 @@
     top: 0;
     -unity-font: url('project://database/Assets/Fonts/AmaticSC-Regular.ttf?fileID=12800000&guid=07b67d8f11c8e7a4e87de52290c65b9c&type=3#AmaticSC-Regular');
     -unity-font-definition: url('project://database/Assets/Resources/AmaticSC-Regular%20SDF.asset?fileID=11400000&guid=7468e0c1edae6a14997f1dbc6f578ba3&type=2#AmaticSC-Regular SDF');
-    font-size: 78px;
+    font-size: 60px;
     -unity-font-style: normal;
     color: rgb(209, 209, 209);
 }
@@ -10,7 +10,7 @@
 .name-text {
     -unity-font: url('project://database/Assets/Fonts/Handlee-Regular.ttf?fileID=12800000&guid=e53cf7d3d59096342aacf2e8faa0368e&type=3#Handlee-Regular');
     -unity-font-definition: resource('Handlee-Regular SDF');
-    font-size: 36px;
+    font-size: 28px;
     color: rgb(255, 251, 210);
     letter-spacing: 7px;
     word-spacing: 22px;
@@ -29,7 +29,7 @@
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
     transition-duration: 0.3s;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .back-button:hover {

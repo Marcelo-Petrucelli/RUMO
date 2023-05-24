@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/UI/MenuStyle.uss?fileID=7433441132597879392&amp;guid=05755a384e83b1148b922a309a47b10e&amp;type=3#MenuStyle" />
     <ui:VisualElement name="Logo" style="height: 303px; width: 382px; margin-left: 0; margin-top: 0; padding-left: 0; background-image: url(&apos;project://database/Assets/UI/RUMO2.png?fileID=2800000&amp;guid=5599102ec4840274bae38e3637937321&amp;type=3#RUMO2&apos;); background-color: rgba(0, 0, 0, 0); left: 1411px; top: 732px; -unity-text-align: upper-left;" />
     <ui:VisualElement name="Buttons" style="left: 92px; top: 267px; right: 0; bottom: 0; margin-bottom: 0; margin-right: 0; width: 35%; flex-grow: 1; justify-content: center; padding-bottom: 120px;">
-        <ui:Button text="Play" display-tooltip-when-elided="false" name="PlayButton" class="menu-button" />
-        <ui:Button text="Credits" display-tooltip-when-elided="true" name="CreditsButton" class="menu-button" />
-        <ui:Button text="Exit" display-tooltip-when-elided="true" name="ExitButton" class="menu-button" />
+        <ui:Button text="Jogar" display-tooltip-when-elided="false" name="PlayButton" class="menu-button" />
+        <ui:Button text="Créditos" display-tooltip-when-elided="true" name="CreditsButton" class="menu-button" />
+        <ui:Button text="Sair" display-tooltip-when-elided="true" name="ExitButton" class="menu-button" />
     </ui:VisualElement>
 </ui:UXML>
