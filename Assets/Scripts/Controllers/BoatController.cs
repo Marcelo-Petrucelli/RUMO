@@ -6,6 +6,7 @@ using DG.Tweening;
 using FMODUnity;
 using System;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using TMPro;
 
 public class BoatController : MonoBehaviour
 {
@@ -285,7 +286,7 @@ public class BoatController : MonoBehaviour
 
     public void FadeTutorial() => LevelManager.currentInstance.HideTutorial();
 
-    public void ShowWarning() {
+    public void ShowWarning(bool showAnchorText = false) {
         this.warning.SetActive(true);
         var sprite = this.warning.GetComponent<SpriteRenderer>();
         var originalColor = sprite.color;
@@ -293,13 +294,31 @@ public class BoatController : MonoBehaviour
         sprite.color = transpWarning;
 
         var sequence = DOTween.Sequence();
-        sequence.Append(sprite.DOColor(originalColor, warningFadeInOutTime));
-        sequence.AppendInterval(warningFadeInterval);
-        sequence.Append(sprite.DOColor(transpWarning, warningFadeInOutTime));
+        sequence.Append(sprite.DOColor(originalColor, this.warningFadeInOutTime));
+        sequence.AppendInterval(this.warningFadeInterval);
+        sequence.Append(sprite.DOColor(transpWarning, this.warningFadeInOutTime));
         sequence.OnComplete(() => {
             sprite.color = originalColor;
             sprite.gameObject.SetActive(false);
         });
+
+        if(showAnchorText) {
+            var text = this.warning.GetComponentInChildren<TextMeshPro>(true);
+
+            text.gameObject.SetActive(true);
+            var originalTextColor = text.color;
+            var transpTextWarning = text.color - Color.black;
+            text.color = transpTextWarning;
+
+            var sequenceText = DOTween.Sequence();
+            sequenceText.Append(text.DOColor(originalTextColor, this.warningFadeInOutTime));
+            sequenceText.AppendInterval(this.warningFadeInterval);
+            sequenceText.Append(text.DOColor(transpTextWarning, this.warningFadeInOutTime));
+            sequenceText.OnComplete(() => {
+                text.color = originalColor;
+                text.gameObject.SetActive(false);
+            });
+        }
     }
 
 
@@ -359,7 +378,7 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
             this.soundEmitter[2].Play();
-            this.ShowWarning();
+            this.ShowWarning(true);
 
             this.jammed = true;
             this.waitingAnchor = true;
@@ -374,7 +393,7 @@ public class BoatController : MonoBehaviour
             this.anim.ResetTrigger("Right");
             this.anim.ResetTrigger("Up");
             this.soundEmitter[2].Play();
-            this.ShowWarning();
+            this.ShowWarning(true);
 
             this.jammed = true;
             this.waitingAnchor = true;
