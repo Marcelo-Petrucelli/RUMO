@@ -5,34 +5,33 @@ using UnityEngine;
 using DG.Tweening;
 using FMODUnity;
 using System;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class BoatController : MonoBehaviour
 {
-    [SerializeField, BoxGroup("Config")] public float acceleration = 0f;
-    [SerializeField, BoxGroup("Config")] public float deceleration = 0f;
-    [SerializeField, BoxGroup("Config")] public float maxSpeed = 0f;
+    [SerializeField, BoxGroup("Config")] public float speed = 4f;
+    [SerializeField, BoxGroup("Config")] public float smoothInputSpeed = 0.3f;
+    [SerializeField, BoxGroup("Config")] public Vector2 smoothInputDumpSnap = new(0.1f, 0.1f);
     [SerializeField, BoxGroup("Config")] public int maxChasingBubbles = 1;
     [SerializeField, BoxGroup("Config")] public float whaleTrollDistance = 7f;
     [SerializeField, BoxGroup("Config")] public float warningFadeInOutTime = 0.5f;
     [SerializeField, BoxGroup("Config")] public float warningFadeInterval = 4f;
 
     [SerializeField, BoxGroup("References")] public Animator trails;
-    [SerializeField, BoxGroup("References")] public List<Transform> bubblePivots;
     [SerializeField, BoxGroup("References")] public Transform whalePivot;
+    [SerializeField, BoxGroup("References")] public List<Transform> bubblePivots;
     [SerializeField, BoxGroup("References")] public GameObject warning;
-    [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalSize = new Vector2(0.5f, 1.5f);
-    [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalOffset = new Vector2(0.025f, 0f);
-    [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalSize = new Vector2(2f, 0.4583282f);
-    [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalOffset = new Vector2(-0.01640372f, -0.3568905f);
+    [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalSize = new(0.5f, 1.5f);
+    [SerializeField, BoxGroup("Vertical Colider Config")] private Vector2 verticalOffset = new(0.025f, 0f);
+    [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalSize = new(2f, 0.4583282f);
+    [SerializeField, BoxGroup("Horizontal Colider Config")] private Vector2 horizontalOffset = new(-0.01640372f, -0.3568905f);
 
-    [ShowNonSerializedField] private float speed = 0f;
     [ShowNonSerializedField] private bool moving = false;
     [ShowNonSerializedField] private bool whaleTime = false;
+    [ShowNonSerializedField] private Vector2 currentMovement;
+    [ShowNonSerializedField] private Vector2 currentVelocity;
+    [ShowNonSerializedField] private BoatDirection currentDirection = BoatDirection.east;
 
-    [ShowNonSerializedField] internal bool left = false;
-    [ShowNonSerializedField] internal bool right = true;
-    [ShowNonSerializedField] internal bool up = false;
-    [ShowNonSerializedField] internal bool down = false;
     [ShowNonSerializedField] internal bool jammed = false;
     [ShowNonSerializedField] internal bool chaseBlocked = false;
     [ShowNonSerializedField] internal bool waitingAnchor = false;
@@ -54,7 +53,7 @@ public class BoatController : MonoBehaviour
         this.anim = this.GetComponent<Animator>();
         this.boatBody = this.GetComponent<Rigidbody2D>();
         this.capsuleCollider = this.GetComponent<CapsuleCollider2D>();
-        this.warning.gameObject.SetActive(false);
+        this.warning.SetActive(false);
         this.soundEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
         this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
         this.capsuleCollider.size = this.horizontalSize;        
@@ -95,7 +94,7 @@ public class BoatController : MonoBehaviour
 
         if(this.MayPopListSize > 0 && Input.GetKeyDown(KeyCode.Space) && !LevelManager.currentInstance.showingText) {
             //this.jammed = true; //Will be set by LevelManager.ObtainNextItem()
-            this.speed = 0;
+            //this.speed = 0;
             this.mayPopBubbles[0].Pop();
             this.chasingBubbles.RemoveAt(0);
             this.mayPopBubbles.RemoveAt(0);
@@ -116,194 +115,170 @@ public class BoatController : MonoBehaviour
 
     private void Move() {
         if(this.jammed) {
-            if(this.speed != 0) {
-                this.speed = 0;
-                this.anim.SetBool("Moving", false);
-                this.trails.SetTrigger("Idle");
-                this.trails.ResetTrigger("Vertical");
-                this.trails.ResetTrigger("Horizontal");
-                this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-            }
+            this.anim.SetBool("Moving", false);
             return;
         }
 
-        var keepLeft = Input.GetKey(KeyCode.LeftArrow) && this.left;
-        var keepUp = Input.GetKey(KeyCode.UpArrow) && this.up;
-        var keepRight = Input.GetKey(KeyCode.RightArrow) && this.right;
-        var keepDown = Input.GetKey(KeyCode.DownArrow) && this.down;
+        var input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        this.currentMovement = Vector2.SmoothDamp(this.currentMovement, input, ref this.currentVelocity, this.smoothInputSpeed);
+        if(this.currentMovement.x <= this.smoothInputDumpSnap.x) {
+            this.currentMovement.x = input.x;
+        }
+        if(this.currentMovement.y <= this.smoothInputDumpSnap.y) {
+            this.currentMovement.y = input.y;
+        }
 
-        var changingLeft = Input.GetKeyDown(KeyCode.LeftArrow) && !this.left;
-        var changingUp = Input.GetKeyDown(KeyCode.UpArrow) && !this.up;
-        var changingRight = Input.GetKeyDown(KeyCode.RightArrow) && !this.right;
-        var changingDown = Input.GetKeyDown(KeyCode.DownArrow) && !this.down;
+        var movement = this.speed * Time.fixedDeltaTime * this.currentMovement;
 
-        var changedDirection = changingLeft || changingUp || changingRight || changingDown;
-        var tryingToMove = changedDirection || keepLeft || keepUp || keepRight || keepDown;
-        var moving = tryingToMove && this.speed != 0;
-        var holding = moving && (
-                            Input.GetKeyDown(KeyCode.LeftArrow) ||
-                            Input.GetKeyDown(KeyCode.RightArrow) ||
-                            Input.GetKeyDown(KeyCode.UpArrow) ||
-                            Input.GetKeyDown(KeyCode.DownArrow)
-                        );
-        var decelerating = !changedDirection && !holding && this.speed != 0;
+        var direction = this.FindDirection(movement, this.currentDirection);
+        var changedDirection = this.currentDirection != direction;
+        var moving = Mathf.Abs(movement.x) + Mathf.Abs(movement.y) > 0;
+        var startedMoving = !this.moving && moving;
+        var stopedMoving = this.moving && !moving;
 
-        /*this.moving = (Input.GetKey(KeyCode.LeftArrow) && this.left)      || 
-                        (Input.GetKey(KeyCode.RightArrow) && this.right) || 
-                        (Input.GetKey(KeyCode.UpArrow) && this.up)       || 
-                        (Input.GetKey(KeyCode.DownArrow) && this.down);*/
         this.moving = moving;
-        this.anim.SetBool("Moving", this.moving);
+        this.currentDirection = direction;
 
-        if(holding) {
+        this.anim.SetBool("Moving", this.moving);
+        if(changedDirection) {
+            this.anim.SetTrigger("Changed");
+        }
+        this.anim.SetInteger("Direction", (int) this.currentDirection);
+
+        if(changedDirection) {
+            this.soundEmitter[1].Play();
+
+            this.ChangeCollision();
+        }
+
+        if(startedMoving) {
+            this.FadeTutorial();
+        }/* else if(stopedMoving) {
+
+        }*/
+        this.ChangeTrail(moving);
+
+        if(this.currentMovement.sqrMagnitude == 0 && this.currentVelocity.sqrMagnitude <= 0.01f) {
+            if(this.soundEmitter[0].IsPlaying()) {
+                this.soundEmitter[0].SetParameter("Push button", 1f);
+            }
+        } else if(moving) {
             this.soundEmitter[0].SetParameter("Push button", 0.0f);
             if(!this.soundEmitter[0].IsPlaying()) {
                 this.soundEmitter[0].Play();
             }
-        } else if(decelerating) {
-            if(this.soundEmitter[0].IsPlaying()) {
-                this.soundEmitter[0].SetParameter("Push button", 1f);
-            }
         }
 
-        if(moving) {
-            if(this.right) {                
-                this.trails.SetTrigger("Horizontal");                
-                this.trails.ResetTrigger("Idle");
-                this.trails.ResetTrigger("Vertical");
-                this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-            } else if(this.left) {                
-                this.trails.SetTrigger("Horizontal");
-                this.trails.ResetTrigger("Idle");
-                this.trails.ResetTrigger("Vertical");
-                if(Mathf.Sign(this.trails.transform.localScale.x) > 0) {
-                    this.trails.transform.localScale = new Vector3(this.trails.transform.localScale.x * -1, Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-                }
-            } else if(this.up) {                
-                this.trails.SetTrigger("Vertical");
-                this.trails.ResetTrigger("Idle");
-                this.trails.ResetTrigger("Horizontal");
-                this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
-            } else if(this.down) {                
-                this.trails.SetTrigger("Vertical");
-                this.trails.ResetTrigger("Idle");
-                this.trails.ResetTrigger("Horizontal");
-                if(Mathf.Sign(this.trails.transform.localScale.y) > 0) {
-                    this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), this.trails.transform.localScale.y * -1, this.trails.transform.localScale.z);
-                }
-            }
-        } else if(this.speed == 0) {
-            this.trails.SetTrigger("Idle");
-            this.trails.ResetTrigger("Vertical");
-            this.trails.ResetTrigger("Horizontal");
+        var clamped = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position + new Vector3(movement.x, movement.y));
+        this.boatBody.MovePosition(clamped);
+    }
 
-            this.trails.transform.localScale = new Vector3(Mathf.Abs(this.trails.transform.localScale.x), Mathf.Abs(this.trails.transform.localScale.y), this.trails.transform.localScale.z);
+    private void ChangeCollision() {
+        var horizontal = true;
+        switch(this.currentDirection) {
+            case BoatDirection.north:
+            case BoatDirection.south:
+                horizontal = false;
+                break;
+            /*case BoatDirection.west:
+            case BoatDirection.northWest:
+            case BoatDirection.southWest:
+            case BoatDirection.east:
+            case BoatDirection.northEast:
+            case BoatDirection.southEast:
+                break;*/
         }
-
-        if(changingLeft) {
-            this.left = true;
-            this.right = this.up = this.down = false;
-            this.speed = 0f;
-
-            this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
-            this.capsuleCollider.size = this.horizontalSize;
-            this.capsuleCollider.offset = this.horizontalOffset;            
-
-            this.anim.SetTrigger("Left");
-            this.anim.ResetTrigger("Right");
-            this.anim.ResetTrigger("Up");
-            this.anim.ResetTrigger("Down");
-
-            this.soundEmitter[1].Play();
-            this.FadeTutorial();
-        } else if(changingRight) {
-            this.right = true;
-            this.left = this.up = this.down = false;
-            this.speed = 0f;
-
+        if(horizontal) {
             this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
             this.capsuleCollider.size = this.horizontalSize;
             this.capsuleCollider.offset = this.horizontalOffset;
-
-            this.anim.SetTrigger("Right");
-            this.anim.ResetTrigger("Left");
-            this.anim.ResetTrigger("Up");
-            this.anim.ResetTrigger("Down");
-
-            this.soundEmitter[1].Play();
-            this.FadeTutorial();
-        } else if(changingUp) {
-            this.up = true;
-            this.left = this.right = this.down = false;
-            this.speed = 0f;
-
-            this.capsuleCollider.direction = CapsuleDirection2D.Vertical;
-            this.capsuleCollider.size = this.verticalSize;
-            this.capsuleCollider.offset = this.verticalOffset;
-
-            this.anim.SetTrigger("Up");
-            this.anim.ResetTrigger("Left");
-            this.anim.ResetTrigger("Right");
-            this.anim.ResetTrigger("Down");
-
-            this.soundEmitter[1].Play();
-            this.FadeTutorial();
-        } else if(changingDown) {
-            this.down = true;
-            this.left = this.right = this.up = false;
-            this.speed = 0f;
-
-            this.capsuleCollider.direction = CapsuleDirection2D.Vertical;
-            this.capsuleCollider.size = this.verticalSize;
-            this.capsuleCollider.offset = this.verticalOffset;
-
-            this.anim.SetTrigger("Down");
-            this.anim.ResetTrigger("Left");
-            this.anim.ResetTrigger("Right");
-            this.anim.ResetTrigger("Up");
-
-            this.soundEmitter[1].Play();
-            this.FadeTutorial();
-        }
-
-        if(tryingToMove) {
-            if(Mathf.Abs(this.speed) < this.maxSpeed) { //Not at Max Speed
-                this.speed += (this.left || this.down ? -1 : 1) * this.acceleration * Time.fixedDeltaTime;
-            }/* else {
-                this.speed = (this.left || this.down ? -1 : 1) * this.maxSpeed;
-            }*/
         } else {
-            if(
-                ((this.left || this.down) && this.speed < 0) ||
-                ((this.right || this.up) && this.speed > 0))
-            {
-                this.speed += (this.left || this.down ? 1 : -1) * this.deceleration * Time.fixedDeltaTime;
-            } else { 
-                this.speed = 0;
-                
+            this.capsuleCollider.direction = CapsuleDirection2D.Vertical;
+            this.capsuleCollider.size = this.verticalSize;
+            this.capsuleCollider.offset = this.verticalOffset;
+        }
+    }
+
+    private void ChangeTrail(bool moving) {
+        var spriteR = this.trails.GetComponent<SpriteRenderer>();
+        if(!moving) {
+            this.trails.SetTrigger("Idle");
+            spriteR.flipX = false;
+            spriteR.flipY = false;
+        } else {
+            switch(this.currentDirection) {
+                case BoatDirection.north:
+                    this.trails.SetTrigger("Vertical");
+                    this.trails.ResetTrigger("Horizontal");
+                    this.trails.ResetTrigger("Idle");
+                    spriteR.flipX = false;
+                    spriteR.flipY = false;
+                    break;
+                case BoatDirection.south:
+                    this.trails.SetTrigger("Vertical");
+                    this.trails.ResetTrigger("Horizontal");
+                    this.trails.ResetTrigger("Idle");
+                    spriteR.flipX = false;
+                    spriteR.flipY = true;
+                    break;
+                case BoatDirection.west:
+                case BoatDirection.northWest:
+                case BoatDirection.southWest:
+                    this.trails.SetTrigger("Horizontal");
+                    this.trails.ResetTrigger("Vertical");
+                    this.trails.ResetTrigger("Idle");
+                    spriteR.flipX = true;
+                    spriteR.flipY = false;
+                    break;
+                case BoatDirection.east:
+                case BoatDirection.northEast:
+                case BoatDirection.southEast:
+                    this.trails.SetTrigger("Horizontal");
+                    this.trails.ResetTrigger("Vertical");
+                    this.trails.ResetTrigger("Idle");
+                    spriteR.flipX = false;
+                    spriteR.flipY = false;
+                    break;
             }
         }
+    }
 
-        if(this.speed != 0) {
-             var speedVect = new Vector3(
-                this.left || this.right ? this.speed * Time.fixedDeltaTime : 0f,
-                this.up || this.down ? this.speed * Time.fixedDeltaTime : 0f,
-                0f
-            );
-
-            var clamped = LevelManager.currentInstance.levelCamera.GetComponent<CameraController>().ClampMapPosition(this.transform.position + speedVect);
-            this.boatBody.MovePosition(clamped);
+    private BoatDirection FindDirection(Vector2 movement, BoatDirection lastDirection) {
+        if(movement.y > 0) { //north
+            if(movement.x > 0) { //northEast
+                return BoatDirection.northEast;
+            } else if(movement.x < 0) { //northWest
+                return BoatDirection.northWest;
+            } else { //only north
+                return BoatDirection.north;
+            }
+        } else if (movement.y < 0){ //south
+            if(movement.x > 0) { //southEast
+                return BoatDirection.southEast;
+            } else if(movement.x < 0) { //southWest
+                return BoatDirection.southWest;
+            } else { //only south
+                return BoatDirection.south;
+            }
+        } else { //neutral
+            if(movement.x > 0) { //northEast
+                return BoatDirection.east;
+            } else if(movement.x < 0) { //northWest
+                return BoatDirection.west;
+            } else { //only north
+                return lastDirection;
+            }
         }
     }
 
     public Vector3 GetBubblePivot() {
-        if(this.up) {
+        if(this.currentDirection == BoatDirection.north) {
             return this.bubblePivots[0].position;
-        } else if(this.right) {
+        } else if(this.currentDirection == BoatDirection.east) {
             return this.bubblePivots[1].position;
-        } else if(this.down) {
+        } else if(this.currentDirection == BoatDirection.south) {
             return this.bubblePivots[2].position;
-        } else { //Left
+        } else { //this.currentDirection == BoatDirection.west
             return this.bubblePivots[3].position;
         }
     }
@@ -311,7 +286,7 @@ public class BoatController : MonoBehaviour
     public void FadeTutorial() => LevelManager.currentInstance.HideTutorial();
 
     public void ShowWarning() {
-        this.warning.gameObject.SetActive(true);
+        this.warning.SetActive(true);
         var sprite = this.warning.GetComponent<SpriteRenderer>();
         var originalColor = sprite.color;
         var transpWarning = sprite.color - Color.black;          
@@ -427,4 +402,15 @@ public class BoatController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.whaleTrollDistance);
     }
+}
+
+internal enum BoatDirection {
+    north = 0,
+    northEast = 1,
+    east = 2,
+    southEast = 3,
+    south = 4,
+    southWest = 5,
+    west = 6,
+    northWest = 7,
 }

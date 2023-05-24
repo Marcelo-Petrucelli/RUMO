@@ -69,8 +69,8 @@ public class LevelManager : MonoBehaviour
         this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
         this.tutorialMessage.gameObject.SetActive(true);
         this.waterAndReflex.SetActive(true);
-        this.whale.gameObject.SetActive(false);
-        this.island.gameObject.SetActive(false);
+        this.whale.SetActive(false);
+        this.island.SetActive(false);
         
     }
 
@@ -126,10 +126,10 @@ public class LevelManager : MonoBehaviour
         sequence.AppendInterval(this.messagesDuration);
         sequence.OnComplete(() => {
             var sequenceFadeOut = DOTween.Sequence();
-            var actualDirection = new Vector3(0, 0, 0);
+            //var actualDirection = new Vector3(0, 0, 0);
             var actualPosition = msg.rectTransform.position;
 
-            if(this.Player.right) {
+            /*if(this.Player.right) {
                 actualDirection = new Vector3(300, 0, 0);
             } else if(this.Player.left) {
                 actualDirection = new Vector3(-300, 0, 0);
@@ -137,10 +137,10 @@ public class LevelManager : MonoBehaviour
                 actualDirection = new Vector3(0, 300, 0);
             } else if(this.Player.down) {
                 actualDirection = new Vector3(0, -300, 0);
-            }       
+            }*/  
             
-            sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
-            sequenceFadeOut.Join(msg.DOColor(transp, this.messagesFadeDuration));
+            //sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
+            sequenceFadeOut.Append(msg.DOColor(transp, this.messagesFadeDuration));
             sequenceFadeOut.OnComplete(() => {
                 msg.gameObject.SetActive(false);
                 this.showingText = false;
@@ -245,7 +245,7 @@ public class LevelManager : MonoBehaviour
 
             this.compassBg.GetComponent<Image>().color = Color.red;
             this.island.transform.position = selected.position;
-            this.island.gameObject.SetActive(true);
+            this.island.SetActive(true);
             this.ending = true;
             AudioController.Instance.StartEUFOMusic();
         }, durationSec);
@@ -256,7 +256,7 @@ public class LevelManager : MonoBehaviour
         this.player.jammed = true;
         AudioController.Instance.FoundIslandMusicEnding();
 
-        this.character.gameObject.SetActive(true);
+        this.character.SetActive(true);
     }
 
     public void CharacterReachedEnd() {
