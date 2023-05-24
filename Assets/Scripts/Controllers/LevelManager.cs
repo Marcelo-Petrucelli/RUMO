@@ -154,11 +154,6 @@ public class LevelManager : MonoBehaviour
         this.tutorialMessage.DOColor(transp, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
     }
 
-    public void ObtainNextItem() {
-        this.itemController.SpawnAndMoveToIventory();
-        this.player.jammed = true;
-    }
-
     public void WhaleItAllUp() {
         this.whaledBubbles = new List<BubbleController>(this.player.chasingBubbles.ToArray());
         this.whale.transform.position = new Vector3(this.player.whalePivot.position.x, this.player.whalePivot.position.y + UnityEngine.Random.Range(-2.2f, 2.2f), this.whale.transform.position.z);
@@ -179,13 +174,25 @@ public class LevelManager : MonoBehaviour
         }, this.whaleWaitingInterval);
     }
 
+    public void ObtainNextItem() {
+        this.itemController.SpawnAndMoveToIventory();
+        this.player.jammed = true;
+    }
+
+    public void ItemWaitForInput() {
+
+    }
+
+    public void ItemInputRecieved() {
+        
+    }
+
     public void ItemObtained(int index) {
         //Mudar caso seja necessário mudar as mensagens
         switch(index) {
             case 0:
                 this.ShowMessage(0); //Livro de receitas
                 this.player.WhaleTime();
-                
                 break;
             case 1:
                 this.ShowMessage(1); //VideoGame controller
