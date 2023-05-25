@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public RectTransform compassBg;
     [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
     [SerializeField, BoxGroup("References")] public ItemHUDController itemController;
-    [SerializeField, BoxGroup("References")] public TextMeshProUGUI tutorialMessage;
+    [SerializeField, BoxGroup("References")] public RectTransform tutorialMessage;
     [SerializeField, BoxGroup("References")] public List<TextMeshProUGUI> messages;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
@@ -67,11 +67,12 @@ public class LevelManager : MonoBehaviour
         currentInstance = this;
         this.player = this.boat.GetComponent<BoatController>();
         this.allBubbles = new List<BubbleController>(FindObjectsOfType<BubbleController>());
-        this.tutorialMessage.gameObject.SetActive(true);
         this.waterAndReflex.SetActive(true);
         this.whale.SetActive(false);
         this.island.SetActive(false);
-        
+
+        this.tutorialMessage.gameObject.SetActive(false);
+        this.ShowTutorial();
     }
 
     // Start is called before the first frame update
@@ -149,9 +150,39 @@ public class LevelManager : MonoBehaviour
         });
     }
 
+    public void ShowTutorial() {
+        
+        var text = this.tutorialMessage.GetComponentInChildren<TextMeshProUGUI>(true);
+        var bg = this.tutorialMessage.GetComponentInChildren<Image>(true);
+
+        var initialTextColor = text.color - Color.black;
+        var finalTextColor = text.color + Color.black;
+        var initialBGColor = bg.color - Color.black;
+        var finalBGColor = bg.color + Color.black;
+
+        this.tutorialMessage.gameObject.SetActive(true);
+
+        text.color = initialTextColor;
+        text.DOColor(finalTextColor, 0.3f).OnComplete(() => { });
+
+        bg.color = finalBGColor;
+        bg.DOColor(finalBGColor, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
+    }
+
     public void HideTutorial() {
-        var transp = this.tutorialMessage.color - Color.black;
-        this.tutorialMessage.DOColor(transp, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
+        var text = this.tutorialMessage.GetComponentInChildren<TextMeshProUGUI>();
+        var bg = this.tutorialMessage.GetComponentInChildren<Image>();
+
+        var initialTextColor = text.color - Color.black;
+        var finalTextColor = text.color + Color.black;
+        var initialBGColor = bg.color - Color.black;
+        var finalBGColor = bg.color + Color.black;
+
+        text.color = initialTextColor;
+        text.DOColor(finalTextColor, 0.3f).OnComplete(() => { });
+
+        bg.color = finalBGColor;
+        bg.DOColor(finalBGColor, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
     }
 
     public void WhaleItAllUp() {

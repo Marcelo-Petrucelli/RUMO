@@ -2109,8 +2109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138, y: -29}
-  m_SizeDelta: {x: 1071.5786, y: 505.0544}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1075, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &869547990
 MonoBehaviour:
@@ -2168,7 +2168,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2196,7 +2196,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -197.90875, w: -131.93921}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2318,7 +2318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &931231064
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2336,10 +2336,10 @@ RectTransform:
   m_Father: {fileID: 19380121805919456}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.625}
-  m_AnchorMax: {x: 0, y: 0.625}
-  m_AnchoredPosition: {x: 1000, y: -178}
-  m_SizeDelta: {x: 954.6061, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &977758180
 GameObject:
@@ -3064,7 +3064,7 @@ GameObject:
   - component: {fileID: 1263515138}
   - component: {fileID: 1263515137}
   m_Layer: 0
-  m_Name: bg
+  m_Name: TutorialBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3265,7 +3265,7 @@ MonoBehaviour:
   compassBg: {fileID: 735731798}
   compassPointer: {fileID: 833443082}
   itemController: {fileID: 1817555989}
-  tutorialMessage: {fileID: 869547990}
+  tutorialMessage: {fileID: 931231064}
   messages:
   - {fileID: 2056641799}
   - {fileID: 655800360}
@@ -5278,7 +5278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4763205218691208092, guid: ddb22551968277045895525545662008, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -70.4
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 7097686823287901021, guid: ddb22551968277045895525545662008, type: 3}
       propertyPath: m_Enabled
@@ -5292,6 +5292,10 @@ PrefabInstance:
       propertyPath: cameraLimits
       value: 
       objectReference: {fileID: 1773521166}
+    - target: {fileID: 7097686823287901021, guid: ddb22551968277045895525545662008, type: 3}
+      propertyPath: startAtFollow
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7097686823287901021, guid: ddb22551968277045895525545662008, type: 3}
       propertyPath: smoothDuration
       value: 1.5
