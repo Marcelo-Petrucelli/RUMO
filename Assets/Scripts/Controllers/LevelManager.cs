@@ -29,6 +29,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public Color compassEndingColor = Color.red;
     [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
     [SerializeField, BoxGroup("Config")] public float characterFinalSceneWaitingTime = 10f;
+    [SerializeField, BoxGroup("Config")] public float tutorialIntervalToShow = 0.6f;
+    [SerializeField, BoxGroup("Config")] public float tutorialFadeDuration = 0.4f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
     [SerializeField, BoxGroup("References")] public SceneController sceneController;
@@ -36,10 +38,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
     [SerializeField, BoxGroup("References")] public ItemHUDController itemController;
     [SerializeField, BoxGroup("References")] public RectTransform tutorialMessage;
-    [SerializeField, BoxGroup("References")] public List<TextMeshProUGUI> messages;
+    [SerializeField, BoxGroup("References")] public RectTransform sideMessagesParent;
     [SerializeField, BoxGroup("References")] public GameObject boat;
     [SerializeField, BoxGroup("References")] public GameObject waterAndReflex;
-    [SerializeField, BoxGroup("References")] public GameObject messagesParent;
     [SerializeField, BoxGroup("References")] public GameObject whale;
     [SerializeField, BoxGroup("References")] public GameObject island;
     [SerializeField, BoxGroup("References")] public GameObject character;
@@ -49,15 +50,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField, ReadOnly, TextArea(maxLines:1, minLines:1), BoxGroup("References")] private string descSprites = "Na ordem " + string.Join(", ", LevelManager.itemSpritesNames.ToArray());
     [SerializeField, BoxGroup("References")] public List<Sprite> itemSprites;
 
-    [SerializeField, ReorderableList, ReadOnly] internal List<BubbleController> allBubbles = new();
-    [ShowNonSerializedField] internal BoatController player;
+    [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<BubbleController> allBubbles = new();
+    [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<TextMeshProUGUI> sideMessages = new();
     [ShowNonSerializedField] internal bool showingText =  false;
 
+    internal BoatController player;
     public BoatController Player => this.player;    
     public static LevelManager currentInstance;
 
     private bool shouldPoolCompass = true;
-    private List<BubbleController> whaledBubbles;   
+    private List<BubbleController> whaledBubbles;
     [ShowNonSerializedField] private bool ending = false;
     [ShowNonSerializedField] internal bool ended = false;
 
@@ -71,8 +73,12 @@ public class LevelManager : MonoBehaviour
         this.whale.SetActive(false);
         this.island.SetActive(false);
 
+        this.sideMessages = new List<TextMeshProUGUI>(this.sideMessagesParent.GetComponentsInChildren<TextMeshProUGUI>(true));
+
         this.tutorialMessage.gameObject.SetActive(false);
-        this.ShowTutorial();
+
+        this.player.jammed = true;
+        this.ExecuteAfter(() => this.ShowTutorial(), this.tutorialIntervalToShow); 
     }
 
     // Start is called before the first frame update
@@ -112,11 +118,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void ShowMessage(int index) {
-        var msg = this.messages[index];
+    public void ShowSideMessage(int index) {
+        var msg = this.sideMessages[index];
         var originalColor = msg.color;
         var transp = originalColor - Color.black;
-        var colorTeste = Color.blue;
 
         msg.color = transp;
         msg.gameObject.SetActive(true);
@@ -145,44 +150,39 @@ public class LevelManager : MonoBehaviour
             sequenceFadeOut.OnComplete(() => {
                 msg.gameObject.SetActive(false);
                 this.showingText = false;
-
             });
         });
     }
 
     public void ShowTutorial() {
-        
         var text = this.tutorialMessage.GetComponentInChildren<TextMeshProUGUI>(true);
         var bg = this.tutorialMessage.GetComponentInChildren<Image>(true);
 
         var initialTextColor = text.color - Color.black;
-        var finalTextColor = text.color + Color.black;
+        var finalTextColor = new Color(text.color.r, text.color.g, text.color.b, 1);
         var initialBGColor = bg.color - Color.black;
-        var finalBGColor = bg.color + Color.black;
+        var finalBGColor = new Color(bg.color.r, bg.color.g, bg.color.b, 1);
 
         this.tutorialMessage.gameObject.SetActive(true);
 
         text.color = initialTextColor;
-        text.DOColor(finalTextColor, 0.3f).OnComplete(() => { });
+        text.DOColor(finalTextColor, this.tutorialFadeDuration).OnComplete(() => {
+            this.player.jammed = false;
+        });
 
-        bg.color = finalBGColor;
-        bg.DOColor(finalBGColor, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
+        bg.color = initialBGColor;
+        bg.DOColor(finalBGColor, this.tutorialFadeDuration);
     }
 
     public void HideTutorial() {
         var text = this.tutorialMessage.GetComponentInChildren<TextMeshProUGUI>();
         var bg = this.tutorialMessage.GetComponentInChildren<Image>();
 
-        var initialTextColor = text.color - Color.black;
-        var finalTextColor = text.color + Color.black;
-        var initialBGColor = bg.color - Color.black;
-        var finalBGColor = bg.color + Color.black;
+        var finalTextColor = text.color - Color.black;
+        var finalBGColor = bg.color - Color.black;
 
-        text.color = initialTextColor;
-        text.DOColor(finalTextColor, 0.3f).OnComplete(() => { });
-
-        bg.color = finalBGColor;
-        bg.DOColor(finalBGColor, 0.3f).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
+        text.DOColor(finalTextColor, this.tutorialFadeDuration).OnComplete(() => { });
+        bg.DOColor(finalBGColor, this.tutorialFadeDuration).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
     }
 
     public void WhaleItAllUp() {
@@ -206,40 +206,36 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ObtainNextItem() {
-        this.itemController.SpawnAndMoveToIventory();
+        this.itemController.SpawnAndShowItem();
         this.player.jammed = true;
     }
 
     public void ItemWaitForInput() {
-
+        //Assuming player is already Jammed
+        this.player.waitingItemDismiss = true;
     }
 
     public void ItemInputRecieved() {
-        
+        this.itemController.FromFrameToSlot();
     }
 
     public void ItemObtained(int index) {
         //Mudar caso seja necessário mudar as mensagens
         switch(index) {
             case 0:
-                this.ShowMessage(0); //Livro de receitas
                 this.player.WhaleTime();
                 break;
             case 1:
-                this.ShowMessage(1); //VideoGame controller
                 AudioController.Instance.FirstAdvanceMusic();
                 this.player.WhaleTime();
                 break;
             case 2:
-                this.ShowMessage(2); //Pets
                 this.player.WhaleTime();
                 break;
             case 3:
-                this.ShowMessage(3); //IceCream
                 this.player.WhaleTime();
                 break;
             case 4:
-                this.ShowMessage(4); //Shoes
                 AudioController.Instance.SecondAdvanceMusic();
                 this.player.FishTime(5f);
                 this.player.WhaleTime();
@@ -248,7 +244,6 @@ public class LevelManager : MonoBehaviour
                 this.player.chaseBlocked = false;
                 break;
             case 6:
-                this.ShowMessage(5); //Camera
                 this.player.KidTime(5f);
                 break;
             case 7:
@@ -256,7 +251,7 @@ public class LevelManager : MonoBehaviour
                 this.EndTime(4f);
                 break;
             case 99:
-                this.ShowMessage(6); //Final Text
+                this.ShowSideMessage(6); //Final Text
                 break;
         }
 

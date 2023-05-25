@@ -5,7 +5,6 @@ using UnityEngine;
 using DG.Tweening;
 using FMODUnity;
 using System;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using TMPro;
 
 public class BoatController : MonoBehaviour
@@ -36,6 +35,7 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] internal bool jammed = false;
     [ShowNonSerializedField] internal bool chaseBlocked = false;
     [ShowNonSerializedField] internal bool waitingAnchor = false;
+    [ShowNonSerializedField] internal bool waitingItemDismiss = false;
 
     [ShowNativeProperty] internal int MayPopListSize => this.mayPopBubbles.Count;
 
@@ -117,6 +117,10 @@ public class BoatController : MonoBehaviour
     private void Move() {
         if(this.jammed) {
             this.anim.SetBool("Moving", false);
+            if(this.waitingItemDismiss && Input.anyKeyDown) { //Upgrade to any key on Gamepad
+                LevelManager.currentInstance.ItemInputRecieved();
+                this.waitingItemDismiss = false;
+            }
             return;
         }
 
@@ -373,10 +377,6 @@ public class BoatController : MonoBehaviour
     public void FishTime(float durationSec) {
         this.chaseBlocked = true;
         this.ExecuteAfter(() => {
-            this.anim.ResetTrigger("Down");
-            this.anim.ResetTrigger("Left");
-            this.anim.ResetTrigger("Right");
-            this.anim.ResetTrigger("Up");
             this.soundEmitter[2].Play();
             this.ShowWarning(true);
 
@@ -388,10 +388,6 @@ public class BoatController : MonoBehaviour
     public void KidTime(float durationSec) {
         this.chaseBlocked = true;
         this.ExecuteAfter(() => {
-            this.anim.ResetTrigger("Down");
-            this.anim.ResetTrigger("Left");
-            this.anim.ResetTrigger("Right");
-            this.anim.ResetTrigger("Up");
             this.soundEmitter[2].Play();
             this.ShowWarning(true);
 
