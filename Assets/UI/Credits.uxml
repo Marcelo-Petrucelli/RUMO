@@ -1,19 +1,19 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/CreditsStyle.uss?fileID=7433441132597879392&amp;guid=0a19f55cde7f2d5439eb266417f83433&amp;type=3#CreditsStyle" />
     <ui:VisualElement name="Credits" style="width: 594px; height: 339px; left: 1px; padding-left: 64px; padding-top: 21px;">
-        <ui:Label text="CREDITS" display-tooltip-when-elided="true" name="Title" style="-unity-font: url(&apos;project://database/Assets/Fonts/AmaticSC-Regular.ttf?fileID=12800000&amp;guid=07b67d8f11c8e7a4e87de52290c65b9c&amp;type=3#AmaticSC-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Resources/AmaticSC-Regular%20SDF.asset?fileID=11400000&amp;guid=7468e0c1edae6a14997f1dbc6f578ba3&amp;type=2#AmaticSC-Regular SDF&apos;); font-size: 240px; width: 514px; height: 264px; color: rgb(209, 209, 209);" />
+        <ui:Label text="CRÉDITOS" display-tooltip-when-elided="true" name="Title" style="-unity-font: url(&apos;project://database/Assets/Fonts/AmaticSC-Regular.ttf?fileID=12800000&amp;guid=07b67d8f11c8e7a4e87de52290c65b9c&amp;type=3#AmaticSC-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Resources/AmaticSC-Regular%20SDF.asset?fileID=11400000&amp;guid=7468e0c1edae6a14997f1dbc6f578ba3&amp;type=2#AmaticSC-Regular SDF&apos;); font-size: 240px; width: 514px; height: 264px; color: rgb(209, 209, 209);" />
     </ui:VisualElement>
-    <ui:VisualElement name="Roles" style="width: 940px; height: 130%; left: 874px; bottom: 675px; flex-grow: 1; flex-direction: column; justify-content: flex-start; align-items: flex-start; top: -32px;">
-        <ui:Label text="Art                      Game Design &amp; UI/UX" display-tooltip-when-elided="true" name="Art" class="role-text" style="width: 462px; height: 97px; left: 51px;" />
-        <ui:Label text="Narrative                     Sound Design" display-tooltip-when-elided="true" name="Narrative" class="role-text" style="width: 50%; left: 0; top: 112px;" />
-        <ui:Label text="Programming &amp; Animations" display-tooltip-when-elided="true" name="Programmer" class="role-text" style="width: 658px; left: 78px; top: 228px; height: 93px; right: 0;" />
+    <ui:VisualElement name="Roles" style="width: 940px; height: 130%; left: 874px; bottom: 675px; flex-grow: 1; flex-direction: column; justify-content: flex-start; align-items: flex-start; top: -32px; padding-left: 63px;">
+        <ui:Label text="             Arte                    Design de Jogo &amp; UI/UX" display-tooltip-when-elided="true" name="Art" class="role-text" style="width: 462px; height: 97px; left: 51px;" />
+        <ui:Label text="Narrativa                Design de Som              Produção" display-tooltip-when-elided="true" name="Narrative" class="role-text" style="width: 50%; left: 0; top: 93px;" />
+        <ui:Label text="                Programação &amp; Animações" display-tooltip-when-elided="true" name="Programmer" class="role-text" style="width: 658px; left: 78px; top: 212px; height: 93px; right: 0;" />
     </ui:VisualElement>
     <ui:VisualElement name="Names" style="height: 506%; width: 50%; left: 861px; top: -252px;">
-        <ui:Label text="Ariel Abans                 Lia Godoy" display-tooltip-when-elided="true" name="Art" class="name-text" style="width: 40%; left: 16px; top: 162px;" />
-        <ui:Label text="Ana Lins                  Felipe Yatri" display-tooltip-when-elided="true" name="Narrative" class="name-text" style="top: 313px; left: 41px; width: 40%;" />
-        <ui:Label text="Marcelo Petrucelli          Lucas Squariz&#10;" display-tooltip-when-elided="true" name="Prog01" class="name-text" style="top: 483px; left: 1px;" />
+        <ui:Label text="             Ariel Abans                   Lia Godoy" display-tooltip-when-elided="true" name="Art" class="name-text" style="width: 40%; left: 16px; top: 140px;" />
+        <ui:Label text="   Ana Lins               Felipe Yatri           Kellen Karollyne" display-tooltip-when-elided="true" name="Narrative" class="name-text" style="top: 297px; left: 41px; width: 40%;" />
+        <ui:Label text="              Marcelo Petrucelli          Lucas Squariz&#10;" display-tooltip-when-elided="true" name="Prog01" class="name-text" style="top: 461px; left: 1px;" />
     </ui:VisualElement>
     <ui:VisualElement name="Buttons" style="width: 250px; height: 500px; left: 34px; top: -49px;">
-        <ui:Button text="Back to Menu" display-tooltip-when-elided="true" name="BackButton" class="back-button" />
+        <ui:Button text="Menu" display-tooltip-when-elided="true" name="BackButton" class="back-button" style="align-items: stretch; -unity-text-align: middle-left;" />
     </ui:VisualElement>
 </ui:UXML>
