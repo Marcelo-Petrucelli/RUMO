@@ -5296,6 +5296,10 @@ PrefabInstance:
       propertyPath: cameraLimits
       value: 
       objectReference: {fileID: 1773521166}
+    - target: {fileID: 7097686823287901021, guid: ddb22551968277045895525545662008, type: 3}
+      propertyPath: smoothDuration
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6609906610070386289, guid: ddb22551968277045895525545662008, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ddb22551968277045895525545662008, type: 3}
