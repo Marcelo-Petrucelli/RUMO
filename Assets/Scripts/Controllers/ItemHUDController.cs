@@ -17,9 +17,9 @@ public class ItemHUDController : MonoBehaviour
 {
     [SerializeField, BoxGroup("References")] public GameObject itemPrefab;
     [SerializeField, BoxGroup("References")] public RectTransform screenItemFrame;
-    [SerializeField, BoxGroup("References")] public RectTransform slotsParent;
     [SerializeField, BoxGroup("References")] public RectTransform partSlotsParent;
-    [SerializeField, BoxGroup("References")] public List<ItemOnHud> items;
+    [SerializeField, ReorderableList, BoxGroup("References")] public List<RectTransform> itemsSlots;
+    [SerializeField, ReorderableList, BoxGroup("References")] public List<ItemOnHud> items;
 
     //[SerializeField, BoxGroup("AnimationConfig")] private float xVariation = -300f;
     [SerializeField, BoxGroup("AnimationConfig")] private float itemMultiplier = 1.3f;
@@ -29,7 +29,7 @@ public class ItemHUDController : MonoBehaviour
     [SerializeField, BoxGroup("AnimationConfig")] private float partItemWaitingDuration = 3f;
     [SerializeField, BoxGroup("AnimationConfig")] private float partItemFadeDuration = 0.4f;
 
-    [SerializeField, ReadOnly, ReorderableList, BoxGroup("Debug")] private List<RectTransform> slots;
+    //[SerializeField, ReadOnly, ReorderableList, BoxGroup("Debug")] private List<RectTransform> slots;
     [SerializeField, ReadOnly, BoxGroup("Debug")] private RectTransform partSlot;
     [ShowNonSerializedField, BoxGroup("Debug")] internal int currentItemIndex = -1;
     [ShowNonSerializedField, BoxGroup("Debug")] internal int currentSlotIndex = -1;
@@ -37,8 +37,8 @@ public class ItemHUDController : MonoBehaviour
 
     void Start()
     {
-        this.slots = new List<RectTransform>(this.slotsParent.GetComponentsInChildren<RectTransform>(true));
-        this.slots.Remove(this.slotsParent);
+        //this.slots = new List<RectTransform>(this.slotsParent.GetComponentsInChildren<RectTransform>(true));
+        //this.slots.Remove(this.slotsParent);
         //this.slots.Reverse();
         this.partSlot = this.partSlotsParent.GetComponentsInChildren<RectTransform>(true)[1];
         this.partSlotsParent.gameObject.SetActive(false);
@@ -99,6 +99,7 @@ public class ItemHUDController : MonoBehaviour
         }
         var item = this.screenItemFrame.GetComponentsInChildren<RectTransform>(true)[1];
 
+        RectTransform slot = null;
         var xPart = 1;
         var yPart = 1;
         if(this.nextIsPart) {
@@ -106,15 +107,16 @@ public class ItemHUDController : MonoBehaviour
             yPart = 2;
             this.FadePart();
         } else {
-            item.SetParent(this.slots[this.currentSlotIndex], true);
+            slot = this.itemsSlots[this.currentSlotIndex];
+            item.SetParent(slot, true);
             xPart = 2;
         }
 
         var frameSequence = DOTween.Sequence();
         if(!this.nextIsPart) {
             frameSequence.Append(item.DOScale(new Vector3(
-                this.slots[0].rect.width * this.itemMultiplier / item.rect.width,
-                this.slots[0].rect.height * this.itemMultiplier / item.rect.height,
+                slot.rect.width * this.itemMultiplier / item.rect.width,
+                slot.rect.height * this.itemMultiplier / item.rect.height,
                 1
             ), this.frameAnimationDuration));
         }
