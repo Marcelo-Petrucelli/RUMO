@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="MixerGroup" id="{5faaee4a-8d30-46c1-86e1-c27fce9d9d4f}">
 		<property name="volume">
-			<value>1.5</value>
+			<value>2</value>
 		</property>
 		<property name="name">
 			<value>Msuic Vol</value>
@@ -20,17 +20,10 @@
 	<object class="MixerBusEffectChain" id="{496313e6-b3c8-4def-bee5-f5418c78d126}">
 		<relationship name="effects">
 			<destination>{1e3a75db-31e5-4152-8849-7bbac61f83e3}</destination>
-			<destination>{5ada72a7-3e2a-4285-9998-1e719b343ea0}</destination>
+			<destination>{a4c3bd0d-5b1c-4f90-98e8-fb5071658eb9}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b19eab31-1090-44aa-a5fc-bab2120c9005}" />
 	<object class="MixerBusFader" id="{1e3a75db-31e5-4152-8849-7bbac61f83e3}" />
-	<object class="MultibandEqEffect" id="{5ada72a7-3e2a-4285-9998-1e719b343ea0}">
-		<property name="filterTypeA">
-			<value>4</value>
-		</property>
-		<property name="filterTypeE">
-			<value>3</value>
-		</property>
-	</object>
+	<object class="ThreeEQEffect" id="{a4c3bd0d-5b1c-4f90-98e8-fb5071658eb9}" />
 </objects>

@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{333e581d-01cc-43de-a739-18200fa94db7}">
 		<property name="name">
-			<value>U.I MENU</value>
+			<value>HOVER</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{cea91f10-30db-47c6-aafc-90fd340fdc84}</destination>
+			<destination>{66c2cf3f-c890-4b37-bc8b-44b027a71ed4}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{58de6d9b-ef0a-4ff5-8105-3cae1971b49e}</destination>
@@ -107,6 +107,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{034ccb86-575e-4d77-894e-792e7615d0f7}">
+		<property name="volume">
+			<value>10</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -189,7 +192,7 @@
 	</object>
 	<object class="AutomationPoint" id="{8cb60aaf-1585-4168-9c5c-b7fa1ba44477}">
 		<property name="position">
-			<value>0.068142283419391853</value>
+			<value>0.15625</value>
 		</property>
 		<property name="value">
 			<value>1</value>
