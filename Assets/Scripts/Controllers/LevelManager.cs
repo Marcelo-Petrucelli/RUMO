@@ -20,8 +20,6 @@ class ColorFilterFinalProperties
 
 public class LevelManager : MonoBehaviour
 {
-    public static List<string> itemSpritesNames = new() { "Book", "Controller", "Pets", "IceCream", "Shoes", "Fish", "Camera", "Kid" };
-
     [SerializeField, BoxGroup("Config")] public int levelIndex;
     [SerializeField, BoxGroup("Config")] public float messagesFadeDuration = 0.8f;
     [SerializeField, BoxGroup("Config")] public float messagesDuration = 4f;
@@ -47,9 +45,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public GameObject character;
     [SerializeField, BoxGroup("References")] public List<Transform> islandSpawns;
     //[SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
-
-    [SerializeField, ReadOnly, TextArea(maxLines:1, minLines:1), BoxGroup("References")] private string descSprites = "Na ordem " + string.Join(", ", LevelManager.itemSpritesNames.ToArray());
-    [SerializeField, BoxGroup("References")] public List<Sprite> itemSprites;
 
     [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<BubbleController> allBubbles = new();
     [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<TextMeshProUGUI> sideMessages = new();
