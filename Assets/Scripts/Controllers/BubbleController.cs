@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BubbleController : MonoBehaviour
 {
-    [SerializeField, Dropdown("BubbleTypes")] public string type;
     [SerializeField] public bool active;
     [SerializeField] public float maxMoveDelta;
     [SerializeField] public float minDistToFollow;
     [SerializeField] public Transform bubbleInner;
     [ShowNonSerializedField] internal bool chasing;
     private BoatController player;
-
-    private List<string> BubbleTypes => LevelManager.itemSpritesNames;
 
     private void Start()
     {
