@@ -5,7 +5,6 @@ using UnityEngine;
 using DG.Tweening;
 using FMODUnity;
 using System;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using TMPro;
 
 public class BoatController : MonoBehaviour
@@ -36,6 +35,7 @@ public class BoatController : MonoBehaviour
     [ShowNonSerializedField] internal bool jammed = false;
     [ShowNonSerializedField] internal bool chaseBlocked = false;
     [ShowNonSerializedField] internal bool waitingAnchor = false;
+    [ShowNonSerializedField] internal bool waitingItemDismiss = false;
 
     [ShowNativeProperty] internal int MayPopListSize => this.mayPopBubbles.Count;
 
@@ -110,13 +110,17 @@ public class BoatController : MonoBehaviour
     private void CheckAnchor() {
         if(this.waitingAnchor && Input.GetKeyDown(KeyCode.A)) {
             this.waitingAnchor = false;
-            LevelManager.currentInstance.ObtainNextItem();
+            LevelManager.currentInstance.ObtainNextItem(true);
         }
     }
 
     private void Move() {
         if(this.jammed) {
             this.anim.SetBool("Moving", false);
+            if(this.waitingItemDismiss && Input.anyKeyDown) { //Upgrade to any key on Gamepad
+                LevelManager.currentInstance.ItemInputRecieved();
+                this.waitingItemDismiss = false;
+            }
             return;
         }
 
@@ -321,7 +325,6 @@ public class BoatController : MonoBehaviour
         }
     }
 
-
     public void TryAddToChasing(BubbleController bubble) {
         if(!this.chasingBubbles.Contains(bubble)) {
             this.chasingBubbles.Add(bubble);
@@ -373,11 +376,7 @@ public class BoatController : MonoBehaviour
     public void FishTime(float durationSec) {
         this.chaseBlocked = true;
         this.ExecuteAfter(() => {
-            this.anim.ResetTrigger("Down");
-            this.anim.ResetTrigger("Left");
-            this.anim.ResetTrigger("Right");
-            this.anim.ResetTrigger("Up");
-            this.soundEmitter[2].Play();
+            this.soundEmitter[2].Play(); //Warning Sound
             this.ShowWarning(true);
 
             this.jammed = true;
@@ -385,14 +384,21 @@ public class BoatController : MonoBehaviour
         }, durationSec);
     }
 
-    public void KidTime(float durationSec) {
+    public void WhirlpoolTime(float durationSec) {
         this.chaseBlocked = true;
         this.ExecuteAfter(() => {
-            this.anim.ResetTrigger("Down");
-            this.anim.ResetTrigger("Left");
-            this.anim.ResetTrigger("Right");
-            this.anim.ResetTrigger("Up");
-            this.soundEmitter[2].Play();
+            this.soundEmitter[2].Play(); //Warning Sound
+            this.ShowWarning(true);
+
+            this.jammed = true;
+            this.waitingAnchor = true;
+        }, durationSec);
+    }
+
+    public void PartTime(float durationSec) {
+        this.chaseBlocked = true;
+        this.ExecuteAfter(() => {
+            this.soundEmitter[2].Play(); //Warning Sound
             this.ShowWarning(true);
 
             this.jammed = true;
