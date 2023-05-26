@@ -839,7 +839,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 30, y: 30, z: 30, w: 30}
+  m_margin: {x: 6.4033813, y: 30, z: 286.19214, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 30, y: 30, z: 30, w: 30}
+  m_margin: {x: 30, y: 30, z: 269.33752, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1393,9 +1393,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bastava um bot\xE3o...\npara voc\xEA entrar no mundo colorido da fantasia
-    \ne viv\xEA-lo de forma pura. \nE agora, o quanto voc\xEA pode contar com um
-    simples bot\xE3o?"
+  m_text: "Bastava um bot\xE3o para voc\xEA entrar no mundo colorido da fantasia
+    e viv\xEA-lo de forma pura. \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
   m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
@@ -1429,7 +1428,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1458,7 +1457,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 30, y: 30, z: 30, w: 30}
+  m_margin: {x: 30, y: 30, z: 249.11194, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1673,7 +1672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &776651373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2812,12 +2811,13 @@ RectTransform:
   - {fileID: 655800359}
   - {fileID: 1625387546}
   - {fileID: 1573246296}
+  - {fileID: 1255778254}
   m_Father: {fileID: 827853327}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 90}
   m_SizeDelta: {x: -500, y: 298}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1240371247
@@ -2992,6 +2992,141 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1255778253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255778254}
+  - component: {fileID: 1255778256}
+  - component: {fileID: 1255778255}
+  m_Layer: 0
+  m_Name: exitFrame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1255778254
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255778253}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1207744319}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 90, y: -185}
+  m_SizeDelta: {x: -180, y: -182}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1255778255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255778253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Mova pra continuar
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
+  m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4292927712
+  m_fontColor: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 48
+  m_fontSizeBase: 48
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: -3.7094727, y: 30, z: 208.6604, w: 30}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1255778256
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255778253}
+  m_CullTransparentMesh: 1
 --- !u!1 &1263515135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3222,20 +3357,6 @@ MonoBehaviour:
   - {fileID: 192241123}
   - {fileID: 1863822647}
   - {fileID: 885849125}
-  descSprites: Na ordem Book, Controller, Pets, IceCream, Shoes, Fish, Camera, Kid
-  itemSprites:
-  - {fileID: 21300000, guid: 5ff37c893c180b34aa2a4afbbb9dbbc4, type: 3}
-  - {fileID: 21300000, guid: 22b4c4d12e3100e4a818e8bc7ea5fe0e, type: 3}
-  - {fileID: 21300000, guid: 2c63981a25f8cca43bf4413b1c21f3b5, type: 3}
-  - {fileID: 21300000, guid: 0992986d747ce4041900905d3251e4c2, type: 3}
-  - {fileID: 21300000, guid: 9ea190f0c815984488ca367b7e7f29a7, type: 3}
-  - {fileID: 21300000, guid: 5a2dc0b06cb5976479aafe61ff5b865f, type: 3}
-  - {fileID: 21300000, guid: 439b910c910eb964aaf1619c9e80524a, type: 3}
-  - {fileID: 21300000, guid: fb295ff1e40e33447aa4f16407fe1c2e, type: 3}
-  - {fileID: 21300000, guid: 7f326ba9c5f292d43b0a4e2823bb4e25, type: 3}
-  - {fileID: 21300000, guid: 01ebf8d28ef82e04b9807df3d747cbec, type: 3}
-  - {fileID: 21300000, guid: 052eb667aa5e6574087487215acefb6e, type: 3}
-  - {fileID: 21300000, guid: f2272865657964b4db5a583c19964bf6, type: 3}
   allBubbles: []
   sideMessages: []
 --- !u!1 &1438806876
@@ -3452,7 +3573,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3481,7 +3602,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 30, y: 30, z: 30, w: 30}
+  m_margin: {x: -3.7094727, y: 30, z: 208.6604, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3793,8 +3914,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Somos como plantas - devemos ser regados\nde amor e carinho de vez em
-    quando, \npara podermos continuar cumprindo nossa miss\xE3o no universo..."
+  m_text: "Somos como plantas - devemos ser regados de amor e carinho de vez em quando,
+    para continuarmos cumprindo nossa miss\xE3o no universo..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
   m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
@@ -3828,7 +3949,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3857,7 +3978,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 30, y: 30, z: 30, w: 30}
+  m_margin: {x: 30, y: 30, z: 185.06396, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5036,7 +5157,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "O mar da vida nos leva at\xE9 a superf\xEDcie de realidades\nnuas, cruas
-    e dolorosas... nos fazendo esquecer daquele afeto \ntranscrito ou personificado
+    e dolorosas... nos fazendo esquecer daquele afeto transcrito ou personificado
     de maneira singela..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
@@ -5071,7 +5192,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5100,7 +5221,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 30, y: 30, z: 30, w: 30}
+  m_margin: {x: 30, y: 30, z: 174.95093, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
