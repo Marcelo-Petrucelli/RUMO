@@ -27,10 +27,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float messagesDuration = 4f;
     [SerializeField, BoxGroup("Config")] public float compassInterval = 0.3f;
     [SerializeField, BoxGroup("Config")] public Color compassEndingColor = Color.red;
-    [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
     [SerializeField, BoxGroup("Config")] public float characterFinalSceneWaitingTime = 10f;
     [SerializeField, BoxGroup("Config")] public float tutorialIntervalToShow = 0.6f;
     [SerializeField, BoxGroup("Config")] public float tutorialFadeDuration = 0.4f;
+    [SerializeField, BoxGroup("Config"), MinMaxSlider(0f, 30f)] public Vector2 specialEventsTimeRange = new (4f, 9f);
+    [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
     [SerializeField, BoxGroup("References")] public SceneController sceneController;
@@ -205,8 +206,8 @@ public class LevelManager : MonoBehaviour
         }, this.whaleWaitingInterval);
     }
 
-    public void ObtainNextItem() {
-        this.itemController.SpawnAndShowItem();
+    public void ObtainNextItem(bool isPartItem = false) {
+        this.itemController.SpawnAndShowItem(isPartItem);
         this.player.jammed = true;
     }
 
@@ -221,37 +222,49 @@ public class LevelManager : MonoBehaviour
 
     public void ItemObtained(int index) {
         //Mudar caso seja necessário mudar as mensagens
+        //this.player.FishTime(5f);
+        //this.player.WhirlpoolTime(5f);
+        //this.player.WhaleTime();
+
+        var preRandomValue = UnityEngine.Random.Range(this.specialEventsTimeRange.x, this.specialEventsTimeRange.y);
         switch(index) {
-            case 0:
-                this.player.WhaleTime();
+            case 0: //Nothing special
                 break;
-            case 1:
-                AudioController.Instance.FirstAdvanceMusic();
-                this.player.WhaleTime();
+            case 1: //Nothing special
                 break;
             case 2:
-                this.player.WhaleTime();
+                AudioController.Instance.FirstAdvanceMusic();
+                this.player.PartTime(preRandomValue); //First Part will be picked
                 break;
             case 3:
-                this.player.WhaleTime();
+                this.player.chaseBlocked = false; //Reactivates bubble chases
                 break;
-            case 4:
-                AudioController.Instance.SecondAdvanceMusic();
-                this.player.FishTime(5f);
-                this.player.WhaleTime();
+            case 4: //Nothing special
                 break;
-            case 5:
-                this.player.chaseBlocked = false;
+            case 5: //Nothing special
                 break;
             case 6:
-                this.player.KidTime(5f);
+                AudioController.Instance.SecondAdvanceMusic();
+                this.player.PartTime(preRandomValue); //Second Part will be picked
                 break;
             case 7:
+                this.player.chaseBlocked = false; //Reactivates bubble chases
+                break;
+            case 8: //Nothing special
+                break;
+            case 9: //Nothing special
+                break;
+            case 10:
+                AudioController.Instance.SecondAdvanceMusic();
+                this.player.PartTime(preRandomValue); //Last Part will be picked
+                break;
+            case 11:
+                //this.player.chaseBlocked = false; //Not needed
                 AudioController.Instance.FinalizeNormalAndStartWOWMusic();
-                this.EndTime(4f);
+                this.EndTime(0.5f);
                 break;
             case 99:
-                this.ShowSideMessage(6); //Final Text
+                this.ShowSideMessage(0); //Final Text
                 break;
         }
 
