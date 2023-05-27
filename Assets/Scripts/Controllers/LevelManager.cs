@@ -232,6 +232,7 @@ public class LevelManager : MonoBehaviour
                 this.player.PartTime(preRandomValue); //First Part will be picked
                 break;
             case 3:
+                this.ShowSideMessage(0); //Part Text - 0
                 this.player.chaseBlocked = false; //Reactivates bubble chases
                 break;
             case 4: //Nothing special
@@ -243,6 +244,7 @@ public class LevelManager : MonoBehaviour
                 this.player.PartTime(preRandomValue); //Second Part will be picked
                 break;
             case 7:
+                this.ShowSideMessage(1); //Part Text - 1
                 this.player.chaseBlocked = false; //Reactivates bubble chases
                 break;
             case 8: //Nothing special
@@ -255,11 +257,12 @@ public class LevelManager : MonoBehaviour
                 break;
             case 11:
                 //this.player.chaseBlocked = false; //Not needed
+                this.ShowSideMessage(2); //Part Text - 2
                 AudioController.Instance.FinalizeNormalAndStartWOWMusic();
                 this.EndTime(0.5f);
                 break;
             case 99:
-                this.ShowSideMessage(0); //Final Text
+                this.ShowSideMessage(3); //Final Text
                 break;
         }
 

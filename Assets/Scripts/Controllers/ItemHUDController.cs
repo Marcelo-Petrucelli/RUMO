@@ -16,10 +16,11 @@ public class ItemOnHud
 public class ItemHUDController : MonoBehaviour
 {
     [SerializeField, BoxGroup("References")] public GameObject itemPrefab;
+    [SerializeField, BoxGroup("References")] public TextMeshProUGUI helpText;
     [SerializeField, BoxGroup("References")] public RectTransform screenItemFrame;
-    [SerializeField, BoxGroup("References")] public RectTransform slotsParent;
     [SerializeField, BoxGroup("References")] public RectTransform partSlotsParent;
-    [SerializeField, BoxGroup("References")] public List<ItemOnHud> items;
+    [SerializeField, ReorderableList, BoxGroup("References")] public List<RectTransform> itemsSlots;
+    [SerializeField, ReorderableList, BoxGroup("References")] public List<ItemOnHud> items;
 
     //[SerializeField, BoxGroup("AnimationConfig")] private float xVariation = -300f;
     [SerializeField, BoxGroup("AnimationConfig")] private float itemMultiplier = 1.3f;
@@ -29,7 +30,7 @@ public class ItemHUDController : MonoBehaviour
     [SerializeField, BoxGroup("AnimationConfig")] private float partItemWaitingDuration = 3f;
     [SerializeField, BoxGroup("AnimationConfig")] private float partItemFadeDuration = 0.4f;
 
-    [SerializeField, ReadOnly, ReorderableList, BoxGroup("Debug")] private List<RectTransform> slots;
+    //[SerializeField, ReadOnly, ReorderableList, BoxGroup("Debug")] private List<RectTransform> slots;
     [SerializeField, ReadOnly, BoxGroup("Debug")] private RectTransform partSlot;
     [ShowNonSerializedField, BoxGroup("Debug")] internal int currentItemIndex = -1;
     [ShowNonSerializedField, BoxGroup("Debug")] internal int currentSlotIndex = -1;
@@ -37,10 +38,11 @@ public class ItemHUDController : MonoBehaviour
 
     void Start()
     {
-        this.slots = new List<RectTransform>(this.slotsParent.GetComponentsInChildren<RectTransform>(true));
-        this.slots.Remove(this.slotsParent);
+        //this.slots = new List<RectTransform>(this.slotsParent.GetComponentsInChildren<RectTransform>(true));
+        //this.slots.Remove(this.slotsParent);
         //this.slots.Reverse();
         this.partSlot = this.partSlotsParent.GetComponentsInChildren<RectTransform>(true)[1];
+        this.helpText.gameObject.SetActive(false);
         this.partSlotsParent.gameObject.SetActive(false);
         this.FadePart(true, true);
 
@@ -68,6 +70,8 @@ public class ItemHUDController : MonoBehaviour
             transp = originalColor - Color.black;
         }
 
+        var textFinalColor = new Color(this.helpText.color.r, this.helpText.color.g, this.helpText.color.b, 1);
+
         var newItem = Instantiate(this.itemPrefab, this.screenItemFrame.transform, false);
         var item = newItem.GetComponent<RectTransform>();
         var image = newItem.GetComponent<Image>();
@@ -79,6 +83,7 @@ public class ItemHUDController : MonoBehaviour
             msg.color = transp;
             msg.gameObject.SetActive(true);
         }
+        this.helpText.gameObject.SetActive(true);
         this.screenItemFrame.gameObject.SetActive(true);
 
         var sequence = DOTween.Sequence();
@@ -86,19 +91,23 @@ public class ItemHUDController : MonoBehaviour
         if(msg != null) {
             sequence.Join(msg.DOColor(originalColor, this.frameAnimationDuration));
         }
-        sequence.AppendInterval(this.waitAnimationDuration);
-
-        LevelManager.currentInstance.ItemWaitForInput();
+        sequence.Join(this.helpText.DOColor(textFinalColor, this.frameAnimationDuration));
+        sequence.OnComplete(() => {
+            LevelManager.currentInstance.ItemWaitForInput();
+        });
+        //sequence.AppendInterval(this.waitAnimationDuration);
     }
 
     public void FromFrameToSlot() {
         var msg = this.items[this.currentItemIndex].text;
+        var textInitialColor = this.helpText.color - Color.black;
         var transp = Color.white - Color.black;
         if(msg != null) {
             transp = msg.color - Color.black;
         }
         var item = this.screenItemFrame.GetComponentsInChildren<RectTransform>(true)[1];
 
+        RectTransform slot = null;
         var xPart = 1;
         var yPart = 1;
         if(this.nextIsPart) {
@@ -106,15 +115,16 @@ public class ItemHUDController : MonoBehaviour
             yPart = 2;
             this.FadePart();
         } else {
-            item.SetParent(this.slots[this.currentSlotIndex], true);
+            slot = this.itemsSlots[this.currentSlotIndex];
+            item.SetParent(slot, true);
             xPart = 2;
         }
 
         var frameSequence = DOTween.Sequence();
         if(!this.nextIsPart) {
             frameSequence.Append(item.DOScale(new Vector3(
-                this.slots[0].rect.width * this.itemMultiplier / item.rect.width,
-                this.slots[0].rect.height * this.itemMultiplier / item.rect.height,
+                slot.rect.width * this.itemMultiplier / item.rect.width,
+                slot.rect.height * this.itemMultiplier / item.rect.height,
                 1
             ), this.frameAnimationDuration));
         }
@@ -122,8 +132,11 @@ public class ItemHUDController : MonoBehaviour
         if(msg != null) {
             frameSequence.Join(msg.DOColor(transp, this.frameAnimationDuration));
         }
-        
+        frameSequence.Join(this.helpText.DOColor(textInitialColor, this.frameAnimationDuration));
+
+
         frameSequence.OnComplete(() => {
+            this.helpText.gameObject.SetActive(false);
             this.screenItemFrame.gameObject.SetActive(false);
             if(msg != null) {
                 msg.gameObject.SetActive(false);

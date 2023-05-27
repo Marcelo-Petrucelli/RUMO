@@ -259,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967a393dc79896847bde1dc3a8ea58c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Book
   active: 1
   maxMoveDelta: 2
   minDistToFollow: 7
@@ -277,8 +276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fixing: 1
-  minY: -20
-  maxY: 20
+  minY: -26
+  maxY: 26
   minZ: 0
   maxZ: 15
 --- !u!114 &9179901552341979914
