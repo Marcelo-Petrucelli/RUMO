@@ -6697,6 +6697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2096753903}
   - component: {fileID: 2096753904}
+  - component: {fileID: 2096753909}
   - component: {fileID: 2096753905}
   - component: {fileID: 2096753906}
   - component: {fileID: 2096753907}
@@ -6860,6 +6861,18 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
+--- !u!114 &2096753909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096753902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805230e4c337c4046963637950d1a932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2109708537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7062,6 +7075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2143022252}
+  - component: {fileID: 2143022256}
   - component: {fileID: 2143022255}
   - component: {fileID: 2143022254}
   - component: {fileID: 2143022253}
@@ -7152,6 +7166,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.18, y: -1}
   m_Size: {x: 5, y: 1.6}
   m_Direction: 1
+--- !u!114 &2143022256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143022251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10dc67d8e39b6f942afadc8a6efd6067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &19380121805919455
 PrefabInstance:
   m_ObjectHideFlags: 0
