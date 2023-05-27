@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fixing: 1
-  minY: -20
-  maxY: 20
+  minY: -26
+  maxY: 26
   minZ: 0
   maxZ: 15
 --- !u!114 &6410101286927456141
