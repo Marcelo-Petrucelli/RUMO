@@ -16,6 +16,7 @@ public class ItemOnHud
 public class ItemHUDController : MonoBehaviour
 {
     [SerializeField, BoxGroup("References")] public GameObject itemPrefab;
+    [SerializeField, BoxGroup("References")] public TextMeshProUGUI helpText;
     [SerializeField, BoxGroup("References")] public RectTransform screenItemFrame;
     [SerializeField, BoxGroup("References")] public RectTransform partSlotsParent;
     [SerializeField, ReorderableList, BoxGroup("References")] public List<RectTransform> itemsSlots;
@@ -41,6 +42,7 @@ public class ItemHUDController : MonoBehaviour
         //this.slots.Remove(this.slotsParent);
         //this.slots.Reverse();
         this.partSlot = this.partSlotsParent.GetComponentsInChildren<RectTransform>(true)[1];
+        this.helpText.gameObject.SetActive(false);
         this.partSlotsParent.gameObject.SetActive(false);
         this.FadePart(true, true);
 
@@ -68,6 +70,8 @@ public class ItemHUDController : MonoBehaviour
             transp = originalColor - Color.black;
         }
 
+        var textFinalColor = new Color(this.helpText.color.r, this.helpText.color.g, this.helpText.color.b, 1);
+
         var newItem = Instantiate(this.itemPrefab, this.screenItemFrame.transform, false);
         var item = newItem.GetComponent<RectTransform>();
         var image = newItem.GetComponent<Image>();
@@ -79,6 +83,7 @@ public class ItemHUDController : MonoBehaviour
             msg.color = transp;
             msg.gameObject.SetActive(true);
         }
+        this.helpText.gameObject.SetActive(true);
         this.screenItemFrame.gameObject.SetActive(true);
 
         var sequence = DOTween.Sequence();
@@ -86,13 +91,16 @@ public class ItemHUDController : MonoBehaviour
         if(msg != null) {
             sequence.Join(msg.DOColor(originalColor, this.frameAnimationDuration));
         }
-        sequence.AppendInterval(this.waitAnimationDuration);
-
-        LevelManager.currentInstance.ItemWaitForInput();
+        sequence.Join(this.helpText.DOColor(textFinalColor, this.frameAnimationDuration));
+        sequence.OnComplete(() => {
+            LevelManager.currentInstance.ItemWaitForInput();
+        });
+        //sequence.AppendInterval(this.waitAnimationDuration);
     }
 
     public void FromFrameToSlot() {
         var msg = this.items[this.currentItemIndex].text;
+        var textInitialColor = this.helpText.color - Color.black;
         var transp = Color.white - Color.black;
         if(msg != null) {
             transp = msg.color - Color.black;
@@ -124,8 +132,11 @@ public class ItemHUDController : MonoBehaviour
         if(msg != null) {
             frameSequence.Join(msg.DOColor(transp, this.frameAnimationDuration));
         }
-        
+        frameSequence.Join(this.helpText.DOColor(textInitialColor, this.frameAnimationDuration));
+
+
         frameSequence.OnComplete(() => {
+            this.helpText.gameObject.SetActive(false);
             this.screenItemFrame.gameObject.SetActive(false);
             if(msg != null) {
                 msg.gameObject.SetActive(false);
