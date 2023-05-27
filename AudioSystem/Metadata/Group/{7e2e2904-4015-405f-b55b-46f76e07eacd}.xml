@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{7e2e2904-4015-405f-b55b-46f76e07eacd}">
+		<property name="volume">
+			<value>-22.5</value>
+		</property>
+		<property name="name">
+			<value>VOICES</value>
+		</property>
+		<property name="pitch">
+			<value>-0.5</value>
+		</property>
+		<relationship name="masters">
+			<destination>{0f589a06-702a-4dcd-a8b6-a53eb959053f}</destination>
+		</relationship>
+		<relationship name="effectChain">
+			<destination>{e0717a08-4cec-42b6-ad08-f160ac40f645}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{9e3a2ea4-106c-4d04-8fa5-e110c1c6e378}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{54729347-a419-49b8-bc76-15e5c6e8d2f6}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{e0717a08-4cec-42b6-ad08-f160ac40f645}">
+		<relationship name="effects">
+			<destination>{777f32a9-abd9-48f9-aec9-06c89b52c531}</destination>
+			<destination>{fae1a982-89b6-4173-921c-a46bc9d99db1}</destination>
+			<destination>{3b0d7c7e-aae6-4d25-be74-168dc57cd56e}</destination>
+			<destination>{494124df-71f5-461a-9300-2e11c91c9c74}</destination>
+			<destination>{7d53be97-fc8f-4f2f-a3c7-f22a1ce7fadd}</destination>
+			<destination>{85a8839f-2667-498a-bcca-e2e59b92fb2a}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{9e3a2ea4-106c-4d04-8fa5-e110c1c6e378}" />
+	<object class="MixerBusFader" id="{777f32a9-abd9-48f9-aec9-06c89b52c531}" />
+	<object class="ChorusEffect" id="{fae1a982-89b6-4173-921c-a46bc9d99db1}">
+		<property name="rate">
+			<value>1</value>
+		</property>
+		<property name="depth">
+			<value>44.5</value>
+		</property>
+		<property name="mix">
+			<value>14.5</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{3b0d7c7e-aae6-4d25-be74-168dc57cd56e}">
+		<property name="decayTime">
+			<value>2300</value>
+		</property>
+		<property name="earlyDelay">
+			<value>98</value>
+		</property>
+		<property name="lateDelay">
+			<value>19</value>
+		</property>
+		<property name="HFReference">
+			<value>740</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>33.5</value>
+		</property>
+		<property name="diffusion">
+			<value>22</value>
+		</property>
+		<property name="density">
+			<value>63</value>
+		</property>
+		<property name="lowShelfFrequency">
+			<value>88</value>
+		</property>
+		<property name="lowShelfGain">
+			<value>-20</value>
+		</property>
+		<property name="highCut">
+			<value>360</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>36</value>
+		</property>
+		<property name="wetLevel">
+			<value>0</value>
+		</property>
+	</object>
+	<object class="MultibandEqEffect" id="{494124df-71f5-461a-9300-2e11c91c9c74}">
+		<property name="filterTypeA">
+			<value>6</value>
+		</property>
+		<property name="filterTypeB">
+			<value>9</value>
+		</property>
+		<property name="filterTypeC">
+			<value>9</value>
+		</property>
+		<property name="filterTypeD">
+			<value>9</value>
+		</property>
+		<property name="filterTypeE">
+			<value>2</value>
+		</property>
+		<property name="frequencyA">
+			<value>176.133224</value>
+		</property>
+		<property name="frequencyB">
+			<value>314.623352</value>
+		</property>
+		<property name="frequencyC">
+			<value>5158.79541</value>
+		</property>
+		<property name="frequencyD">
+			<value>7647.40625</value>
+		</property>
+		<property name="frequencyE">
+			<value>7490.58887</value>
+		</property>
+		<property name="qualityA">
+			<value>0.267448276</value>
+		</property>
+		<property name="qualityB">
+			<value>8</value>
+		</property>
+		<property name="qualityC">
+			<value>5.4000001</value>
+		</property>
+		<property name="qualityE">
+			<value>0.644206941</value>
+		</property>
+		<property name="gainB">
+			<value>1.03448153</value>
+		</property>
+		<property name="gainC">
+			<value>-29.4827595</value>
+		</property>
+		<property name="gainD">
+			<value>2.06896663</value>
+		</property>
+	</object>
+	<object class="TremoloEffect" id="{7d53be97-fc8f-4f2f-a3c7-f22a1ce7fadd}">
+		<property name="frequency">
+			<value>0.119999997</value>
+		</property>
+		<property name="depth">
+			<value>0.224999994</value>
+		</property>
+		<property name="shape">
+			<value>0.479999989</value>
+		</property>
+		<property name="duty">
+			<value>0.734999955</value>
+		</property>
+		<property name="phase">
+			<value>0.189999998</value>
+		</property>
+		<property name="spread">
+			<value>0.0599999987</value>
+		</property>
+	</object>
+	<object class="LimiterEffect" id="{85a8839f-2667-498a-bcca-e2e59b92fb2a}">
+		<property name="boost">
+			<value>9.40000057</value>
+		</property>
+		<property name="ceiling">
+			<value>-4.4000001</value>
+		</property>
+		<property name="release">
+			<value>9</value>
+		</property>
+	</object>
+</objects>
