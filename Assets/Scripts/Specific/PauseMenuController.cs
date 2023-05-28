@@ -30,9 +30,15 @@ public class PauseMenuController: MonoBehaviour
     {
         this.initialY = this.animatedMenu.anchoredPosition.y;
 
-        this.pausedBg.gameObject.SetActive(false);
-        this.pausedContent.gameObject.SetActive(false);
-        this.pausedConsent.gameObject.SetActive(false);
+        if(this.pausedBg != null) {
+            this.pausedBg.gameObject.SetActive(false);
+        }
+        if(this.pausedContent != null) {
+            this.pausedContent.gameObject.SetActive(false);
+        }
+        if(this.pausedConsent != null) {
+            this.pausedConsent.gameObject.SetActive(false);
+        }
 
         this.musicToggle.isOn = AudioController.Instance.isMusicMuted;
         this.sfxToggle.isOn = AudioController.Instance.isSFXMuted;
