@@ -6,17 +6,6 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using TMPro;
-using UnityEngine.SceneManagement;
-
-/*[Serializable]
-class ColorFilterFinalProperties
-{
-    [SerializeField] float finalHUE;
-    [SerializeField] float finalBrightness;
-    [SerializeField] float finalContrast;
-    [SerializeField] float finalSaturation;
-    [SerializeField] Vector3 finalSaturationIntensity;
-}*/
 
 public class LevelManager : MonoBehaviour
 {
@@ -132,20 +121,8 @@ public class LevelManager : MonoBehaviour
         sequence.AppendInterval(this.messagesDuration);
         sequence.OnComplete(() => {
             var sequenceFadeOut = DOTween.Sequence();
-            //var actualDirection = new Vector3(0, 0, 0);
             var actualPosition = msg.rectTransform.position;
-
-            /*if(this.Player.right) {
-                actualDirection = new Vector3(300, 0, 0);
-            } else if(this.Player.left) {
-                actualDirection = new Vector3(-300, 0, 0);
-            } else if(this.Player.up) {
-                actualDirection = new Vector3(0, 300, 0);
-            } else if(this.Player.down) {
-                actualDirection = new Vector3(0, -300, 0);
-            }*/  
-            
-            //sequenceFadeOut.Append(msg.rectTransform.DOMove((actualPosition - actualDirection), this.messagesFadeDuration).SetEase(Ease.InOutCirc));           
+        
             sequenceFadeOut.Append(msg.DOColor(transp, this.messagesFadeDuration));
             sequenceFadeOut.OnComplete(() => {
                 msg.gameObject.SetActive(false);
@@ -233,11 +210,6 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ItemObtained(int index) {
-        //Mudar caso seja necessário mudar as mensagens
-        //this.player.FishTime(5f);
-        //this.player.WhirlpoolTime(5f);
-        //this.player.WhaleTime();
-
         var preRandomValue = UnityEngine.Random.Range(this.specialEventsTimeRange.x, this.specialEventsTimeRange.y);
         switch(index) {
             case 0: //Nothing special
