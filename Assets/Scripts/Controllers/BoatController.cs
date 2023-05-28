@@ -254,23 +254,23 @@ public class BoatController : MonoBehaviour
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.northEast:
-                    this.trails.SetInteger("Direction", 2);
+                    this.trails.SetInteger("Direction", 1);
                     spriteR.flipX = false;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.northWest:
-                    this.trails.SetInteger("Direction", 2);
-                    spriteR.flipX = true;
+                    this.trails.SetInteger("Direction", 1);
+                    spriteR.flipX = false;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.southEast:
-                    this.trails.SetInteger("Direction", 2);
+                    this.trails.SetInteger("Direction", 1);
                     spriteR.flipX = false;
                     spriteR.flipY = true;
                     break;
                 case BoatDirection.southWest:
-                    this.trails.SetInteger("Direction", 2);
-                    spriteR.flipX = true;
+                    this.trails.SetInteger("Direction", 1);
+                    spriteR.flipX = false;
                     spriteR.flipY = true;
                     break;
             }
