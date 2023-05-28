@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class WhirlpoolController : MonoBehaviour
 {
-    [SerializeField] public bool active = true;
-    [SerializeField] public Vector2 centerOffset = new (0f, 0f);
-    [SerializeField] public float deadRadius = 0.15f;
+    [SerializeField, BoxGroup("Config")] public float deadRadius = 0.15f;
+    [SerializeField, BoxGroup("Config")] public Vector2 centerOffset = new (0f, 0f);
+    [SerializeField, BoxGroup("Config")] public Vector2 whirlPoolMaxDragForce = new(0.3f, 0.3f);
+    [SerializeField, BoxGroup("Config"), Range(0f, 1f)] public float speedMultiplier = 0.75f;
 
     [ShowNativeProperty] internal Vector2 Center => (this.transform.position + (Vector3) this.centerOffset);
+
+    [ShowNonSerializedField] internal bool active = true;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

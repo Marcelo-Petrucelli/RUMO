@@ -50,12 +50,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 2812997314822787196, guid: 5397c8d4d8512644699dd29fdcd0ca05, type: 3}
-  positionToShoot: {fileID: 4551221662467323513}
   animator: {fileID: 4551221663666288205}
+  minDistToShoot: 4.5
   timeBetweenShoot: 2
-  timeToDestroyProjectile: 0.5
-  minDistToShoot: 5
-  fishAttackTrigger: Attack
+  projectileSpawnOffset: {x: -1.06, y: 0.6}
+  allProjectileDuration: 3
+  allProjectileSpeed: 1.5
+  myBubbles: []
 --- !u!70 &4551221662467323495
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -69,8 +70,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.087857045, y: -0.24979086}
-  m_Size: {x: 5.0997434, y: 1.6130341}
+  m_Offset: {x: 0.17220223, y: -1.1469994}
+  m_Size: {x: 4.9156003, y: 0.88600576}
   m_Direction: 1
 --- !u!50 &4551221662467323492
 Rigidbody2D:

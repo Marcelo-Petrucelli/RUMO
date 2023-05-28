@@ -18,7 +18,6 @@ public class BoatController : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float warningFadeInterval = 4f;
     [SerializeField, BoxGroup("Config")] public float destroyPreInterval = 0.5f;
     [SerializeField, BoxGroup("Config")] public float destroyWarningDuration = 1f;
-    [SerializeField, BoxGroup("Config")] public Vector2 whirlPoolMaxDragForce = new(0.3f, 0.3f);
 
     [SerializeField, BoxGroup("References")] public Animator trails;
     [SerializeField, BoxGroup("References")] public Transform whalePivot;
@@ -133,12 +132,16 @@ public class BoatController : MonoBehaviour
         var drag = new Vector2(0f, 0f);
         var boatSpeed = this.speed;
         if(this.poolDraggin != null) {
-            boatSpeed /= 2;
-            drag = this.Vector2Clamp((this.poolDraggin.Center - (Vector2)this.transform.position).normalized, -1 * this.whirlPoolMaxDragForce, this.whirlPoolMaxDragForce);
+            if(this.poolDraggin.active) {
+                boatSpeed *= this.poolDraggin.speedMultiplier;
+                drag = this.Vector2Clamp((this.poolDraggin.Center - (Vector2) this.transform.position).normalized, -1 * this.poolDraggin.whirlPoolMaxDragForce, this.poolDraggin.whirlPoolMaxDragForce);
 
-            var wDist = Vector2.Distance(this.poolDraggin.Center, this.transform.position);
-            if(wDist < this.poolDraggin.deadRadius) {
-                this.ToBeDestroyed();
+                var wDist = Vector2.Distance(this.poolDraggin.Center, this.transform.position);
+                if(wDist < this.poolDraggin.deadRadius) {
+                    this.ToBeDestroyed();
+                }
+            } else {
+                this.poolDraggin = null;
             }
         }
 
@@ -374,8 +377,9 @@ public class BoatController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Finish") && !LevelManager.currentInstance.ended) {
-            LevelManager.currentInstance.EndGame();
+        if(collision.transform.TryGetComponent<ProjectileBase>(out var fishProjectile) && fishProjectile.active) {
+            this.ToBeDestroyed();
+            fishProjectile.Explode();
         }
     }
 
@@ -421,9 +425,11 @@ public class BoatController : MonoBehaviour
         }, durationSec);
     }
 
-    public void ToBeDestroyed() {
+    public void ToBeDestroyed(bool showWarning = true) {
         this.jammed = true;
-        this.ShowWarning(false, this.destroyWarningDuration);
+        if(showWarning) {
+            this.ShowWarning(false, this.destroyWarningDuration);
+        }
         this.ExecuteAfter(() => { 
             this.anim.SetTrigger("Destroy"); 
         }, this.destroyPreInterval); //Animation EVENT! Calls Destroyed at end.

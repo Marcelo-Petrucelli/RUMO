@@ -316,8 +316,7 @@ public class LevelManager : MonoBehaviour
 
     public void EndGame() {
         this.ItemObtained(99);
-        this.player.jammed = true;
-        this.player.Destroyed();
+        this.player.ToBeDestroyed(false);
         AudioController.Instance.FoundIslandMusicEnding();
 
         this.character.SetActive(true);

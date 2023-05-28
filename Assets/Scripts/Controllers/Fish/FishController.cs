@@ -1,25 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
 public class FishController : MonoBehaviour
 {
-    [SerializeField, BoxGroup("Fish References")] public Transform prefabProjectile;    
-    [SerializeField, BoxGroup("Fish References")] public Animator animator;
+    [SerializeField, BoxGroup("References")] public Transform prefabProjectile;    
+    [SerializeField, BoxGroup("References")] public Animator animator;
 
-    [SerializeField, BoxGroup("Fish shoot configs"), Range(2f, 10f)] public float timeBetweenShoot = 2f;
-    [SerializeField, BoxGroup("Fish shoot configs")] public float timeToDestroyProjectile = .5f;
-    [SerializeField, BoxGroup("Fish shoot configs")] public Vector2 projectileSpawnOffset = Vector2.zero;
-    [SerializeField, BoxGroup("Fish shoot configs")] public float minDistToShoot;
-    [SerializeField, BoxGroup("Fish shoot configs")] public string fishAttackTrigger = "Attack";
+    [SerializeField, BoxGroup("Configs")] public float minDistToShoot;
+    [SerializeField, BoxGroup("Configs"), Range(2f, 10f)] public float timeBetweenShoot = 2f;
+    [SerializeField, BoxGroup("Configs")] public Vector2 projectileSpawnOffset = Vector2.zero;
 
-    [ShowNonSerializedField] private float distanceBetweenBoatAndFish;
+    [SerializeField, BoxGroup("Spawn Configs")] public float allProjectileDuration = 3f;
+    [SerializeField, BoxGroup("Spawn Configs")] public float allProjectileSpeed = 2f;
+
+    [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<ProjectileBase> myBubbles = new();
+
+    [ShowNonSerializedField] internal bool active = true;
     [ShowNonSerializedField] private bool isShooting;
-
     [ShowNativeProperty] private Vector3 ProjectileSpawnPoint => this.transform.position + (Vector3) this.projectileSpawnOffset;
-    private Coroutine currentCorrotine;
+    [ShowNonSerializedField] private float distanceBetweenBoatAndFish;
+
     private BoatController player;
+    private Coroutine currentCorrotine;
 
     private void Start()
     {
@@ -28,37 +32,56 @@ public class FishController : MonoBehaviour
 
     private void Update()
     {
-        distanceBetweenBoatAndFish = Vector3.Distance(this.transform.position, this.player.transform.position);
+        if(this.active) {
+            this.distanceBetweenBoatAndFish = Vector3.Distance(this.transform.position, this.player.transform.position);
 
-        if(distanceBetweenBoatAndFish < this.minDistToShoot) {
-            if(!isShooting) {
-                isShooting = true;
-                currentCorrotine = StartCoroutine(StartShoot());
+            if(this.distanceBetweenBoatAndFish < this.minDistToShoot && !this.player.jammed) {
+                if(!this.isShooting) {
+                    this.isShooting = true;
+                    this.currentCorrotine = this.StartCoroutine(this.StartShoot());
+                }
+            } else if(this.isShooting) {
+                this.StopCoroutine(this.currentCorrotine);
+                this.isShooting = false;
             }
-        } else if(isShooting) {            
-            StopCoroutine(currentCorrotine);
-            isShooting = false;
+        } else {
+            this.StopCoroutine(this.currentCorrotine);
+            this.isShooting = false;
         }
     }  
 
     public void FishShoot() {         
-        var projectile = Instantiate(prefabProjectile, this.transform);
-        projectile.transform.position = ProjectileSpawnPoint;          
+        var obj = Instantiate(this.prefabProjectile, this.transform);
+        var projectile = obj.GetComponent<ProjectileBase>();
+        
+        //Config
+        projectile.transform.position = this.ProjectileSpawnPoint;
+        projectile.speed = this.allProjectileSpeed;
+        projectile.timeToDestroy = this.allProjectileDuration;
+        projectile.fishParent = this;
+
+        this.myBubbles.Add(projectile);
     }
 
     IEnumerator StartShoot() {
-        while(isShooting) {
-            animator.SetTrigger(fishAttackTrigger);
-            yield return new WaitForSeconds(timeBetweenShoot);
+        while(this.isShooting) {
+            this.animator.SetTrigger("Attack");
+            yield return new WaitForSeconds(this.timeBetweenShoot);
         }
     }
 
+    private void OnDestroy()
+    {
+        foreach(var bubble in this.myBubbles) {
+            bubble.Explode();
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, this.minDistToShoot);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(ProjectileSpawnPoint, 0.5f);
+        Gizmos.DrawWireSphere(this.ProjectileSpawnPoint, 0.5f);
     }
 }

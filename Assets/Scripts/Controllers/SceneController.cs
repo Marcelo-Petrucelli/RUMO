@@ -85,7 +85,7 @@ public class SceneController:MonoBehaviour
         uiSFXEmitter.Play();
     }
 
-    public void PlayGame() { this.End("4_Level_1"); this.ButtonPressed(); AudioController.Instance.GameStartedMusic(); }
+    public void PlayGame() { this.End("4_CutScene"); this.ButtonPressed(); AudioController.Instance.GameStartedMusic(); }
 
     public void GotoCredits() { this.End("3_Credits"); this.ButtonPressed(); }
 
@@ -95,7 +95,7 @@ public class SceneController:MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         switch (levelIndex) {
             case 0:
-                this.End("4_Level_1");
+                this.End("5_Level_1");
                 break;
             /*case 1:
                 this.End("5_Level_2");

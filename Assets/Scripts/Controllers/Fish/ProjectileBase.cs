@@ -8,43 +8,54 @@ public class ProjectileBase: MonoBehaviour
 {
     [SerializeField, BoxGroup("References")] public Animator anim;
 
-    [SerializeField, BoxGroup("Projectile config")] public float timeToDestroy = .5f;
-    [SerializeField, BoxGroup("Projectile config")] public float side = 1f;
-    [ShowNonSerializedField] private bool active = true;
+    [SerializeField, BoxGroup("Config")] public float speed = 2f;
+    [SerializeField, BoxGroup("Config")] public float timeToDestroy = 3f;
+    [ShowNonSerializedField] internal bool active = true;
 
-    private BoatController player;    
+    private BoatController player;
+    internal FishController fishParent;
 
     private void Start()
     {
         this.player = LevelManager.currentInstance.Player;
-        this.ExecuteAfter(() => { Explode();}, this.timeToDestroy);
+        this.ExecuteAfter(() => { this.Explode();}, this.timeToDestroy);
     }
 
     private void Update() {
         if (this.active) {
-            MoveProjectile();
+            this.MoveProjectile();
         }                
     }
 
     public void MoveProjectile() {
-        this.transform.Translate((this.player.transform.position - this.transform.position) * Time.deltaTime * this.side);
+        if(this.player.jammed) {
+            this.Explode();
+        }
+        this.transform.Translate(this.speed * Time.deltaTime * (this.player.transform.position - this.transform.position).normalized);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {        
-        if(active && collision.transform.TryGetComponent<BoatController>(out var player)) {
-            Explode();
+    //Moved to BoatController logic
+    /*private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.transform.TryGetComponent<ProjectileBase>(out var fishProjectile) && fishProjectile.active) {
+            //this.player.ToBeDestroyed();
+            this.Explode();
         }
-    }
+    }*/
 
     public void Explode() {
-        active = false;
+        this.active = false;
         this.anim.SetTrigger("Explode");
     }
 
-    public void DestroySelf() => Destroy(this.gameObject);
+    public void DestroySelf() {
+        if(this.fishParent != null) {
+            this.fishParent.myBubbles.Remove(this);
+        }
+        Destroy(this.gameObject);
+    }
 
     private void ExecuteAfter(Action stuff, float waitingTime) {
-        StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
+        this.StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
     }
 
     private IEnumerator ExecuteAfterCR(Action stuff, float waitingTime) {
