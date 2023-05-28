@@ -5,14 +5,17 @@ using System;
 
 public class AudioController:MonoBehaviour
 {
+    [SerializeField, BoxGroup("References")] Transform dubParent;
+    
     internal static AudioController Instance = null;
     [ShowNonSerializedField] internal bool isMusicMuted = false;
     [ShowNonSerializedField] internal bool isSFXMuted = false;
     [ShowNonSerializedField] internal bool isDubMuted = false;
 
     private FMODUnity.StudioEventEmitter musicEmitter;
+    private List<FMODUnity.StudioEventEmitter> dubs;
 
-    void Awake() {        
+    void Awake() {
         if(Instance == null) {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -20,6 +23,11 @@ public class AudioController:MonoBehaviour
             Destroy(this.gameObject);
         }
         this.musicEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
+        this.dubs = new List<FMODUnity.StudioEventEmitter>(this.dubParent.GetComponentsInChildren<FMODUnity.StudioEventEmitter>());
+    }
+
+    public void PlayDub(int index) {
+        this.dubs[index].Play();
     }
 
     public void GameStartedMusic() {
