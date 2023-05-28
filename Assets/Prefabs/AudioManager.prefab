@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97a3aa28a3116b429a19ebb7f8ebf1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dubParent: {fileID: 0}
+  dubParent: {fileID: 2704519073093951878}
 --- !u!114 &6921481396098853667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2704519073093951878}
   - component: {fileID: 8416261940679923904}
+  - component: {fileID: 6391522219656604589}
   - component: {fileID: 1969431833669169055}
   - component: {fileID: 1862964067464466545}
   - component: {fileID: 217548590917915923}
@@ -121,7 +122,6 @@ GameObject:
   - component: {fileID: 3045375404247878547}
   - component: {fileID: 1270350234640356291}
   - component: {fileID: 604169699027042674}
-  - component: {fileID: 6391522219656604589}
   m_Layer: 0
   m_Name: Dubs
   m_TagString: Untagged
@@ -164,6 +164,37 @@ MonoBehaviour:
       Data3: 14096789
       Data4: -1863092470
     Path: event:/VOICES/INTROPROLOGOLIA
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &6391522219656604589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281311568775755779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1935584878
+      Data2: 1195762869
+      Data3: -353062224
+      Data4: 1521420811
+    Path: event:/VOICES/Audio Tutorial
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -578,34 +609,3 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!114 &6391522219656604589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3281311568775755779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
