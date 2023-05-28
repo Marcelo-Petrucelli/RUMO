@@ -406,6 +406,16 @@ public class BoatController : MonoBehaviour
         this.anim.SetBool("Character", true);
     }
 
+    public void FadeAndDestroyTrail() {
+        var trailImage = this.trails.GetComponent<SpriteRenderer>();
+
+        var sequence = DOTween.Sequence();
+        sequence.AppendInterval(this.destroyPreInterval);
+        sequence.Append(trailImage.DOColor(new Color(trailImage.color.r, trailImage.color.g, trailImage.color.b, 0f), 1f)).OnComplete(() => {
+            Destroy(this.trails.gameObject);
+        });
+    }
+
     public void WhaleTime() => this.whaleTime = true;
 
     public void FishTime(float durationSec) {

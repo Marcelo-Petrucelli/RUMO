@@ -2,6 +2,7 @@
 using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
+using DG.Tweening;
 
 public class FishController : MonoBehaviour
 {
@@ -45,7 +46,9 @@ public class FishController : MonoBehaviour
                 this.isShooting = false;
             }
         } else {
-            this.StopCoroutine(this.currentCorrotine);
+            if(this.currentCorrotine != null) {
+                this.StopCoroutine(this.currentCorrotine);
+            }
             this.isShooting = false;
         }
     }  
@@ -68,6 +71,15 @@ public class FishController : MonoBehaviour
             this.animator.SetTrigger("Attack");
             yield return new WaitForSeconds(this.timeBetweenShoot);
         }
+    }
+
+    public void DisableFadeAndDestroy() {
+        this.active = false;
+        var spr = this.animator.GetComponent<SpriteRenderer>();
+
+        spr.DOFade(0f, 0.3f).OnComplete(() => {
+            Destroy(this.gameObject);
+        });
     }
 
     private void OnDestroy()

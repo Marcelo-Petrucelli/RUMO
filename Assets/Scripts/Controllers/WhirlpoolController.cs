@@ -1,8 +1,11 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
+using DG.Tweening;
 
 public class WhirlpoolController : MonoBehaviour
 {
+    [SerializeField, BoxGroup("References")] public Animator animator;
+
     [SerializeField, BoxGroup("Config")] public float deadRadius = 0.15f;
     [SerializeField, BoxGroup("Config")] public Vector2 centerOffset = new (0f, 0f);
     [SerializeField, BoxGroup("Config")] public Vector2 whirlPoolMaxDragForce = new(0.3f, 0.3f);
@@ -11,6 +14,15 @@ public class WhirlpoolController : MonoBehaviour
     [ShowNativeProperty] internal Vector2 Center => (this.transform.position + (Vector3) this.centerOffset);
 
     [ShowNonSerializedField] internal bool active = true;
+
+    public void DisableFadeAndDestroy() {
+        this.active = false;
+        var spr = this.animator.GetComponent<SpriteRenderer>();
+        
+        spr.DOFade(0f, 0.3f).OnComplete(() => {
+            Destroy(this.gameObject);
+        });
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

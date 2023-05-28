@@ -267,7 +267,7 @@ public class LevelManager : MonoBehaviour
         this.player.chaseBlocked = true;
         this.player.jammed = true;
 
-        //TODO - Fade e Desativar all HAZARDS
+        this.DisableHazards();
 
         this.player.ObtainedCharacter();
         foreach(var b in this.allBubbles.ToArray()) {
@@ -293,10 +293,23 @@ public class LevelManager : MonoBehaviour
         }, this.waitingEndingInterval);
     }
 
+    public void DisableHazards() {
+        var allFishs = FindObjectsOfType<FishController>();
+        var allWhirlpool = FindObjectsOfType<WhirlpoolController>();
+
+        foreach(var fish in allFishs) {
+            fish.DisableFadeAndDestroy();
+        }
+
+        foreach(var whirlpool in allWhirlpool) {
+            whirlpool.DisableFadeAndDestroy();
+        }
+    }
+
     public void EndGame() {
         this.ItemObtained(99);
         this.player.ToBeDestroyed(false);
-        //TODO - Remove Trails
+        this.player.FadeAndDestroyTrail();
         this.pauseController.ForceDisableLeave();
         AudioController.Instance.FoundIslandMusicEnding();
 
