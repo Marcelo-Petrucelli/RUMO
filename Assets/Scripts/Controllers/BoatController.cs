@@ -228,42 +228,50 @@ public class BoatController : MonoBehaviour
     private void ChangeTrail(bool moving) {
         var spriteR = this.trails.GetComponent<SpriteRenderer>();
         if(!moving) {
-            this.trails.SetTrigger("Idle");
+            this.trails.SetInteger("Direction", -1);
             spriteR.flipX = false;
             spriteR.flipY = false;
         } else {
             switch(this.currentDirection) {
                 case BoatDirection.north:
-                    this.trails.SetTrigger("Vertical");
-                    this.trails.ResetTrigger("Horizontal");
-                    this.trails.ResetTrigger("Idle");
+                    this.trails.SetInteger("Direction", 1);
                     spriteR.flipX = false;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.south:
-                    this.trails.SetTrigger("Vertical");
-                    this.trails.ResetTrigger("Horizontal");
-                    this.trails.ResetTrigger("Idle");
+                    this.trails.SetInteger("Direction", 1);
                     spriteR.flipX = false;
                     spriteR.flipY = true;
                     break;
                 case BoatDirection.west:
-                case BoatDirection.northWest:
-                case BoatDirection.southWest:
-                    this.trails.SetTrigger("Horizontal");
-                    this.trails.ResetTrigger("Vertical");
-                    this.trails.ResetTrigger("Idle");
+                    this.trails.SetInteger("Direction", 0);
                     spriteR.flipX = true;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.east:
-                case BoatDirection.northEast:
-                case BoatDirection.southEast:
-                    this.trails.SetTrigger("Horizontal");
-                    this.trails.ResetTrigger("Vertical");
-                    this.trails.ResetTrigger("Idle");
+                    this.trails.SetInteger("Direction", 0);
                     spriteR.flipX = false;
                     spriteR.flipY = false;
+                    break;
+                case BoatDirection.northEast:
+                    this.trails.SetInteger("Direction", 2);
+                    spriteR.flipX = false;
+                    spriteR.flipY = false;
+                    break;
+                case BoatDirection.northWest:
+                    this.trails.SetInteger("Direction", 2);
+                    spriteR.flipX = true;
+                    spriteR.flipY = false;
+                    break;
+                case BoatDirection.southEast:
+                    this.trails.SetInteger("Direction", 2);
+                    spriteR.flipX = false;
+                    spriteR.flipY = true;
+                    break;
+                case BoatDirection.southWest:
+                    this.trails.SetInteger("Direction", 2);
+                    spriteR.flipX = true;
+                    spriteR.flipY = true;
                     break;
             }
         }
@@ -391,6 +399,11 @@ public class BoatController : MonoBehaviour
         if(this.mayPopBubbles.Contains(bubble)) {
             this.mayPopBubbles.Remove(bubble);
         }
+    }
+
+    public void ObtainedCharacter() {
+        this.anim.SetTrigger("Changed");
+        this.anim.SetBool("Character", true);
     }
 
     public void WhaleTime() => this.whaleTime = true;
