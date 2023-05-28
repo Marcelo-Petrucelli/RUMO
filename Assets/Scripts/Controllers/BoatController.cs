@@ -166,14 +166,13 @@ public class BoatController : MonoBehaviour
         this.currentDirection = direction;
 
         this.anim.SetBool("Moving", this.moving);
+        this.anim.SetInteger("Direction", (int) this.currentDirection);
         if(changedDirection) {
             this.anim.SetTrigger("Changed");
         }
-        this.anim.SetInteger("Direction", (int) this.currentDirection);
 
         if(changedDirection) {
             this.soundEmitter[1].Play();
-
             this.ChangeCollision();
         }
 
@@ -228,7 +227,7 @@ public class BoatController : MonoBehaviour
     private void ChangeTrail(bool moving) {
         var spriteR = this.trails.GetComponent<SpriteRenderer>();
         if(!moving) {
-            this.trails.SetInteger("Direction", -1);
+            this.trails.SetInteger("Direction", 0);
             spriteR.flipX = false;
             spriteR.flipY = false;
         } else {
@@ -244,32 +243,32 @@ public class BoatController : MonoBehaviour
                     spriteR.flipY = true;
                     break;
                 case BoatDirection.west:
-                    this.trails.SetInteger("Direction", 0);
+                    this.trails.SetInteger("Direction", 2);
                     spriteR.flipX = true;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.east:
-                    this.trails.SetInteger("Direction", 0);
+                    this.trails.SetInteger("Direction", 2);
                     spriteR.flipX = false;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.northEast:
-                    this.trails.SetInteger("Direction", 2);
+                    this.trails.SetInteger("Direction", 3);
                     spriteR.flipX = false;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.northWest:
-                    this.trails.SetInteger("Direction", 2);
+                    this.trails.SetInteger("Direction", 3);
                     spriteR.flipX = true;
                     spriteR.flipY = false;
                     break;
                 case BoatDirection.southEast:
-                    this.trails.SetInteger("Direction", 2);
+                    this.trails.SetInteger("Direction", 3);
                     spriteR.flipX = false;
                     spriteR.flipY = true;
                     break;
                 case BoatDirection.southWest:
-                    this.trails.SetInteger("Direction", 2);
+                    this.trails.SetInteger("Direction", 3);
                     spriteR.flipX = true;
                     spriteR.flipY = true;
                     break;
@@ -468,6 +467,7 @@ public class BoatController : MonoBehaviour
         this.jammed = true; //Guarantee
         this.anim.SetTrigger("Changed");
         this.anim.SetInteger("Direction", 1);
+        this.trails.SetInteger("Direction", 0);
         this.chaseBlocked = false;
         this.waitingAnchor = false;
         this.waitingItemDismiss = false;
