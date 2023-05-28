@@ -6,17 +6,18 @@ using UnityEngine;
 public class FishController : MonoBehaviour
 {
     [SerializeField, BoxGroup("Fish References")] public Transform prefabProjectile;    
-    [SerializeField, BoxGroup("Fish References")] public Transform positionToShoot;
     [SerializeField, BoxGroup("Fish References")] public Animator animator;
 
     [SerializeField, BoxGroup("Fish shoot configs"), Range(2f, 10f)] public float timeBetweenShoot = 2f;
     [SerializeField, BoxGroup("Fish shoot configs")] public float timeToDestroyProjectile = .5f;
+    [SerializeField, BoxGroup("Fish shoot configs")] public Vector2 projectileSpawnOffset = Vector2.zero;
     [SerializeField, BoxGroup("Fish shoot configs")] public float minDistToShoot;
     [SerializeField, BoxGroup("Fish shoot configs")] public string fishAttackTrigger = "Attack";
 
     [ShowNonSerializedField] private float distanceBetweenBoatAndFish;
     [ShowNonSerializedField] private bool isShooting;
 
+    [ShowNativeProperty] private Vector3 ProjectileSpawnPoint => this.transform.position + (Vector3) this.projectileSpawnOffset;
     private Coroutine currentCorrotine;
     private BoatController player;
 
@@ -42,7 +43,7 @@ public class FishController : MonoBehaviour
 
     public void FishShoot() {         
         var projectile = Instantiate(prefabProjectile, this.transform);
-        projectile.transform.position = positionToShoot.position;          
+        projectile.transform.position = ProjectileSpawnPoint;          
     }
 
     IEnumerator StartShoot() {
@@ -57,5 +58,7 @@ public class FishController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, this.minDistToShoot);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(ProjectileSpawnPoint, 0.5f);
     }
 }

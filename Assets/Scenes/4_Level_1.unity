@@ -7662,6 +7662,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1632618331}
     m_Modifications:
+    - target: {fileID: 4551221662467323491, guid: c72c115d4f46b7d40adb53aa392dfec3, type: 3}
+      propertyPath: projectileSpawnOffset.x
+      value: -1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551221662467323491, guid: c72c115d4f46b7d40adb53aa392dfec3, type: 3}
+      propertyPath: projectileSpawnOffset.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4551221662467323512, guid: c72c115d4f46b7d40adb53aa392dfec3, type: 3}
       propertyPath: m_Name
       value: Fish
