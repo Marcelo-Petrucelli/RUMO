@@ -266,10 +266,15 @@ public class LevelManager : MonoBehaviour
     public void EndTime() {
         this.player.chaseBlocked = true;
         this.player.jammed = true;
+
+        //TODO - Fade e Desativar all HAZARDS
+
+        this.player.ObtainedCharacter();
         foreach(var b in this.allBubbles.ToArray()) {
             b.Pop(true);
             this.player.RemoveBubbleReferences(b);
         }
+
         this.ExecuteAfter(() => {
             this.islandSpawns.Sort((a, b) => Vector2.Distance(a.transform.position, this.player.transform.position) < Vector2.Distance(b.transform.position, this.player.transform.position) ? -1 : 1);
 
@@ -291,6 +296,7 @@ public class LevelManager : MonoBehaviour
     public void EndGame() {
         this.ItemObtained(99);
         this.player.ToBeDestroyed(false);
+        //TODO - Remove Trails
         this.pauseController.ForceDisableLeave();
         AudioController.Instance.FoundIslandMusicEnding();
 
@@ -305,7 +311,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void BoatDied() {
-        if(!this.ending) { //TODO - This only works if all enemies and hazards are DeSpawned after getting all items. Confirm it!
+        if(!this.ending) { //This only works if all enemies and hazards are DeSpawned after getting all items.
             this.ExecuteAfter(() => {
                 this.sceneController.FakeEnd(
                     this.loseWaitingInterval,
