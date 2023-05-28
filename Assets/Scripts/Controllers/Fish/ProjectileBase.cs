@@ -31,7 +31,8 @@ public class ProjectileBase: MonoBehaviour
         if(this.player.jammed) {
             this.Explode();
         }
-        this.transform.Translate(this.speed * Time.deltaTime * (this.player.transform.position - this.transform.position).normalized);
+        var finalPos = this.speed * Time.deltaTime * (this.player.transform.position - this.transform.position).normalized;
+        this.transform.Translate(finalPos.x, finalPos.y, this.transform.position.z);
     }
 
     //Moved to BoatController logic

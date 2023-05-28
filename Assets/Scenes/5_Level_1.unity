@@ -1625,7 +1625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6410101286927456138, guid: e2736c37943064c4bb2480881a0f8ced, type: 3}
       propertyPath: m_RootOrder
-      value: 116
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 6410101286927456138, guid: e2736c37943064c4bb2480881a0f8ced, type: 3}
       propertyPath: m_LocalScale.x
@@ -2955,6 +2955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fixing: 1
+  zFinalOffset: 0
   minY: -20
   maxY: 20
   minZ: 0
@@ -6753,6 +6754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fixing: 1
+  zFinalOffset: 0
   minY: -26
   maxY: 26
   minZ: 0

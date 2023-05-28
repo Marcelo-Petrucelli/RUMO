@@ -54,8 +54,8 @@ MonoBehaviour:
   minDistToShoot: 4.5
   timeBetweenShoot: 2
   projectileSpawnOffset: {x: -1.06, y: 0.6}
-  allProjectileDuration: 3
   allProjectileSpeed: 1.5
+  allProjectileDuration: 3
   myBubbles: []
 --- !u!70 &4551221662467323495
 CapsuleCollider2D:
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fixing: 1
+  zFinalOffset: 0
   minY: -26
   maxY: 26
   minZ: 0

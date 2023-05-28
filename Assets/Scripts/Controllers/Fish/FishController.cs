@@ -12,8 +12,8 @@ public class FishController : MonoBehaviour
     [SerializeField, BoxGroup("Configs"), Range(2f, 10f)] public float timeBetweenShoot = 2f;
     [SerializeField, BoxGroup("Configs")] public Vector2 projectileSpawnOffset = Vector2.zero;
 
-    [SerializeField, BoxGroup("Spawn Configs")] public float allProjectileDuration = 3f;
     [SerializeField, BoxGroup("Spawn Configs")] public float allProjectileSpeed = 2f;
+    [SerializeField, BoxGroup("Spawn Configs")] public float allProjectileDuration = 3f;
 
     [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<ProjectileBase> myBubbles = new();
 

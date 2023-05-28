@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
     [SerializeField, BoxGroup("Config")] public float loseWaitingInterval = 1.5f;
     [SerializeField, BoxGroup("Config")] public float loseFadeWaitInterval = 1f;
+    [SerializeField, BoxGroup("Config"), MinMaxSlider(-100f, 100f)] public Vector2 minMaxAutoFixZRange = new (0f, 15f);
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
     [SerializeField, BoxGroup("References")] public SceneController sceneController;
@@ -343,6 +344,16 @@ public class LevelManager : MonoBehaviour
                 );
             }, this.loseWaitingInterval);
         } //else {} //Else it's the end of the game, boat is supposed to die.
+    }
+
+    public void SetWorldMinMaxZIndex(ZIndexFix fixData) {
+        if(fixData != null) {
+            var camController = this.levelCamera.GetComponent<CameraController>();
+            fixData.minY = camController.farDown;
+            fixData.maxY = camController.farUp;
+            fixData.minZ = this.minMaxAutoFixZRange.x;
+            fixData.maxZ = this.minMaxAutoFixZRange.y;
+        }
     }
 
     private float AngleLocal(Vector2 p1, Vector2 p2) => Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI;
