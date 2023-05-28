@@ -7,7 +7,7 @@ public class WhirlpoolController : MonoBehaviour
     [SerializeField] public Vector2 centerOffset = new (0f, 0f);
     [SerializeField] public float deadRadius = 0.15f;
 
-    [ShowNativeProperty] internal Vector3 Center => this.transform.position + (Vector3) this.centerOffset;
+    [ShowNativeProperty] internal Vector2 Center => (this.transform.position + (Vector3) this.centerOffset);
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

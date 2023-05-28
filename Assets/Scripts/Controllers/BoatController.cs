@@ -18,6 +18,7 @@ public class BoatController : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float warningFadeInterval = 4f;
     [SerializeField, BoxGroup("Config")] public float destroyPreInterval = 0.5f;
     [SerializeField, BoxGroup("Config")] public float destroyWarningDuration = 1f;
+    [SerializeField, BoxGroup("Config")] public Vector2 whirlPoolMaxDragForce = new(0.3f, 0.3f);
 
     [SerializeField, BoxGroup("References")] public Animator trails;
     [SerializeField, BoxGroup("References")] public Transform whalePivot;
@@ -133,9 +134,10 @@ public class BoatController : MonoBehaviour
         var boatSpeed = this.speed;
         if(this.poolDraggin != null) {
             boatSpeed /= 2;
-            drag = this.Vector3Clamp((this.poolDraggin.Center - this.transform.position).normalized, new Vector3(-0.3f, -0.3f, 0f), new Vector3(0.3f, 0.3f, 0f));
+            drag = this.Vector2Clamp((this.poolDraggin.Center - (Vector2)this.transform.position).normalized, -1 * this.whirlPoolMaxDragForce, this.whirlPoolMaxDragForce);
 
-            if(Vector3.Distance(this.poolDraggin.Center, this.transform.position) < this.poolDraggin.deadRadius) {
+            var wDist = Vector2.Distance(this.poolDraggin.Center, this.transform.position);
+            if(wDist < this.poolDraggin.deadRadius) {
                 this.ToBeDestroyed();
             }
         }
@@ -308,37 +310,34 @@ public class BoatController : MonoBehaviour
 
     public void ShowWarning(bool showAnchorText = false, float? duration = null) {
         this.warning.SetActive(true);
-        var sprite = this.warning.GetComponent<SpriteRenderer>();
-        var originalColor = sprite.color;
-        var transpWarning = sprite.color - Color.black;          
-        sprite.color = transpWarning;
-
-        var sequence = DOTween.Sequence();
-        sequence.Append(sprite.DOColor(originalColor, this.warningFadeInOutTime));
-        sequence.AppendInterval(duration ?? this.warningFadeInterval);
-        sequence.Append(sprite.DOColor(transpWarning, this.warningFadeInOutTime));
-        sequence.OnComplete(() => {
-            sprite.color = originalColor;
-            sprite.gameObject.SetActive(false);
+        var sprites = this.warning.GetComponentsInChildren<SpriteRenderer>(true);
+        
+        var tw = this.FadeWarningSprite(sprites[0], duration ?? this.warningFadeInterval);
+        tw.OnComplete(() => {
+            this.warning.gameObject.SetActive(false);
         });
 
         if(showAnchorText) {
-            var text = this.warning.GetComponentInChildren<TextMeshPro>(true);
-
-            text.gameObject.SetActive(true);
-            var originalTextColor = text.color;
-            var transpTextWarning = text.color - Color.black;
-            text.color = transpTextWarning;
-
-            var sequenceText = DOTween.Sequence();
-            sequenceText.Append(text.DOColor(originalTextColor, this.warningFadeInOutTime));
-            sequenceText.AppendInterval(duration ?? this.warningFadeInterval);
-            sequenceText.Append(text.DOColor(transpTextWarning, this.warningFadeInOutTime));
-            sequenceText.OnComplete(() => {
-                text.color = originalColor;
-                text.gameObject.SetActive(false);
-            });
+            for(int i=1; i<sprites.Length; i++) {
+                this.FadeWarningSprite(sprites[1], duration ?? this.warningFadeInterval);
+            }
         }
+    }
+
+    public Tween FadeWarningSprite(SpriteRenderer sprite, float interval) {
+        var originalColor = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1);
+        var transpWarning = sprite.color - Color.black;
+        sprite.color = transpWarning;
+
+        sprite.gameObject.SetActive(true);
+        var sequence = DOTween.Sequence();
+        sequence.Append(sprite.DOColor(originalColor, this.warningFadeInOutTime));
+        sequence.AppendInterval(interval);
+        sequence.Append(sprite.DOColor(transpWarning, this.warningFadeInOutTime));
+        return sequence.OnComplete(() => {
+            sprite.color = originalColor;
+            sprite.gameObject.SetActive(false);
+        });
     }
 
     public void TryAddToChasing(BubbleController bubble) {
@@ -444,7 +443,7 @@ public class BoatController : MonoBehaviour
         this.transform.position = this.initialPosition;
     }
 
-    private Vector3 Vector3Clamp(Vector3 current, Vector3 min, Vector3 max) => new (Mathf.Clamp(current.x, min.x, max.x), Mathf.Clamp(current.y, min.y, max.y), Mathf.Clamp(current.z, min.z, max.z));
+    private Vector2 Vector2Clamp(Vector2 current, Vector2 min, Vector2 max) => new (Mathf.Clamp(current.x, min.x, max.x), Mathf.Clamp(current.y, min.y, max.y));
 
     private void ExecuteAfter(Action stuff, float waitingTime) {
         StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
