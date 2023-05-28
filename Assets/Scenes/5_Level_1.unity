@@ -1597,8 +1597,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 770, y: -10}
-  m_SizeDelta: {x: 250, y: 250}
+  m_AnchoredPosition: {x: 773, y: -37}
+  m_SizeDelta: {x: 698.1818, y: 392.72726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &210860590
 CanvasRenderer:
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: c53a2afd30724cf479fccae800848369, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b51f385d44fa5d4b98e084a86b8aae3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3014,8 +3014,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 470, y: -10}
-  m_SizeDelta: {x: 250, y: 250}
+  m_AnchoredPosition: {x: 470, y: -37}
+  m_SizeDelta: {x: 698.1818, y: 392.72726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &628424934
 CanvasRenderer:
@@ -3045,7 +3045,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: c53a2afd30724cf479fccae800848369, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b51f385d44fa5d4b98e084a86b8aae3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7277,8 +7277,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170, y: -10}
-  m_SizeDelta: {x: 250, y: 250}
+  m_AnchoredPosition: {x: 170, y: -37}
+  m_SizeDelta: {x: 698.1818, y: 392.72726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648098894
 MonoBehaviour:
@@ -7300,7 +7300,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: c53a2afd30724cf479fccae800848369, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b51f385d44fa5d4b98e084a86b8aae3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8485,7 +8485,7 @@ MonoBehaviour:
       Data2: 1293603932
       Data3: 610600602
       Data4: -1511276673
-    Path: event:/BALEIA SOM
+    Path: event:/SFX/BALEIA SOM
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -8772,7 +8772,7 @@ MonoBehaviour:
       Data2: 1146039042
       Data3: 1637113783
       Data4: 746153647
-    Path: event:/BOAT
+    Path: event:/SFX/GAMEPLAY/BoAT
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -8805,7 +8805,7 @@ MonoBehaviour:
       Data2: 1303746646
       Data3: -1412110436
       Data4: -932504744
-    Path: event:/CURVAS
+    Path: event:/SFX/GAMEPLAY/CURVAS
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -8836,7 +8836,7 @@ MonoBehaviour:
       Data2: 1091742164
       Data3: 2137602231
       Data4: -1112676658
-    Path: "event:/Aten\xE7\xE3o"
+    Path: "event:/SFX/GAMEPLAY/Aten\xE7\xE3o"
   Event: 
   PlayEvent: 0
   StopEvent: 0

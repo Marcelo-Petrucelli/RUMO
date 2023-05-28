@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab00ddaf66027fd4f9cfae274d9fe6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoFromLM: 1
   fixing: 1
   minY: -26
   maxY: 26
@@ -299,7 +300,7 @@ MonoBehaviour:
       Data2: 1257327002
       Data3: -162754114
       Data4: -1781057343
-    Path: event:/Bolha
+    Path: event:/SFX/GAMEPLAY/Bolha
   Event: 
   PlayEvent: 0
   StopEvent: 0
