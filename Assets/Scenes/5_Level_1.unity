@@ -4667,7 +4667,7 @@ MonoBehaviour:
   messagesFadeDuration: 0.8
   messagesDuration: 5
   compassInterval: 0.3
-  waitingEndingInterval: 3
+  waitingEndingInterval: 5
   compassEndingColor: {r: 0.41568628, g: 0.07058824, b: 0.07058824, a: 1}
   characterFinalSceneWaitingTime: 8
   tutorialIntervalToShow: 1

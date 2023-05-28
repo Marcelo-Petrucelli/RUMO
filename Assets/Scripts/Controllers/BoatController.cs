@@ -381,6 +381,9 @@ public class BoatController : MonoBehaviour
             this.ToBeDestroyed();
             fishProjectile.Explode();
         }
+        if(collision.CompareTag("Finish") && !LevelManager.currentInstance.ended) {
+            LevelManager.currentInstance.EndGame();
+        }
     }
 
     private IEnumerator InstaRemoveFromPopList(BubbleController bubble) {
