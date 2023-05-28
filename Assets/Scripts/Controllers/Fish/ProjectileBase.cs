@@ -22,12 +22,12 @@ public class ProjectileBase: MonoBehaviour
 
     private void Update() {
         if (this.active) {
-            this.transform.Translate((this.player.transform.position - this.transform.position) * Time.deltaTime * this.side);
+            MoveProjectile();
         }                
     }
 
     public void MoveProjectile() {
-        var player = GetComponent<BoatController>();        
+        this.transform.Translate((this.player.transform.position - this.transform.position) * Time.deltaTime * this.side);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {        

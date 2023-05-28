@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class FishController : MonoBehaviour
 {
-    [SerializeField, BoxGroup("Fish shoot configs")] public Transform prefabProjectile;    
-    [SerializeField, BoxGroup("Fish shoot configs")] public float timeBetweenShoot = 1f;
+    [SerializeField, BoxGroup("Fish References")] public Transform prefabProjectile;    
+    [SerializeField, BoxGroup("Fish References")] public Transform positionToShoot;
+    [SerializeField, BoxGroup("Fish References")] public Animator animator;
+
+    [SerializeField, BoxGroup("Fish shoot configs"), Range(2f, 10f)] public float timeBetweenShoot = 2f;
     [SerializeField, BoxGroup("Fish shoot configs")] public float timeToDestroyProjectile = .5f;
     [SerializeField, BoxGroup("Fish shoot configs")] public float minDistToShoot;
-    [SerializeField, BoxGroup("Fish shoot configs")] public Transform positionToShoot;
+    [SerializeField, BoxGroup("Fish shoot configs")] public string fishAttackTrigger = "Attack";
+
     [ShowNonSerializedField] private float distanceBetweenBoatAndFish;
     [ShowNonSerializedField] private bool isShooting;
 
@@ -34,18 +38,16 @@ public class FishController : MonoBehaviour
             StopCoroutine(currentCorrotine);
             isShooting = false;
         }
-    }
+    }  
 
-    private void FishShoot() {        
-        if(distanceBetweenBoatAndFish < this.minDistToShoot) {
-            var projectile = Instantiate(prefabProjectile, this.transform);
-            projectile.transform.position = positionToShoot.position;            
-        }
+    public void FishShoot() {         
+        var projectile = Instantiate(prefabProjectile, this.transform);
+        projectile.transform.position = positionToShoot.position;          
     }
 
     IEnumerator StartShoot() {
         while(isShooting) {
-            FishShoot();            
+            animator.SetTrigger(fishAttackTrigger);
             yield return new WaitForSeconds(timeBetweenShoot);
         }
     }
