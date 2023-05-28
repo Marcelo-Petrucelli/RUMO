@@ -167,7 +167,7 @@ MonoBehaviour:
       Data2: 1138622924
       Data3: 538458535
       Data4: -1219647217
-    Path: event:/U.I MENU
+    Path: event:/U.I/HOVER
   Event: 
   PlayEvent: 0
   StopEvent: 0

@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab00ddaf66027fd4f9cfae274d9fe6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoFromLM: 1
   fixing: 1
-  zFinalOffset: 0
   minY: -26
   maxY: 26
   minZ: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
       Data2: 1194769217
       Data3: 1503569079
       Data4: -581422500
-    Path: event:/FISH_SOUND
+    Path: event:/SFX/FISH_SOUND
   Event: 
   PlayEvent: 0
   StopEvent: 0
