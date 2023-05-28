@@ -25,7 +25,7 @@ public class ItemHUDController : MonoBehaviour
     //[SerializeField, BoxGroup("AnimationConfig")] private float xVariation = -300f;
     [SerializeField, BoxGroup("AnimationConfig")] private float itemMultiplier = 1.3f;
     [SerializeField, BoxGroup("AnimationConfig")] private float frameAnimationDuration = 0.3f;
-    [SerializeField, BoxGroup("AnimationConfig")] private float waitAnimationDuration = 1f;
+    //[SerializeField, BoxGroup("AnimationConfig")] private float waitAnimationDuration = 1f;
     [SerializeField, BoxGroup("AnimationConfig")] private float itemAnimationDuration = 0.3f;
     [SerializeField, BoxGroup("AnimationConfig")] private float partItemWaitingDuration = 3f;
     [SerializeField, BoxGroup("AnimationConfig")] private float partItemFadeDuration = 0.4f;

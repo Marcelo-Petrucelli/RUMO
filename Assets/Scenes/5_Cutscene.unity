@@ -331,8 +331,8 @@ MonoBehaviour:
   tmpText: {fileID: 160167678}
   velocityX: 7
   velocityY: 7
-  intensityX: {x: 0, y: 5}
-  intensityY: {x: 0, y: 5}
+  intensityX: {x: 0, y: 2}
+  intensityY: {x: 0, y: 2}
   wobbleDuration: 5
 --- !u!1 &166064199
 GameObject:
@@ -457,8 +457,8 @@ MonoBehaviour:
   tmpText: {fileID: 166064200}
   velocityX: 7
   velocityY: 7
-  intensityX: {x: 0, y: 5}
-  intensityY: {x: 0, y: 5}
+  intensityX: {x: 0, y: 2}
+  intensityY: {x: 0, y: 2}
   wobbleDuration: 5
 --- !u!222 &166064202
 CanvasRenderer:
@@ -668,8 +668,8 @@ MonoBehaviour:
   tmpText: {fileID: 636852367}
   velocityX: 7
   velocityY: 7
-  intensityX: {x: 0, y: 5}
-  intensityY: {x: 0, y: 5}
+  intensityX: {x: 0, y: 2}
+  intensityY: {x: 0, y: 2}
   wobbleDuration: 5
 --- !u!222 &636852369
 CanvasRenderer:
@@ -827,8 +827,8 @@ MonoBehaviour:
   tmpText: {fileID: 1760610428}
   velocityX: 7
   velocityY: 7
-  intensityX: {x: 0, y: 5}
-  intensityY: {x: 0, y: 5}
+  intensityX: {x: 0, y: 2}
+  intensityY: {x: 0, y: 2}
   wobbleDuration: 5
 --- !u!222 &1760610430
 CanvasRenderer:

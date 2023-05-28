@@ -16,6 +16,8 @@ public class BoatController : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float whaleTrollDistance = 7f;
     [SerializeField, BoxGroup("Config")] public float warningFadeInOutTime = 0.5f;
     [SerializeField, BoxGroup("Config")] public float warningFadeInterval = 4f;
+    [SerializeField, BoxGroup("Config")] public float destroyPreInterval = 0.5f;
+    [SerializeField, BoxGroup("Config")] public float destroyWarningDuration = 1f;
 
     [SerializeField, BoxGroup("References")] public Animator trails;
     [SerializeField, BoxGroup("References")] public Transform whalePivot;
@@ -43,22 +45,25 @@ public class BoatController : MonoBehaviour
     internal bool MayBeBubbleChasedBy(BubbleController bubble) => (this.chasingBubbles.Count < this.maxChasingBubbles || this.chasingBubbles.Contains(bubble)) && !this.chaseBlocked;
 
     private Animator anim;
+    private Vector3 initialPosition;
     private Rigidbody2D boatBody;
     private CapsuleCollider2D capsuleCollider;
     private List<FMODUnity.StudioEventEmitter> soundEmitter;
     private List<BubbleController> mayPopBubbles = new List<BubbleController>();
     internal List<BubbleController> chasingBubbles = new List<BubbleController>();
+    internal WhirlpoolController poolDraggin;
 
     // Start is called before the first frame update
     void Start() {
+        this.initialPosition = this.transform.position;
         this.anim = this.GetComponent<Animator>();
         this.boatBody = this.GetComponent<Rigidbody2D>();
         this.capsuleCollider = this.GetComponent<CapsuleCollider2D>();
-        this.warning.SetActive(false);
         this.soundEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
         this.capsuleCollider.direction = CapsuleDirection2D.Horizontal;
         this.capsuleCollider.size = this.horizontalSize;        
         this.capsuleCollider.offset = this.horizontalOffset;
+        this.warning.SetActive(false);
     }
 
     // Update is called once per frame
@@ -89,7 +94,7 @@ public class BoatController : MonoBehaviour
     }
 
     private void CheckPop() {
-        if(this.jammed) {
+        if(this.jammed || this.waitingAnchor) {
             return;
         }
 
@@ -124,7 +129,18 @@ public class BoatController : MonoBehaviour
             return;
         }
 
-        var input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        var drag = new Vector2(0f, 0f);
+        var boatSpeed = this.speed;
+        if(this.poolDraggin != null) {
+            boatSpeed /= 2;
+            drag = this.Vector3Clamp((this.poolDraggin.Center - this.transform.position).normalized, new Vector3(-0.3f, -0.3f, 0f), new Vector3(0.3f, 0.3f, 0f));
+
+            if(Vector3.Distance(this.poolDraggin.Center, this.transform.position) < this.poolDraggin.deadRadius) {
+                this.ToBeDestroyed();
+            }
+        }
+
+        var input = new Vector2(Input.GetAxis("Horizontal") + drag.x, Input.GetAxis("Vertical") + drag.y).normalized;
         this.currentMovement = Vector2.SmoothDamp(this.currentMovement, input, ref this.currentVelocity, this.smoothInputSpeed);
         if(this.currentMovement.x <= this.smoothInputDumpSnap.x) {
             this.currentMovement.x = input.x;
@@ -133,7 +149,7 @@ public class BoatController : MonoBehaviour
             this.currentMovement.y = input.y;
         }
 
-        var movement = this.speed * Time.fixedDeltaTime * this.currentMovement;
+        var movement = boatSpeed * Time.fixedDeltaTime * this.currentMovement;
 
         var direction = this.FindDirection(movement, this.currentDirection);
         var changedDirection = this.currentDirection != direction;
@@ -290,7 +306,7 @@ public class BoatController : MonoBehaviour
 
     public void FadeTutorial() => LevelManager.currentInstance.HideTutorial();
 
-    public void ShowWarning(bool showAnchorText = false) {
+    public void ShowWarning(bool showAnchorText = false, float? duration = null) {
         this.warning.SetActive(true);
         var sprite = this.warning.GetComponent<SpriteRenderer>();
         var originalColor = sprite.color;
@@ -299,7 +315,7 @@ public class BoatController : MonoBehaviour
 
         var sequence = DOTween.Sequence();
         sequence.Append(sprite.DOColor(originalColor, this.warningFadeInOutTime));
-        sequence.AppendInterval(this.warningFadeInterval);
+        sequence.AppendInterval(duration ?? this.warningFadeInterval);
         sequence.Append(sprite.DOColor(transpWarning, this.warningFadeInOutTime));
         sequence.OnComplete(() => {
             sprite.color = originalColor;
@@ -316,7 +332,7 @@ public class BoatController : MonoBehaviour
 
             var sequenceText = DOTween.Sequence();
             sequenceText.Append(text.DOColor(originalTextColor, this.warningFadeInOutTime));
-            sequenceText.AppendInterval(this.warningFadeInterval);
+            sequenceText.AppendInterval(duration ?? this.warningFadeInterval);
             sequenceText.Append(text.DOColor(transpTextWarning, this.warningFadeInOutTime));
             sequenceText.OnComplete(() => {
                 text.color = originalColor;
@@ -405,6 +421,30 @@ public class BoatController : MonoBehaviour
             this.waitingAnchor = true;
         }, durationSec);
     }
+
+    public void ToBeDestroyed() {
+        this.jammed = true;
+        this.ShowWarning(false, this.destroyWarningDuration);
+        this.ExecuteAfter(() => { 
+            this.anim.SetTrigger("Destroy"); 
+        }, this.destroyPreInterval); //Animation EVENT! Calls Destroyed at end.
+    }
+
+    public void Destroyed() => LevelManager.currentInstance.BoatDied();
+
+    public void ResetAll()
+    {
+        this.jammed = true; //Guarantee
+        this.anim.SetTrigger("Changed");
+        this.anim.SetInteger("Direction", 1);
+        this.chaseBlocked = false;
+        this.waitingAnchor = false;
+        this.waitingItemDismiss = false;
+        this.currentMovement = Vector2.zero;
+        this.transform.position = this.initialPosition;
+    }
+
+    private Vector3 Vector3Clamp(Vector3 current, Vector3 min, Vector3 max) => new (Mathf.Clamp(current.x, min.x, max.x), Mathf.Clamp(current.y, min.y, max.y), Mathf.Clamp(current.z, min.z, max.z));
 
     private void ExecuteAfter(Action stuff, float waitingTime) {
         StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));

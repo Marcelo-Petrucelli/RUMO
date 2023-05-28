@@ -308,8 +308,10 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - MUSIC
   - SFX
   - U.I
+  - VOICES
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

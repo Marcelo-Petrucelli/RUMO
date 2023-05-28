@@ -24,12 +24,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("Config")] public float messagesFadeDuration = 0.8f;
     [SerializeField, BoxGroup("Config")] public float messagesDuration = 4f;
     [SerializeField, BoxGroup("Config")] public float compassInterval = 0.3f;
+    [SerializeField, BoxGroup("Config")] public float waitingEndingInterval = 1.5f;
     [SerializeField, BoxGroup("Config")] public Color compassEndingColor = Color.red;
     [SerializeField, BoxGroup("Config")] public float characterFinalSceneWaitingTime = 10f;
     [SerializeField, BoxGroup("Config")] public float tutorialIntervalToShow = 0.6f;
     [SerializeField, BoxGroup("Config")] public float tutorialFadeDuration = 0.4f;
     [SerializeField, BoxGroup("Config"), MinMaxSlider(0f, 30f)] public Vector2 specialEventsTimeRange = new (4f, 9f);
     [SerializeField, BoxGroup("Config")] public float whaleWaitingInterval = 1.2f;
+    [SerializeField, BoxGroup("Config")] public float loseWaitingInterval = 1.5f;
+    [SerializeField, BoxGroup("Config")] public float loseFadeWaitInterval = 1f;
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
     [SerializeField, BoxGroup("References")] public SceneController sceneController;
@@ -46,7 +49,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, BoxGroup("References")] public List<Transform> islandSpawns;
     //[SerializeField, BoxGroup("References")] public GameObject bubblePrefab;
 
-    [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<BubbleController> allBubbles = new();
+    [SerializeField, ReorderableList, BoxGroup("Debug")] internal List<BubbleController> allBubbles = new();
     [SerializeField, ReorderableList, ReadOnly, BoxGroup("Debug")] internal List<TextMeshProUGUI> sideMessages = new();
     [ShowNonSerializedField] internal bool showingText =  false;
 
@@ -151,34 +154,47 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ShowTutorial() {
-        var text = this.tutorialMessage.GetComponentInChildren<TextMeshProUGUI>(true);
-        var bg = this.tutorialMessage.GetComponentInChildren<Image>(true);
+        var texts = this.tutorialMessage.GetComponentsInChildren<TextMeshProUGUI>(true);
+        var bgs = this.tutorialMessage.GetComponentsInChildren<Image>(true);
 
-        var initialTextColor = text.color - Color.black;
-        var finalTextColor = new Color(text.color.r, text.color.g, text.color.b, 1);
-        var initialBGColor = bg.color - Color.black;
-        var finalBGColor = new Color(bg.color.r, bg.color.g, bg.color.b, 1);
+        Tween tw = null;
+        foreach(var text in texts) {
+            var initialTextColor = text.color - Color.black;
+            var finalTextColor = new Color(text.color.r, text.color.g, text.color.b, 1);
 
-        this.tutorialMessage.gameObject.SetActive(true);
-
-        text.color = initialTextColor;
-        text.DOColor(finalTextColor, this.tutorialFadeDuration).OnComplete(() => {
+            text.color = initialTextColor;
+            tw = text.DOColor(finalTextColor, this.tutorialFadeDuration);
+        }
+        tw?.OnComplete(() => {
             this.player.jammed = false;
         });
 
-        bg.color = initialBGColor;
-        bg.DOColor(finalBGColor, this.tutorialFadeDuration);
+        foreach(var bg in bgs) {
+            var initialBGColor = bg.color - Color.black;
+            var finalBGColor = new Color(bg.color.r, bg.color.g, bg.color.b, 1);
+
+            bg.color = initialBGColor;
+            bg.DOColor(finalBGColor, this.tutorialFadeDuration);
+        }
+
+        this.tutorialMessage.gameObject.SetActive(true);
     }
 
     public void HideTutorial() {
-        var text = this.tutorialMessage.GetComponentInChildren<TextMeshProUGUI>();
-        var bg = this.tutorialMessage.GetComponentInChildren<Image>();
+        var texts = this.tutorialMessage.GetComponentsInChildren<TextMeshProUGUI>();
+        var bgs = this.tutorialMessage.GetComponentsInChildren<Image>();
 
-        var finalTextColor = text.color - Color.black;
-        var finalBGColor = bg.color - Color.black;
+        Tween tw = null;
+        foreach(var text in texts) {
+            var finalTextColor = text.color - Color.black;
+            tw = text.DOColor(finalTextColor, this.tutorialFadeDuration);
+        }
+        tw?.OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
 
-        text.DOColor(finalTextColor, this.tutorialFadeDuration).OnComplete(() => { });
-        bg.DOColor(finalBGColor, this.tutorialFadeDuration).OnComplete(() => { this.tutorialMessage.gameObject.SetActive(false); });
+        foreach(var bg in bgs) {
+            var finalBGColor = bg.color - Color.black;
+            bg.DOColor(finalBGColor, this.tutorialFadeDuration).OnComplete(() => { });
+        }
     }
 
     public void WhaleItAllUp() {
@@ -246,10 +262,13 @@ public class LevelManager : MonoBehaviour
             case 7:
                 this.ShowSideMessage(1); //Part Text - 1
                 this.player.chaseBlocked = false; //Reactivates bubble chases
+                this.player.WhaleTime();
                 break;
             case 8: //Nothing special
+                this.player.WhaleTime();
                 break;
             case 9: //Nothing special
+                this.player.WhaleTime();
                 break;
             case 10:
                 AudioController.Instance.SecondAdvanceMusic();
@@ -259,7 +278,7 @@ public class LevelManager : MonoBehaviour
                 //this.player.chaseBlocked = false; //Not needed
                 this.ShowSideMessage(2); //Part Text - 2
                 AudioController.Instance.FinalizeNormalAndStartWOWMusic();
-                this.EndTime(0.5f);
+                this.EndTime();
                 break;
             case 99:
                 this.ShowSideMessage(3); //Final Text
@@ -270,7 +289,7 @@ public class LevelManager : MonoBehaviour
         this.player.jammed = false;
     }
 
-    public void EndTime(float durationSec) {
+    public void EndTime() {
         this.player.chaseBlocked = true;
         this.player.jammed = true;
         foreach(var b in this.allBubbles.ToArray()) {
@@ -292,12 +311,13 @@ public class LevelManager : MonoBehaviour
             this.island.SetActive(true);
             this.ending = true;
             AudioController.Instance.StartEUFOMusic();
-        }, durationSec);
+        }, this.waitingEndingInterval);
     }
 
     public void EndGame() {
         this.ItemObtained(99);
         this.player.jammed = true;
+        this.player.Destroyed();
         AudioController.Instance.FoundIslandMusicEnding();
 
         this.character.SetActive(true);
@@ -308,6 +328,22 @@ public class LevelManager : MonoBehaviour
         this.ExecuteAfter(() => {
             this.sceneController.GotoCredits();
         }, this.characterFinalSceneWaitingTime);
+    }
+
+    public void BoatDied() {
+        if(!this.ending) { //TODO - This only works if all enemies and hazards are DeSpawned after getting all items. Confirm it!
+            this.ExecuteAfter(() => {
+                this.sceneController.FakeEnd(
+                    this.loseWaitingInterval,
+                    () => {
+                        this.player.ResetAll();
+                    },
+                    () => {
+                        this.player.jammed = false;
+                    }
+                );
+            }, this.loseWaitingInterval);
+        } //else {} //Else it's the end of the game, boat is supposed to die.
     }
 
     private float AngleLocal(Vector2 p1, Vector2 p2) => Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI;
