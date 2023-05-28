@@ -14,10 +14,10 @@ public class CameraController:MonoBehaviour
     private Camera myCamera;
     private Vector2 halfCam;
     private Vector3 actualSmoothSpeed;
-    private float farLeft => this.cameraLimits.position.x - (this.cameraLimits.localScale.x / 2f);
-    private float farRight => this.cameraLimits.position.x + (this.cameraLimits.localScale.x / 2f);
-    private float farUp => this.cameraLimits.position.y + (this.cameraLimits.localScale.y / 2f);
-    private float farDown => this.cameraLimits.position.y - (this.cameraLimits.localScale.y / 2f);
+    [ShowNativeProperty] internal float farLeft => this.cameraLimits.position.x - (this.cameraLimits.localScale.x / 2f);
+    [ShowNativeProperty] internal float farRight => this.cameraLimits.position.x + (this.cameraLimits.localScale.x / 2f);
+    [ShowNativeProperty] internal float farUp => this.cameraLimits.position.y + (this.cameraLimits.localScale.y / 2f);
+    [ShowNativeProperty] internal float farDown => this.cameraLimits.position.y - (this.cameraLimits.localScale.y / 2f);
 
     // Start is called before the first frame update
     void Start() {

@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 public class ZIndexFix : MonoBehaviour
 {
-    [SerializeField] public bool fixing = true;
-    [SerializeField] private float minY;
-    [SerializeField] private float maxY;
-
-    [SerializeField] private float minZ;
-    [SerializeField] private float maxZ;
+    [SerializeField, BoxGroup("Config")] public bool autoFromLM = true;
+    [SerializeField, BoxGroup("Config")] public bool fixing = true;
+    [SerializeField, BoxGroup("Config")] internal float minY;
+    [SerializeField, BoxGroup("Config")] internal float maxY;
+    [SerializeField, BoxGroup("Config")] internal float minZ;
+    [SerializeField, BoxGroup("Config")] internal float maxZ;
     
     private Transform attachement;
 
@@ -15,14 +16,17 @@ public class ZIndexFix : MonoBehaviour
     void Start()
     {
         this.attachement = this.GetComponent<Transform>();
+        if(this.autoFromLM) {
+            LevelManager.currentInstance.SetWorldMinMaxZIndex(this);
+        }
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         if(this.fixing) {
-            var newY = this.Remap(this.attachement.position.y, this.minY, this.maxY, this.minZ, this.maxZ);
-            this.attachement.position = new Vector3(this.attachement.position.x, this.attachement.position.y, newY);
+            var zPos = this.Remap(this.attachement.position.y, this.minY, this.maxY, this.minZ, this.maxZ);
+            this.attachement.position = new Vector3(this.attachement.position.x, this.attachement.position.y, zPos);
         }
     }
 

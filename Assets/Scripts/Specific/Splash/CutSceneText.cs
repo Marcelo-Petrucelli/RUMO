@@ -8,20 +8,31 @@ using UnityEngine;
 
 public class CutSceneText : MonoBehaviour
 {
-    [SerializeField, BoxGroup("Texts")] public List<TextMeshProUGUI> texts;    
+    [SerializeField, BoxGroup("References")] public List<TextMeshProUGUI> texts;    
 
-    [SerializeField, BoxGroup("Text transition config")] public float initialWaiting = 1f;
-    [SerializeField, BoxGroup("Text transition config")] public float textWaitingInterval = 1f;
-    [SerializeField, BoxGroup("Text transition config")] public float textFadeInDuration = 1f;   
+    [SerializeField, BoxGroup("Config")] public float initialWaiting = 1f;
+    [SerializeField, BoxGroup("Config")] public float textWaitingInterval = 1f;
+    [SerializeField, BoxGroup("Config")] public float textFadeInDuration = 1f;
+    [SerializeField, BoxGroup("Config")] public float endSceneWaitingTime = 5f;
+
+    private SceneController sceneController;
+
+    private void Awake()
+    {
+        this.sceneController = FindObjectOfType<SceneController>();
+    }
 
     private void Start()
     {        
         var sequence = DOTween.Sequence();
-        sequence.AppendInterval(initialWaiting);
+        sequence.AppendInterval(this.initialWaiting);
         foreach (var text in this.texts) {
-            sequence.Append(TextAnimation(text));
-            sequence.AppendInterval(textWaitingInterval);
-        }       
+            sequence.Append(this.TextAnimation(text));
+            sequence.AppendInterval(this.textWaitingInterval);
+        }
+        sequence.AppendInterval(this.endSceneWaitingTime).OnComplete(() => {
+            this.sceneController.GoToLevel(0);
+        });
     }
 
     public Tween TextAnimation(TextMeshProUGUI currentText) {        
@@ -30,7 +41,7 @@ public class CutSceneText : MonoBehaviour
         var transp = currentText.color - Color.black;
         currentText.color = transp;
 
-        return currentText.DOColor(originalColor, textFadeInDuration).OnComplete(() => {
+        return currentText.DOColor(originalColor, this.textFadeInDuration).OnComplete(() => {
             currentText.GetComponent<Wobble>().WobbleOut();
         });
     }

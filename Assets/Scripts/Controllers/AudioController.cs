@@ -5,7 +5,11 @@ using System;
 
 public class AudioController:MonoBehaviour
 {
-    public static AudioController Instance = null;
+    internal static AudioController Instance = null;
+    [ShowNonSerializedField] internal bool isMusicMuted = false;
+    [ShowNonSerializedField] internal bool isSFXMuted = false;
+    [ShowNonSerializedField] internal bool isDubMuted = false;
+
     private FMODUnity.StudioEventEmitter musicEmitter;
 
     void Awake() {        

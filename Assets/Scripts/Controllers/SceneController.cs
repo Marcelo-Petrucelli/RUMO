@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.SearchService;
+using System;
+using Unity.VisualScripting;
 
 public class SceneController:MonoBehaviour
 {
@@ -61,12 +64,28 @@ public class SceneController:MonoBehaviour
         });
     }
 
+    public void FakeEnd(float duration, Action onFadeOut = null, Action onComplete = null) {
+        this.BackDropImage.color = Color.black - Color.black;
+        this.frontDrop.SetActive(true);
+
+        var sequence = DOTween.Sequence();
+        sequence.Append(this.BackDropImage.DOFade(1f, this.fadeInAndOutDuration.x).SetEase(Ease.Linear).OnComplete(() => {
+            onFadeOut?.Invoke();
+        }));
+        sequence.AppendInterval(duration);
+        sequence.Append(this.BackDropImage.DOFade(0f, this.fadeInAndOutDuration.x).SetEase(Ease.Linear));
+        sequence.OnComplete(() => {
+            this.frontDrop.SetActive(false);
+            onComplete?.Invoke();
+        });
+    }
+
     public void ButtonPressed() {
         var uiSFXEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
         uiSFXEmitter.Play();
     }
 
-    public void PlayGame() { this.End("4_Level_1"); this.ButtonPressed(); AudioController.Instance.GameStartedMusic(); }
+    public void PlayGame() { this.End("4_CutScene"); this.ButtonPressed(); AudioController.Instance.GameStartedMusic(); }
 
     public void GotoCredits() { this.End("3_Credits"); this.ButtonPressed(); }
 
@@ -76,7 +95,7 @@ public class SceneController:MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         switch (levelIndex) {
             case 0:
-                this.End("4_Level_1");
+                this.End("5_Level_1");
                 break;
             /*case 1:
                 this.End("5_Level_2");
