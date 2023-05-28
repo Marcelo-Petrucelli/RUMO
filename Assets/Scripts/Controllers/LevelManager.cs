@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField, BoxGroup("References")] public Camera levelCamera;
     [SerializeField, BoxGroup("References")] public SceneController sceneController;
+    [SerializeField, BoxGroup("References")] public PauseMenuController pauseController; 
     [SerializeField, BoxGroup("References")] public RectTransform compassBg;
     [SerializeField, BoxGroup("References")] public RectTransform compassPointer;
     [SerializeField, BoxGroup("References")] public ItemHUDController itemController;
@@ -290,6 +291,7 @@ public class LevelManager : MonoBehaviour
     public void EndGame() {
         this.ItemObtained(99);
         this.player.ToBeDestroyed(false);
+        this.pauseController.ForceDisableLeave();
         AudioController.Instance.FoundIslandMusicEnding();
 
         this.character.SetActive(true);
@@ -316,6 +318,12 @@ public class LevelManager : MonoBehaviour
                 );
             }, this.loseWaitingInterval);
         } //else {} //Else it's the end of the game, boat is supposed to die.
+    }
+
+    public void LeaveGame() {
+        this.player.jammed = true;
+        Time.timeScale = 1;
+        this.sceneController.BackToMenu();
     }
 
     public void SetWorldMinMaxZIndex(ZIndexFix fixData) {

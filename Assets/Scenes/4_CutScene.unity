@@ -551,6 +551,7 @@ MonoBehaviour:
   initialWaiting: 1
   textWaitingInterval: 2
   textFadeInDuration: 2
+  endSceneWaitingTime: 5
 --- !u!1 &636852366
 GameObject:
   m_ObjectHideFlags: 0

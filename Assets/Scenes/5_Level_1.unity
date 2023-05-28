@@ -608,7 +608,7 @@ GameObject:
   - component: {fileID: 89515607}
   - component: {fileID: 89515606}
   m_Layer: 0
-  m_Name: Button
+  m_Name: LeaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -681,10 +681,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1591762425}
         m_TargetAssemblyTypeName: PauseMenuController, Assembly-CSharp
         m_MethodName: ShowLeaveConsent
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 89515606}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5322,10 +5322,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1591762425}
         m_TargetAssemblyTypeName: PauseMenuController, Assembly-CSharp
         m_MethodName: HideLeaveConsent
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 89515606}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6039,6 +6039,7 @@ MonoBehaviour:
   minMaxAutoFixZRange: {x: 0, y: 15}
   levelCamera: {fileID: 1826247275}
   sceneController: {fileID: 1826247279}
+  pauseController: {fileID: 0}
   compassBg: {fileID: 735731798}
   compassPointer: {fileID: 833443082}
   itemController: {fileID: 827853328}
@@ -6881,6 +6882,7 @@ MonoBehaviour:
   musicToggle: {fileID: 2005231280}
   sfxToggle: {fileID: 17941212}
   dubToggle: {fileID: 428838469}
+  leaveButton: {fileID: 89515606}
   pausedBg: {fileID: 1667305579}
   pausedContent: {fileID: 726416880}
   pausedConsent: {fileID: 739758249}

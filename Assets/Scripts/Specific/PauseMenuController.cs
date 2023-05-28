@@ -13,6 +13,7 @@ public class PauseMenuController: MonoBehaviour
     [SerializeField, BoxGroup("References")] private Toggle musicToggle;
     [SerializeField, BoxGroup("References")] private Toggle sfxToggle;
     [SerializeField, BoxGroup("References")] private Toggle dubToggle;
+    [SerializeField, BoxGroup("References")] private Button leaveButton;
     [SerializeField, BoxGroup("References")] private RectTransform pausedBg;
     [SerializeField, BoxGroup("References")] private RectTransform pausedContent;
     [SerializeField, BoxGroup("References")] private RectTransform pausedConsent;
@@ -95,9 +96,9 @@ public class PauseMenuController: MonoBehaviour
         );
     }
 
-    public void ShowLeaveConsent(Button clickedButton) {
+    public void ShowLeaveConsent() {
         this.menuToggleButton.interactable = false;
-        clickedButton.interactable = false;
+        this.leaveButton.interactable = false;
         this.HideChildren(this.pausedContent, this.animationDuration / 2);
         this.ShowChildren(this.pausedConsent, this.animationDuration / 2).OnComplete(() => {
             var buttons = this.pausedConsent.GetComponentsInChildren<Button>(true);
@@ -107,7 +108,7 @@ public class PauseMenuController: MonoBehaviour
         });
     }
 
-    public void HideLeaveConsent(Button leaveButton) {
+    public void HideLeaveConsent() {
         var buttons = this.pausedConsent.GetComponentsInChildren<Button>(true);
         foreach(var button in buttons) {
             button.interactable = false;
@@ -115,12 +116,12 @@ public class PauseMenuController: MonoBehaviour
 
         this.HideChildren(this.pausedConsent, this.animationDuration / 2);
         this.ShowChildren(this.pausedContent, this.animationDuration / 2).OnComplete(() => {
-            leaveButton.interactable = true;
+            this.leaveButton.interactable = true;
             this.menuToggleButton.interactable = true;
         });
     }
 
-    public void LeaveGame() => LevelManager.currentInstance.sceneController.BackToMenu();
+    public void LeaveGame() => LevelManager.currentInstance.LeaveGame();
 
     public Tween ShowChildren(RectTransform parent, float duration, float finalAlphaValue = 1f) {
         var texts = parent.GetComponentsInChildren<TextMeshProUGUI>(true);
@@ -165,4 +166,6 @@ public class PauseMenuController: MonoBehaviour
         tw?.OnComplete(() => { parent.gameObject.SetActive(false); });
         return tw;
     }
+
+    public void ForceDisableLeave() => this.leaveButton.interactable = false;
 }
