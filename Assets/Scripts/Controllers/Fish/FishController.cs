@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class FishController : MonoBehaviour
 {
-    [SerializeField, BoxGroup("Fish shoot configs")] public Transform prefabProjectile;    
-    [SerializeField, BoxGroup("Fish shoot configs")] public float timeBetweenShoot = 1f;
+    [SerializeField, BoxGroup("Fish References")] public Transform prefabProjectile;    
+    [SerializeField, BoxGroup("Fish References")] public Animator animator;
+
+    [SerializeField, BoxGroup("Fish shoot configs"), Range(2f, 10f)] public float timeBetweenShoot = 2f;
     [SerializeField, BoxGroup("Fish shoot configs")] public float timeToDestroyProjectile = .5f;
+    [SerializeField, BoxGroup("Fish shoot configs")] public Vector2 projectileSpawnOffset = Vector2.zero;
     [SerializeField, BoxGroup("Fish shoot configs")] public float minDistToShoot;
-    [SerializeField, BoxGroup("Fish shoot configs")] public Transform positionToShoot;
+    [SerializeField, BoxGroup("Fish shoot configs")] public string fishAttackTrigger = "Attack";
+
     [ShowNonSerializedField] private float distanceBetweenBoatAndFish;
     [ShowNonSerializedField] private bool isShooting;
 
+    [ShowNativeProperty] private Vector3 ProjectileSpawnPoint => this.transform.position + (Vector3) this.projectileSpawnOffset;
     private Coroutine currentCorrotine;
     private BoatController player;
 
@@ -34,18 +39,16 @@ public class FishController : MonoBehaviour
             StopCoroutine(currentCorrotine);
             isShooting = false;
         }
-    }
+    }  
 
-    private void FishShoot() {        
-        if(distanceBetweenBoatAndFish < this.minDistToShoot) {
-            var projectile = Instantiate(prefabProjectile, this.transform);
-            projectile.transform.position = positionToShoot.position;            
-        }
+    public void FishShoot() {         
+        var projectile = Instantiate(prefabProjectile, this.transform);
+        projectile.transform.position = ProjectileSpawnPoint;          
     }
 
     IEnumerator StartShoot() {
         while(isShooting) {
-            FishShoot();            
+            animator.SetTrigger(fishAttackTrigger);
             yield return new WaitForSeconds(timeBetweenShoot);
         }
     }
@@ -55,5 +58,7 @@ public class FishController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, this.minDistToShoot);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(ProjectileSpawnPoint, 0.5f);
     }
 }
