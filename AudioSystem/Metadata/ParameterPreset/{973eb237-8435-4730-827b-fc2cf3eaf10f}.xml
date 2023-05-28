@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{973eb237-8435-4730-827b-fc2cf3eaf10f}">
+		<property name="name">
+			<value>fINALTROVÃO</value>
+		</property>
+		<relationship name="folder">
+			<destination>{a4b264e4-b3a3-4899-900f-25170b9ff25a}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{afcf5367-8c65-40cb-a6b2-bc036642f350}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{afcf5367-8c65-40cb-a6b2-bc036642f350}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

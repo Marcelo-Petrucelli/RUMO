@@ -8,7 +8,7 @@
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{cea91f10-30db-47c6-aafc-90fd340fdc84}</destination>
+			<destination>{a990af6f-0cbe-4317-81e0-b1e2a0aca0c6}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{ac0dd3fd-2d38-4bf6-92f9-4cb1b29f57fe}</destination>
@@ -53,7 +53,7 @@
 			<destination>{763a762e-09a9-472c-a522-0ab33cb3d180}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{54729347-a419-49b8-bc76-15e5c6e8d2f6}</destination>
+			<destination>{b109cbe8-75f7-40ec-9603-3afd47b939c0}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{3c28cde0-8777-446f-8a22-17285d063046}" />
@@ -89,10 +89,15 @@
 	</object>
 	<object class="MixerBusPanner" id="{763a762e-09a9-472c-a522-0ab33cb3d180}" />
 	<object class="SingleSound" id="{9bd27971-8c5a-41c0-8613-4d0b25efa5ac}">
-		<property name="length">
-			<value>2.5</value>
+		<property name="start">
+			<value>0.10000000000000001</value>
 		</property>
-		<property name="name" />
+		<property name="length">
+			<value>2.4000000000000004</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>0.10000000000000001</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{1b477ca0-feb7-4942-bf91-ed5446593bca}</destination>
 		</relationship>
@@ -129,7 +134,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>5</value>
+			<value>3.5</value>
 		</property>
 	</object>
 	<object class="FadeCurve" id="{a4986444-df22-4d04-b88f-5b48954ed7a8}">
@@ -149,13 +154,13 @@
 	<object class="MixerBusFader" id="{4d7bca45-a288-4ce3-b71b-50d550f31790}" />
 	<object class="AutomationPoint" id="{ef3cbb97-416d-44d7-ba56-239487f73058}">
 		<property name="position">
-			<value>1.5</value>
+			<value>1.3000000000000005</value>
 		</property>
 		<property name="value">
 			<value>1</value>
 		</property>
 		<property name="curveShape">
-			<value>0.25471893</value>
+			<value>-1.00000048</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{2551d44d-5733-4e4e-830d-ffed6cd2bc94}">
