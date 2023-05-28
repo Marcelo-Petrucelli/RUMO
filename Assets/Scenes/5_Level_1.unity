@@ -549,7 +549,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 869547989}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1906,7 +1906,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 869547989}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5295,7 +5295,7 @@ RectTransform:
   - {fileID: 1413194360}
   - {fileID: 581369858}
   m_Father: {fileID: 869547989}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6175,7 +6175,7 @@ MonoBehaviour:
   minMaxAutoFixZRange: {x: 0, y: 15}
   levelCamera: {fileID: 1826247275}
   sceneController: {fileID: 1826247279}
-  pauseController: {fileID: 0}
+  pauseController: {fileID: 1591762425}
   compassBg: {fileID: 735731798}
   compassPointer: {fileID: 833443082}
   itemController: {fileID: 827853328}
