@@ -33,6 +33,8 @@ public class CutSceneText : MonoBehaviour
         sequence.AppendInterval(this.endSceneWaitingTime).OnComplete(() => {
             this.sceneController.GoToLevel(0);
         });
+
+        AudioController.Instance?.PlayDub(0, this.initialWaiting + (this.textWaitingInterval * 2));
     }
 
     public Tween TextAnimation(TextMeshProUGUI currentText) {        

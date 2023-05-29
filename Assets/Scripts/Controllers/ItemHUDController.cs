@@ -82,6 +82,35 @@ public class ItemHUDController : MonoBehaviour
         if(msg != null) {
             msg.color = transp;
             msg.gameObject.SetActive(true);
+            switch(this.currentItemIndex) {
+                case 0:
+                    AudioController.Instance?.PlayDub(2);
+                    break;
+                case 1:
+                    AudioController.Instance?.PlayDub(3);
+                    break;
+                case 2:
+                    AudioController.Instance?.PlayDub(4);
+                    break;
+                case 3:
+                    AudioController.Instance?.PlayDub(6);
+                    break;
+                case 4:
+                    AudioController.Instance?.PlayDub(7);
+                    break;
+                case 5:
+                    AudioController.Instance?.PlayDub(8);
+                    break;
+                case 6:
+                    AudioController.Instance?.PlayDub(10);
+                    break;
+                case 7:
+                    AudioController.Instance?.PlayDub(11);
+                    break;
+                case 8:
+                    AudioController.Instance?.PlayDub(12);
+                    break;
+            }
         }
         this.helpText.gameObject.SetActive(true);
         this.screenItemFrame.gameObject.SetActive(true);

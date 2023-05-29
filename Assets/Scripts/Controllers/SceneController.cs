@@ -3,9 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
-using UnityEditor.SearchService;
 using System;
-using Unity.VisualScripting;
 
 public class SceneController:MonoBehaviour
 {

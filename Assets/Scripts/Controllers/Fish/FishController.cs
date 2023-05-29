@@ -39,9 +39,11 @@ public class FishController : MonoBehaviour
             if(this.distanceBetweenBoatAndFish < this.minDistToShoot && !this.player.jammed) {
                 if(!this.isShooting) {
                     this.isShooting = true;
+                    AudioController.Instance.EnterBattle();
                     this.currentCorrotine = this.StartCoroutine(this.StartShoot());
                 }
             } else if(this.isShooting) {
+                AudioController.Instance.ExitBattle();
                 this.StopCoroutine(this.currentCorrotine);
                 this.isShooting = false;
             }

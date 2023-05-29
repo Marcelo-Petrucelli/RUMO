@@ -54,7 +54,7 @@ MonoBehaviour:
   minDistToShoot: 4.5
   timeBetweenShoot: 2
   projectileSpawnOffset: {x: -1.06, y: 0.6}
-  allProjectileSpeed: 1.5
+  allProjectileSpeed: 1
   allProjectileDuration: 3
   myBubbles: []
 --- !u!70 &4551221662467323495

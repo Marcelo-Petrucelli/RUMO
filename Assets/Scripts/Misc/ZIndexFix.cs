@@ -17,7 +17,7 @@ public class ZIndexFix : MonoBehaviour
     {
         this.attachement = this.GetComponent<Transform>();
         if(this.autoFromLM) {
-            LevelManager.currentInstance.SetWorldMinMaxZIndex(this);
+            LevelManager.currentInstance?.SetWorldMinMaxZIndex(this);
         }
     }
 
