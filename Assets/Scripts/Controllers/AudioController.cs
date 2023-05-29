@@ -37,6 +37,16 @@ public class AudioController:MonoBehaviour
         }
     }
 
+    public void EnterBattle() {
+        this.musicsEmitter[1].SetParameter("Finish battle", 0f);
+        this.musicsEmitter[1].SetParameter("Battle", 1f);
+    }
+
+    public void ExitBattle() {
+        this.musicsEmitter[1].SetParameter("Battle", 0f);
+        this.musicsEmitter[1].SetParameter("Finish battle", 1f);
+    }
+
     public void GameStartedMusic() {
         this.musicsEmitter[0].SetParameter("FINISH INTRO", 1.2f);
         this.ExecuteAfter(() => {
