@@ -3113,8 +3113,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bastava um bot\xE3o para voc\xEA entrar no mundo colorido da fantasia
-    e viv\xEA-lo de forma pura. \n"
+  m_text: "Bastava um bot\xE3o para entrar no mundo colorido da fantasia e viv\xEA-lo
+    de forma pura. \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
   m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
@@ -6734,8 +6734,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Estar vivo \xE9 saber quando precisar dar uma inje\xE7\xE3o \nde vida
-    em voc\xEA e nos outros...."
+  m_text: "Estar vivo \xE9 saber quando precisar de uma inje\xE7\xE3o \nde vida em
+    voc\xEA e nos outros...."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
   m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
@@ -7183,8 +7183,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Somos como plantas - devemos ser regados de amor e carinho de vez em quando,
-    para continuarmos cumprindo nossa miss\xE3o no universo..."
+  m_text: "Somos como plantas - devemos ser regados com ternura para continuarmos
+    cumprindo nossa miss\xE3o no universo..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
   m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
