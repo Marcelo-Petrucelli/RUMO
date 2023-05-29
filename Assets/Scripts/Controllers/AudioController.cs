@@ -9,9 +9,45 @@ public class AudioController:MonoBehaviour
     [SerializeField, BoxGroup("References")] Transform dubParent;
     
     internal static AudioController Instance = null;
-    [ShowNonSerializedField] internal bool isMusicMuted = false;
-    [ShowNonSerializedField] internal bool isSFXMuted = false;
-    [ShowNonSerializedField] internal bool isDubMuted = false;
+    [ShowNonSerializedField] private bool isMusicMuted = false;
+    [ShowNonSerializedField] private bool isSFXMuted = false;
+    [ShowNonSerializedField] private bool isDubMuted = false;
+
+    internal bool MusicMuted {
+        get => this.isMusicMuted;
+        set {
+            this.isMusicMuted = value;
+            if(this.isMusicMuted) {
+
+            } else {
+
+            }
+        }
+    }
+
+    internal bool SFXMuted {
+        get => this.isSFXMuted;
+        set {
+            this.isSFXMuted = value;
+            if(this.isSFXMuted) {
+
+            } else {
+
+            }
+        }
+    }
+
+    internal bool DubMuted {
+        get => this.isDubMuted;
+        set {
+            this.isDubMuted = value;
+            if(this.isDubMuted) {
+
+            } else {
+
+            }
+        }
+    }
 
     private List<FMODUnity.StudioEventEmitter> musicsEmitter;
     private List<FMODUnity.StudioEventEmitter> dubs;
