@@ -236,7 +236,7 @@ MonoBehaviour:
   - {fileID: -367238269755446908}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -450,10 +450,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/VOICES.bank
   Name: VOICES
   StudioPath: bank:/VOICES
-  lastModified: 638209116499335660
+  lastModified: 638209126373459360
   FileSizes:
   - Name: Desktop
-    Value: 1609024
+    Value: 1608896
   Exists: 1
 --- !u!114 &-216896131146021665
 MonoBehaviour:
@@ -535,7 +535,7 @@ MonoBehaviour:
   - {fileID: 9201576465605475191}
   StringsBanks:
   - {fileID: -850546662148640188}
-  cacheTime: 638209116499335660
+  cacheTime: 638209126373459360
   cacheVersion: 131603
 --- !u!114 &166207578645702935
 MonoBehaviour:
@@ -637,8 +637,8 @@ MonoBehaviour:
     Data3: -1412110436
     Data4: -932504744
   Banks:
-  - {fileID: 9201576465605475191}
   - {fileID: 2876849030499083868}
+  - {fileID: 9201576465605475191}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
