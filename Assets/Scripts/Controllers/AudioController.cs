@@ -6,15 +6,50 @@ using System.Collections;
 
 public class AudioController:MonoBehaviour
 {
-    [SerializeField, BoxGroup("References")] Transform dubParent;
-    
+    [SerializeField, ReorderableList, BoxGroup("References")] private List<FMODUnity.StudioEventEmitter> dubs;
+
     internal static AudioController Instance = null;
-    [ShowNonSerializedField] internal bool isMusicMuted = false;
-    [ShowNonSerializedField] internal bool isSFXMuted = false;
-    [ShowNonSerializedField] internal bool isDubMuted = false;
+    [ShowNonSerializedField] private bool isMusicMuted = false;
+    [ShowNonSerializedField] private bool isSFXMuted = false;
+    [ShowNonSerializedField] private bool isDubMuted = false;
+
+    internal bool MusicMuted {
+        get => this.isMusicMuted;
+        set {
+            this.isMusicMuted = value;
+            if(this.isMusicMuted) {
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(0);
+            } else {
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(1);
+            }
+        }
+    }
+
+    internal bool SFXMuted {
+        get => this.isSFXMuted;
+        set {
+            this.isSFXMuted = value;
+            if(this.isSFXMuted) {
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(0);
+            } else {
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(1);
+            }
+        }
+    }
+
+    internal bool DubMuted {
+        get => this.isDubMuted;
+        set {
+            this.isDubMuted = value;
+            if(this.isDubMuted) {
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(0);
+            } else {
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(1);
+            }
+        }
+    }
 
     private List<FMODUnity.StudioEventEmitter> musicsEmitter;
-    private List<FMODUnity.StudioEventEmitter> dubs;
 
     void Awake() {
         if(Instance == null) {
@@ -24,7 +59,6 @@ public class AudioController:MonoBehaviour
             Destroy(this.gameObject);
         }
         this.musicsEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
-        this.dubs = new List<FMODUnity.StudioEventEmitter>(this.dubParent.GetComponentsInChildren<FMODUnity.StudioEventEmitter>());
     }
 
     public void PlayDub(int index, float wait = 0f) {

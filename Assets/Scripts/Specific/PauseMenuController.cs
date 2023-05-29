@@ -40,26 +40,26 @@ public class PauseMenuController: MonoBehaviour
             this.pausedConsent.gameObject.SetActive(false);
         }
 
-        this.musicToggle.isOn = AudioController.Instance.isMusicMuted;
-        this.sfxToggle.isOn = AudioController.Instance.isSFXMuted;
-        this.dubToggle.isOn = !AudioController.Instance.isDubMuted;
+        this.musicToggle.isOn = AudioController.Instance.MusicMuted;
+        this.sfxToggle.isOn = AudioController.Instance.SFXMuted;
+        this.dubToggle.isOn = !AudioController.Instance.DubMuted;
     }
 
     public void MenuToggleMusic(bool value) {
         if(AudioController.Instance != null) {
-            AudioController.Instance.isMusicMuted = value;
+            AudioController.Instance.MusicMuted = value;
         }
     }
 
     public void MenuToggleSFX(bool value) {
         if(AudioController.Instance != null) {
-            AudioController.Instance.isSFXMuted = value;
+            AudioController.Instance.SFXMuted = value;
         }
     }
 
     public void MenuToggleDub(bool value) {
         if(AudioController.Instance != null) {
-            AudioController.Instance.isDubMuted = !value;
+            AudioController.Instance.DubMuted = !value;
         }
     }
 

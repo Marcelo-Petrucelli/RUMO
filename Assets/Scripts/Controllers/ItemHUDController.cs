@@ -82,7 +82,8 @@ public class ItemHUDController : MonoBehaviour
         if(msg != null) {
             msg.color = transp;
             msg.gameObject.SetActive(true);
-            switch(this.currentItemIndex) {
+            print(this.currentSlotIndex);
+            switch(this.currentSlotIndex) {
                 case 0:
                     AudioController.Instance?.PlayDub(2);
                     break;
