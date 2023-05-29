@@ -4,6 +4,9 @@
 		<property name="name">
 			<value>Msuic Vol</value>
 		</property>
+		<relationship name="masters">
+			<destination>{595dfbae-fe74-449f-8922-f92a3ee1c641}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{496313e6-b3c8-4def-bee5-f5418c78d126}</destination>
 		</relationship>
