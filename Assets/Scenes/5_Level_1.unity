@@ -2395,7 +2395,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Nascemos sozinhos e morremos sozinhos.\nO que fazemos nesse meio tempo
-    \xE9 o que \nvai nos guiar at\xE9 a outra ponta..."
+    \xE9 o que vai nos guiar at\xE9 a outra ponta..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
   m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
@@ -9107,7 +9107,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "O mar da vida nos leva at\xE9 a superf\xEDcie de realidades\nnuas, cruas
+  m_text: "O mar da vida nos leva at\xE9 a superf\xEDcie de realidades nuas, cruas
     e dolorosas... nos fazendo esquecer daquele afeto transcrito ou personificado
     de maneira singela..."
   m_isRightToLeft: 0
@@ -9881,6 +9881,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1323562217}
     m_Modifications:
+    - target: {fileID: 7916737765405908623, guid: 036356cedb335f04386c05c570c61625, type: 3}
+      propertyPath: allProjectileSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7916737765478659360, guid: 036356cedb335f04386c05c570c61625, type: 3}
       propertyPath: m_Name
       value: FishAnchor
