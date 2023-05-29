@@ -24,7 +24,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-8507001693920618532
+--- !u!114 &-8038346410778645510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,50 +34,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/PULONA AGUA BALEIA
+  m_Name: event:/U.I/Enter game
   m_EditorClassIdentifier: 
-  Path: event:/PULONA AGUA BALEIA
+  Path: event:/U.I/Enter game
   Guid:
-    Data1: -1786793429
-    Data2: 1218377739
-    Data3: -9411683
-    Data4: -738560294
+    Data1: 1088687393
+    Data2: 1284089710
+    Data3: -1288310122
+    Data4: 765950656
   Banks:
-  - {fileID: 2876849030499083868}
-  IsStream: 1
+  - {fileID: -1737137109819552962}
+  IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 4803
---- !u!114 &-7710614590316358966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/TROV\xC3O_LOMBRIGA"
-  m_EditorClassIdentifier: 
-  Path: "event:/TROV\xC3O_LOMBRIGA"
-  Guid:
-    Data1: -645935016
-    Data2: 1099319605
-    Data3: 892003258
-    Data4: -2002443740
-  Banks:
-  - {fileID: 2876849030499083868}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 66976
+  Length: 2810
 --- !u!114 &-7457637525034158155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +105,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7325
---- !u!114 &-5559022266777118577
+--- !u!114 &-7147497423181447642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,16 +115,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/GAMEPLAY/CURVAS
+  m_Name: event:/SFX/PULONA AGUA BALEIA
   m_EditorClassIdentifier: 
-  Path: event:/GAMEPLAY/CURVAS
+  Path: event:/SFX/PULONA AGUA BALEIA
   Guid:
-    Data1: 465513994
-    Data2: 1303746646
-    Data3: -1412110436
-    Data4: -932504744
+    Data1: -1786793429
+    Data2: 1218377739
+    Data3: -9411683
+    Data4: -738560294
   Banks:
-  - {fileID: 9201576465605475191}
+  - {fileID: 2876849030499083868}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4803
+--- !u!114 &-6645124550649754577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/GAMEPLAY/Bolha
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/GAMEPLAY/Bolha
+  Guid:
+    Data1: -522096336
+    Data2: 1257327002
+    Data3: -162754114
+    Data4: -1781057343
+  Banks:
   - {fileID: 2876849030499083868}
   IsStream: 0
   Is3D: 0
@@ -159,7 +158,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2118
+  Length: 1045
+--- !u!114 &-5531779679789238526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FISH_SOUND
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FISH_SOUND
+  Guid:
+    Data1: 1397841748
+    Data2: 1194769217
+    Data3: 1503569079
+    Data4: -581422500
+  Banks:
+  - {fileID: 2876849030499083868}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
 --- !u!114 &-5019552185282719026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +262,7 @@ MonoBehaviour:
   - {fileID: -367238269755446908}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -304,10 +330,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/U.I.bank
   Name: U.I
   StudioPath: bank:/U.I
-  lastModified: 638208119303083806
+  lastModified: 638209034911788325
   FileSizes:
   - Name: Desktop
-    Value: 68896
+    Value: 69536
   Exists: 1
 --- !u!114 &-1726460199813817074
 MonoBehaviour:
@@ -363,6 +389,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 540
+--- !u!114 &-1570292813069620658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/INTRO_MUSIC
+  m_EditorClassIdentifier: 
+  Path: event:/MUSIC/INTRO_MUSIC
+  Guid:
+    Data1: -1828756715
+    Data2: 1338282937
+    Data3: -106356336
+    Data4: -2032783329
+  Banks:
+  - {fileID: 5101913339488574207}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5593805001511121946}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 111627
 --- !u!114 &-850546662148640188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,11 +432,38 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638208119302988676
+  lastModified: 638209037964986050
   FileSizes:
   - Name: Desktop
-    Value: 2720
+    Value: 2970
   Exists: 1
+--- !u!114 &-814808516722967009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/BALEIA SOM
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/BALEIA SOM
+  Guid:
+    Data1: 143284549
+    Data2: 1293603932
+    Data3: 610600602
+    Data4: -1511276673
+  Banks:
+  - {fileID: 2876849030499083868}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8739
 --- !u!114 &-367238269755446908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,10 +479,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/VOICES.bank
   Name: VOICES
   StudioPath: bank:/VOICES
-  lastModified: 638208119303154016
+  lastModified: 638209037965051133
   FileSizes:
   - Name: Desktop
-    Value: 1459552
+    Value: 1612000
   Exists: 1
 --- !u!114 &-216896131146021665
 MonoBehaviour:
@@ -450,19 +531,9 @@ MonoBehaviour:
   - {fileID: -1737137109819552962}
   - {fileID: -367238269755446908}
   EditorEvents:
-  - {fileID: -5559022266777118577}
   - {fileID: 3414464423358086806}
-  - {fileID: 2982446927699593994}
   - {fileID: 3395354145241083014}
-  - {fileID: -8507001693920618532}
-  - {fileID: 3216346041374072709}
-  - {fileID: 6899154290986831964}
-  - {fileID: 1214569153979296280}
-  - {fileID: -7710614590316358966}
-  - {fileID: 6648114580288774497}
-  - {fileID: 6384833086300465867}
   - {fileID: -1590805293169831696}
-  - {fileID: 8032071152467900454}
   - {fileID: -4728734450514436360}
   - {fileID: 2597086839687267630}
   - {fileID: 8142876142501014280}
@@ -477,12 +548,24 @@ MonoBehaviour:
   - {fileID: -216896131146021665}
   - {fileID: -7271605639502270007}
   - {fileID: -7457637525034158155}
+  - {fileID: 5940354758610081153}
+  - {fileID: -1570292813069620658}
+  - {fileID: 3213068770554626689}
+  - {fileID: -7147497423181447642}
+  - {fileID: -6645124550649754577}
+  - {fileID: -814808516722967009}
+  - {fileID: -5531779679789238526}
+  - {fileID: 5839518503296197253}
+  - {fileID: 4274176172689861981}
+  - {fileID: -8038346410778645510}
+  - {fileID: 5511780773054347938}
+  - {fileID: 8834879429237581621}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9201576465605475191}
   StringsBanks:
   - {fileID: -850546662148640188}
-  cacheTime: 638208119303154016
+  cacheTime: 638209037965051133
   cacheVersion: 131603
 --- !u!114 &166207578645702935
 MonoBehaviour:
@@ -565,57 +648,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5734
---- !u!114 &393781398326286092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MUSIC_FISH/TENSE_MUSIC
-  m_EditorClassIdentifier: 
-  Name: TENSE_MUSIC
-  StudioPath: 
-  Min: 0
-  Max: 3
-  Default: 0
-  ID:
-    data1: 401020710
-    data2: 146635051
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &1214569153979296280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/FISH_SOUND
-  m_EditorClassIdentifier: 
-  Path: event:/FISH_SOUND
-  Guid:
-    Data1: 1397841748
-    Data2: 1194769217
-    Data3: 1503569079
-    Data4: -581422500
-  Banks:
-  - {fileID: 2876849030499083868}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2500
 --- !u!114 &2584613801156212923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,12 +717,12 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638208119303073789
+  lastModified: 638209034911788325
   FileSizes:
   - Name: Desktop
-    Value: 1300000
+    Value: 1302176
   Exists: 1
---- !u!114 &2982446927699593994
+--- !u!114 &3213068770554626689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -700,51 +732,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MUSIC/MUSIC_FISH
+  m_Name: "event:/SFX/TROV\xC3O_LOMBRIGA"
   m_EditorClassIdentifier: 
-  Path: event:/MUSIC/MUSIC_FISH
+  Path: "event:/SFX/TROV\xC3O_LOMBRIGA"
   Guid:
-    Data1: 1627788906
-    Data2: 1272420507
-    Data3: 470255760
-    Data4: 1294035448
+    Data1: -645935016
+    Data2: 1099319605
+    Data3: 892003258
+    Data4: -2002443740
   Banks:
   - {fileID: 5101913339488574207}
+  - {fileID: 2876849030499083868}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 393781398326286092}
+  - {fileID: 5995927527032263290}
   MinDistance: 1
   MaxDistance: 20
-  Length: 71162
---- !u!114 &3216346041374072709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/GAMEPLAY/Bolha
-  m_EditorClassIdentifier: 
-  Path: event:/GAMEPLAY/Bolha
-  Guid:
-    Data1: -522096336
-    Data2: 1257327002
-    Data3: -162754114
-    Data4: -1781057343
-  Banks:
-  - {fileID: 2876849030499083868}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1045
+  Length: 66000
 --- !u!114 &3395354145241083014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,6 +778,7 @@ MonoBehaviour:
   - {fileID: -2261166888534746131}
   - {fileID: -8712395665855921791}
   - {fileID: -3145266966702114325}
+  - {fileID: 4958050206954318697}
   MinDistance: 1
   MaxDistance: 20
   Length: 513488
@@ -802,6 +809,82 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &4274176172689861981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/GAMEPLAY/BoAT
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/GAMEPLAY/BoAT
+  Guid:
+    Data1: -893335303
+    Data2: 1146039042
+    Data3: 1637113783
+    Data4: 746153647
+  Banks:
+  - {fileID: 2876849030499083868}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4981089444144117532}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6625
+--- !u!114 &4958050206954318697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/MUSIC_Master/fINALTROV\xC3O"
+  m_EditorClassIdentifier: 
+  Name: "fINALTROV\xC3O"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4219573088
+    data2: 1550261972
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4981089444144117532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BoAT/Push button
+  m_EditorClassIdentifier: 
+  Name: Push button
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2192678758
+    data2: 394297925
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5101913339488574207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,12 +900,12 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/MUSIC.bank
   Name: MUSIC
   StudioPath: bank:/MUSIC
-  lastModified: 638208119302968678
+  lastModified: 638209034911683230
   FileSizes:
   - Name: Desktop
-    Value: 6029600
+    Value: 7934336
   Exists: 1
---- !u!114 &6384833086300465867
+--- !u!114 &5511780773054347938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -832,24 +915,126 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/GAMEPLAY/BoAT
+  m_Name: event:/U.I/CLIXK menu
   m_EditorClassIdentifier: 
-  Path: event:/GAMEPLAY/BoAT
+  Path: event:/U.I/CLIXK menu
   Guid:
-    Data1: -893335303
-    Data2: 1146039042
-    Data3: 1637113783
-    Data4: 746153647
+    Data1: 1659223548
+    Data2: 1138531228
+    Data3: -1643191369
+    Data4: -41518485
+  Banks:
+  - {fileID: -1737137109819552962}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5593805001511121946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/INTRO_MUSIC/FINISH INTRO
+  m_EditorClassIdentifier: 
+  Name: FINISH INTRO
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3426626916
+    data2: 1741745980
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &5839518503296197253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/SFX/GAMEPLAY/Aten\xE7\xE3o"
+  m_EditorClassIdentifier: 
+  Path: "event:/SFX/GAMEPLAY/Aten\xE7\xE3o"
+  Guid:
+    Data1: 1750768474
+    Data2: 1091742164
+    Data3: 2137602231
+    Data4: -1112676658
   Banks:
   - {fileID: 2876849030499083868}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 7062862321401580086}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 6625
+  Length: 750
+--- !u!114 &5940354758610081153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/GAMEPLAY/CURVAS
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/GAMEPLAY/CURVAS
+  Guid:
+    Data1: 465513994
+    Data2: 1303746646
+    Data3: -1412110436
+    Data4: -932504744
+  Banks:
+  - {fileID: 2876849030499083868}
+  - {fileID: 9201576465605475191}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2118
+--- !u!114 &5995927527032263290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/TROV\xC3O_LOMBRIGA/fINALTROV\xC3O"
+  m_EditorClassIdentifier: 
+  Name: "fINALTROV\xC3O"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4219573088
+    data2: 1550261972
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &6548484732560222464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,111 +1062,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5897
---- !u!114 &6648114580288774497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/GAMEPLAY/Aten\xE7\xE3o"
-  m_EditorClassIdentifier: 
-  Path: "event:/GAMEPLAY/Aten\xE7\xE3o"
-  Guid:
-    Data1: 1750768474
-    Data2: 1091742164
-    Data3: 2137602231
-    Data4: -1112676658
-  Banks:
-  - {fileID: 2876849030499083868}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 750
---- !u!114 &6899154290986831964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BALEIA SOM
-  m_EditorClassIdentifier: 
-  Path: event:/BALEIA SOM
-  Guid:
-    Data1: 143284549
-    Data2: 1293603932
-    Data3: 610600602
-    Data4: -1511276673
-  Banks:
-  - {fileID: 2876849030499083868}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 8739
---- !u!114 &7062862321401580086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/BoAT/Push button
-  m_EditorClassIdentifier: 
-  Name: Push button
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2192678758
-    data2: 394297925
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &8032071152467900454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enter game
-  m_EditorClassIdentifier: 
-  Path: event:/Enter game
-  Guid:
-    Data1: 1088687393
-    Data2: 1284089710
-    Data3: -1288310122
-    Data4: 765950656
-  Banks:
-  - {fileID: -1737137109819552962}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2810
 --- !u!114 &8142876142501014280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,6 +1089,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3625
+--- !u!114 &8834879429237581621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VOICES/Audio Tutorial
+  m_EditorClassIdentifier: 
+  Path: event:/VOICES/Audio Tutorial
+  Guid:
+    Data1: 1935584878
+    Data2: 1195762869
+    Data3: -353062224
+    Data4: 1521420811
+  Banks:
+  - {fileID: -367238269755446908}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13844
 --- !u!114 &9201576465605475191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,8 +1131,8 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638208119302978672
+  lastModified: 638209034911693240
   FileSizes:
   - Name: Desktop
-    Value: 47520
+    Value: 47872
   Exists: 1
