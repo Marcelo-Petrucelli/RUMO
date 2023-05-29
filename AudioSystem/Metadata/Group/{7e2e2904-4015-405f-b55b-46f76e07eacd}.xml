@@ -12,6 +12,7 @@
 		</property>
 		<relationship name="masters">
 			<destination>{0f589a06-702a-4dcd-a8b6-a53eb959053f}</destination>
+			<destination>{00fa3ee2-ce0b-4012-9564-dcd7ea986972}</destination>
 		</relationship>
 		<relationship name="effectChain">
 			<destination>{e0717a08-4cec-42b6-ad08-f160ac40f645}</destination>
