@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5500808629527428567}
   - component: {fileID: 8695871129543227114}
   - component: {fileID: 6921481396098853667}
+  - component: {fileID: 1197508458683139241}
   - component: {fileID: 6775532715264283678}
   m_Layer: 0
   m_Name: AudioManager
@@ -61,6 +62,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!114 &1197508458683139241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44372960030325929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1828756715
+      Data2: 1338282937
+      Data3: -106356336
+      Data4: -2032783329
+    Path: event:/MUSIC/INTRO_MUSIC
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params:
+  - Name: FINISH INTRO
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &6775532715264283678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +116,7 @@ MonoBehaviour:
       Data4: 212891100
     Path: event:/MUSIC/MUSIC_Master
   Event: 
-  PlayEvent: 1
+  PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0

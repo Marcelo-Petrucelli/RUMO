@@ -615,6 +615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blubble (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8860662212533909761, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
 --- !u!1001 &621759133
@@ -679,6 +683,10 @@ PrefabInstance:
     - target: {fileID: 5556263583807929109, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
       propertyPath: m_Name
       value: Blubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860662212533909761, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
+      propertyPath: active
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
@@ -904,6 +912,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blubble (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8860662212533909761, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
 --- !u!1001 &1598433025
@@ -968,6 +980,10 @@ PrefabInstance:
     - target: {fileID: 5556263583807929109, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
       propertyPath: m_Name
       value: Blubble (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860662212533909761, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
+      propertyPath: active
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
@@ -1276,6 +1292,10 @@ PrefabInstance:
     - target: {fileID: 5556263583807929109, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
       propertyPath: m_Name
       value: Blubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860662212533909761, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}
+      propertyPath: active
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed65bd051c7882408e8c961de4fc869, type: 3}

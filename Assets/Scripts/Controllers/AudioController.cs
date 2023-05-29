@@ -2,6 +2,7 @@
 using NaughtyAttributes;
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class AudioController:MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class AudioController:MonoBehaviour
     [ShowNonSerializedField] internal bool isSFXMuted = false;
     [ShowNonSerializedField] internal bool isDubMuted = false;
 
-    private FMODUnity.StudioEventEmitter musicEmitter;
+    private List<FMODUnity.StudioEventEmitter> musicsEmitter;
     private List<FMODUnity.StudioEventEmitter> dubs;
 
     void Awake() {
@@ -22,39 +23,58 @@ public class AudioController:MonoBehaviour
         } else {
             Destroy(this.gameObject);
         }
-        this.musicEmitter = this.GetComponent<FMODUnity.StudioEventEmitter>();
+        this.musicsEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
         this.dubs = new List<FMODUnity.StudioEventEmitter>(this.dubParent.GetComponentsInChildren<FMODUnity.StudioEventEmitter>());
     }
 
-    public void PlayDub(int index) {
-        this.dubs[index].Play();
+    public void PlayDub(int index, float wait = 0f) {
+        if(wait == 0) {
+            this.dubs[index].Play();
+        } else {
+            this.ExecuteAfter(() => {
+                this.dubs[index].Play();
+            }, wait);
+        }
     }
 
     public void GameStartedMusic() {
-        this.musicEmitter.SetParameter("Transition", 1.1f); //1~1.5
+        this.musicsEmitter[0].SetParameter("FINISH INTRO", 1.2f);
+        this.ExecuteAfter(() => {
+            this.musicsEmitter[1].Play();
+            this.musicsEmitter[1].SetParameter("Transition", 1.1f); //1~1.5
+        }, 3.3f);
     }
 
     public void FirstAdvanceMusic() {
-        this.musicEmitter.SetParameter("Transition", 2.1f); //2~2.5
+        this.musicsEmitter[1].SetParameter("Transition", 2.1f); //2~2.5
     }
 
     public void SecondAdvanceMusic() {
-        this.musicEmitter.SetParameter("Transition", 3.1f); //3~3.5
+        this.musicsEmitter[1].SetParameter("Transition", 3.1f); //3~3.5
     }
 
     public void FinalizeNormalAndStartWOWMusic() {
-        this.musicEmitter.SetParameter("Transition", 4.1f); //4~4.5
+        this.musicsEmitter[1].SetParameter("Transition", 4.1f); //4~4.5
     }
 
     public void StartEUFOMusic() {
-        this.musicEmitter.SetParameter("Transition", 5.1f); //5~5.5
+        this.musicsEmitter[1].SetParameter("Transition", 5.1f); //5~5.5
     }
 
     public void FoundIslandMusicEnding() {
-        this.musicEmitter.SetParameter("Transition", 6.1f); //5~5.5
+        this.musicsEmitter[1].SetParameter("Transition", 6.1f); //5~5.5
     }
 
     public void ReturnedToMenuFromWinningCredits() {
-        this.musicEmitter.SetParameter("Transition", 7.1f); //7~7.1
+        this.musicsEmitter[1].SetParameter("Transition", 7.1f); //7~7.1
+    }
+
+    private void ExecuteAfter(Action stuff, float waitingTime) {
+        StartCoroutine(this.ExecuteAfterCR(stuff, waitingTime));
+    }
+
+    private IEnumerator ExecuteAfterCR(Action stuff, float waitingTime) {
+        yield return new WaitForSeconds(waitingTime);
+        stuff?.Invoke();
     }
 }

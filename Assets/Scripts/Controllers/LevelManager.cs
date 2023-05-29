@@ -116,6 +116,20 @@ public class LevelManager : MonoBehaviour
         msg.color = transp;
         msg.gameObject.SetActive(true);
 
+        switch(index) {
+            case 0:
+                AudioController.Instance?.PlayDub(5);
+                break;
+            case 1:
+                AudioController.Instance?.PlayDub(9);
+                break;
+            case 2:
+                AudioController.Instance?.PlayDub(13);
+                break;
+            case 3:
+                AudioController.Instance?.PlayDub(14);
+                break;
+        }
         this.showingText = true;
         var sequence = DOTween.Sequence();
         sequence.Append(msg.DOColor(originalColor, this.messagesFadeDuration));
@@ -135,6 +149,7 @@ public class LevelManager : MonoBehaviour
     public void ShowTutorial() {
         var texts = this.tutorialMessage.GetComponentsInChildren<TextMeshProUGUI>(true);
         var bgs = this.tutorialMessage.GetComponentsInChildren<Image>(true);
+        AudioController.Instance?.PlayDub(1);
 
         Tween tw = null;
         foreach(var text in texts) {
@@ -181,7 +196,7 @@ public class LevelManager : MonoBehaviour
         this.whale.transform.position = new Vector3(this.player.whalePivot.position.x, this.player.whalePivot.position.y + UnityEngine.Random.Range(-2.2f, 2.2f), this.whale.transform.position.z);
         this.whale.gameObject.SetActive(true);
         this.whale.GetComponentInChildren<Animator>().SetTrigger("Jump");
-        this.whale.GetComponentInChildren<FMODUnity.StudioEventEmitter>().Play();
+        this.whale.GetComponentsInChildren<FMODUnity.StudioEventEmitter>()[1].Play();
     }
 
     public void Whaled() {
