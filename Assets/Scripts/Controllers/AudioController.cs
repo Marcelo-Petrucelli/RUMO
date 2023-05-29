@@ -6,8 +6,8 @@ using System.Collections;
 
 public class AudioController:MonoBehaviour
 {
-    [SerializeField, BoxGroup("References")] Transform dubParent;
-    
+    [SerializeField, ReorderableList, BoxGroup("References")] private List<FMODUnity.StudioEventEmitter> dubs;
+
     internal static AudioController Instance = null;
     [ShowNonSerializedField] private bool isMusicMuted = false;
     [ShowNonSerializedField] private bool isSFXMuted = false;
@@ -50,7 +50,6 @@ public class AudioController:MonoBehaviour
     }
 
     private List<FMODUnity.StudioEventEmitter> musicsEmitter;
-    private List<FMODUnity.StudioEventEmitter> dubs;
 
     void Awake() {
         if(Instance == null) {
@@ -60,7 +59,6 @@ public class AudioController:MonoBehaviour
             Destroy(this.gameObject);
         }
         this.musicsEmitter = new List<FMODUnity.StudioEventEmitter>(this.GetComponents<FMODUnity.StudioEventEmitter>());
-        this.dubs = new List<FMODUnity.StudioEventEmitter>(this.dubParent.GetComponentsInChildren<FMODUnity.StudioEventEmitter>());
     }
 
     public void PlayDub(int index, float wait = 0f) {
