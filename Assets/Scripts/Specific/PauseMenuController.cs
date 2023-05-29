@@ -24,10 +24,12 @@ public class PauseMenuController: MonoBehaviour
 
     private float initialY;
     private Tween currentAnimation;
+    private SceneController sceneController;
     [ShowNonSerializedField] private bool opened;
 
     private void Start()
     {
+        this.sceneController = FindObjectOfType<SceneController>();
         this.initialY = this.animatedMenu.anchoredPosition.y;
 
         if(this.pausedBg != null) {
@@ -48,18 +50,21 @@ public class PauseMenuController: MonoBehaviour
     public void MenuToggleMusic(bool value) {
         if(AudioController.Instance != null) {
             AudioController.Instance.MusicMuted = value;
+            this.sceneController.ButtonPressed();
         }
     }
 
     public void MenuToggleSFX(bool value) {
         if(AudioController.Instance != null) {
             AudioController.Instance.SFXMuted = value;
+            this.sceneController.ButtonPressed();
         }
     }
 
     public void MenuToggleDub(bool value) {
         if(AudioController.Instance != null) {
             AudioController.Instance.DubMuted = !value;
+            this.sceneController.ButtonPressed();
         }
     }
 

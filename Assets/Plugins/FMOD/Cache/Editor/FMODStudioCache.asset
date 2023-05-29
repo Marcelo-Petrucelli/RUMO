@@ -24,7 +24,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-8333803056199239423
+--- !u!114 &-8690851202431613292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,23 +34,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BALEIA SOM
+  m_Name: event:/GAMEPLAY/PULONA AGUA BALEIA
   m_EditorClassIdentifier: 
-  Path: event:/BALEIA SOM
+  Path: event:/GAMEPLAY/PULONA AGUA BALEIA
   Guid:
-    Data1: 143284549
-    Data2: 1293603932
-    Data3: 610600602
-    Data4: -1511276673
+    Data1: -1786793429
+    Data2: 1218377739
+    Data3: -9411683
+    Data4: -738560294
   Banks:
   - {fileID: 2876849030499083868}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 8739
+  Length: 4803
 --- !u!114 &-7457637525034158155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +187,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 12414
+--- !u!114 &-4166796722821110005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GAMEPLAY/BALEIA SOM
+  m_EditorClassIdentifier: 
+  Path: event:/GAMEPLAY/BALEIA SOM
+  Guid:
+    Data1: 143284549
+    Data2: 1293603932
+    Data3: 610600602
+    Data4: -1511276673
+  Banks:
+  - {fileID: 2876849030499083868}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8739
 --- !u!114 &-3447417312666629880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +328,7 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/U.I.bank
   Name: U.I
   StudioPath: bank:/U.I
-  lastModified: 638209098011792981
+  lastModified: 638209116499264141
   FileSizes:
   - Name: Desktop
     Value: 68896
@@ -388,33 +415,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 111627
---- !u!114 &-868618253005402302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/PULONA AGUA BALEIA
-  m_EditorClassIdentifier: 
-  Path: event:/PULONA AGUA BALEIA
-  Guid:
-    Data1: -1786793429
-    Data2: 1218377739
-    Data3: -9411683
-    Data4: -738560294
-  Banks:
-  - {fileID: 2876849030499083868}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 4803
 --- !u!114 &-850546662148640188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,10 +430,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638209106541904489
+  lastModified: 638209116499170368
   FileSizes:
   - Name: Desktop
-    Value: 2860
+    Value: 2958
   Exists: 1
 --- !u!114 &-367238269755446908
 MonoBehaviour:
@@ -450,7 +450,7 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/VOICES.bank
   Name: VOICES
   StudioPath: bank:/VOICES
-  lastModified: 638209098011893257
+  lastModified: 638209116499335660
   FileSizes:
   - Name: Desktop
     Value: 1609024
@@ -522,18 +522,20 @@ MonoBehaviour:
   - {fileID: -1570292813069620658}
   - {fileID: 8834879429237581621}
   - {fileID: 913784028736166380}
-  - {fileID: -868618253005402302}
   - {fileID: 3220831286512313581}
-  - {fileID: -8333803056199239423}
   - {fileID: 4853672914351652982}
   - {fileID: -7003624891945870362}
-  - {fileID: 4969295435978279200}
+  - {fileID: -8690851202431613292}
+  - {fileID: -4166796722821110005}
+  - {fileID: 5533246058528163539}
+  - {fileID: 2151051822410587535}
+  - {fileID: 7856950412009600659}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9201576465605475191}
   StringsBanks:
   - {fileID: -850546662148640188}
-  cacheTime: 638209106541941775
+  cacheTime: 638209116499335660
   cacheVersion: 131603
 --- !u!114 &166207578645702935
 MonoBehaviour:
@@ -644,6 +646,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2118
+--- !u!114 &2151051822410587535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/GAMEPLAY/Trov\xE3o lombriga"
+  m_EditorClassIdentifier: 
+  Path: "event:/GAMEPLAY/Trov\xE3o lombriga"
+  Guid:
+    Data1: 730033250
+    Data2: 1225347561
+    Data3: 128079515
+    Data4: -935859068
+  Banks:
+  - {fileID: 2876849030499083868}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 66976
 --- !u!114 &2584613801156212923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,10 +742,10 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638209106541941775
+  lastModified: 638209116499254128
   FileSizes:
   - Name: Desktop
-    Value: 540032
+    Value: 1299616
   Exists: 1
 --- !u!114 &3220831286512313581
 MonoBehaviour:
@@ -829,33 +858,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 750
---- !u!114 &4969295435978279200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enter game
-  m_EditorClassIdentifier: 
-  Path: event:/Enter game
-  Guid:
-    Data1: 1088687393
-    Data2: 1284089710
-    Data3: -1288310122
-    Data4: 765950656
-  Banks:
-  - {fileID: -1737137109819552962}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2810
 --- !u!114 &5101913339488574207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,11 +873,38 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/MUSIC.bank
   Name: MUSIC
   StudioPath: bank:/MUSIC
-  lastModified: 638209098011732941
+  lastModified: 638209116499160373
   FileSizes:
   - Name: Desktop
-    Value: 7265408
+    Value: 7931616
   Exists: 1
+--- !u!114 &5533246058528163539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GAMEPLAY/dente do peixe
+  m_EditorClassIdentifier: 
+  Path: event:/GAMEPLAY/dente do peixe
+  Guid:
+    Data1: -1688229554
+    Data2: 1141217791
+    Data3: 1729874358
+    Data4: -1834198451
+  Banks:
+  - {fileID: 2876849030499083868}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3000
 --- !u!114 &5593805001511121946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,6 +956,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5897
+--- !u!114 &7856950412009600659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GAMEPLAY/Enter game
+  m_EditorClassIdentifier: 
+  Path: event:/GAMEPLAY/Enter game
+  Guid:
+    Data1: 1088687393
+    Data2: 1284089710
+    Data3: -1288310122
+    Data4: 765950656
+  Banks:
+  - {fileID: -1737137109819552962}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2810
 --- !u!114 &8142876142501014280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,8 +1052,8 @@ MonoBehaviour:
   Path: AudioSystem/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638209106541894504
+  lastModified: 638209116499170368
   FileSizes:
   - Name: Desktop
-    Value: 47680
+    Value: 47776
   Exists: 1
