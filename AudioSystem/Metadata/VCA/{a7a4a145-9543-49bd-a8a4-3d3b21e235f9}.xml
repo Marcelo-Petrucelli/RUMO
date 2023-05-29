@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="MixerVCA" id="{0f589a06-702a-4dcd-a8b6-a53eb959053f}">
+	<object class="MixerVCA" id="{a7a4a145-9543-49bd-a8a4-3d3b21e235f9}">
 		<property name="name">
-			<value>Vozes VCA</value>
+			<value>SFX</value>
 		</property>
 		<relationship name="mixer">
 			<destination>{47bc2e7e-c3ab-43be-811c-9a23fe770aa7}</destination>

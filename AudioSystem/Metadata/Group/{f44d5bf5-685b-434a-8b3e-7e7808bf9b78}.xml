@@ -7,6 +7,9 @@
 		<property name="name">
 			<value>Curvas</value>
 		</property>
+		<relationship name="masters">
+			<destination>{a7a4a145-9543-49bd-a8a4-3d3b21e235f9}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{fd8fa775-d141-477c-a1e5-e890662c0b3b}</destination>
 		</relationship>

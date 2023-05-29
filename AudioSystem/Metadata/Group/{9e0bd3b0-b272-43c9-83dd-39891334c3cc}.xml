@@ -7,6 +7,9 @@
 		<property name="name">
 			<value>MENU</value>
 		</property>
+		<relationship name="masters">
+			<destination>{a7a4a145-9543-49bd-a8a4-3d3b21e235f9}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{694471dc-25ce-4508-9c96-6efd0a5661de}</destination>
 		</relationship>
