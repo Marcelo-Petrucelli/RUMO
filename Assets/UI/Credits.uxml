@@ -16,5 +16,4 @@
     <ui:VisualElement name="Buttons" style="width: 250px; height: 500px; left: 34px; top: -49px;">
         <ui:Button text="Menu" display-tooltip-when-elided="true" name="BackButton" class="back-button" style="align-items: stretch; -unity-text-align: middle-left;" />
     </ui:VisualElement>
-    <ui:Toggle label="Toggle" />
 </ui:UXML>
