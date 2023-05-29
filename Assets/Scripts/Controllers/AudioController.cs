@@ -79,6 +79,7 @@ public class AudioController:MonoBehaviour
     public void ExitBattle() {
         this.musicsEmitter[1].SetParameter("Battle", 0f);
         this.musicsEmitter[1].SetParameter("Finish battle", 1f);
+        this.musicsEmitter[1].SetParameter("Transition", 1.1f);
     }
 
     public void GameStartedMusic() {
