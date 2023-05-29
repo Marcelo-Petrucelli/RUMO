@@ -1441,7 +1441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &206835131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Com o tempo, desaprendemos o verdadeiro \nsignificado de \u2018autenticidade\u2019..."
+  m_text: "Com o tempo, desaprendemos o verdadeiro significado de \u2018autenticidade\u2019..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
   m_sharedMaterial: {fileID: 4687883020304258380, guid: 1ccc99717b2b8e5499f23c51ac4730a3, type: 2}
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 6.4033813, y: 30, z: 286.19214, w: 30}
+  m_margin: {x: 6.4033813, y: 30, z: 243.21484, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
