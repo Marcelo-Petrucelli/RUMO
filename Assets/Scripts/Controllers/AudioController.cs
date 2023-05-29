@@ -18,9 +18,9 @@ public class AudioController:MonoBehaviour
         set {
             this.isMusicMuted = value;
             if(this.isMusicMuted) {
-
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(0);
             } else {
-
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(1);
             }
         }
     }
@@ -30,9 +30,9 @@ public class AudioController:MonoBehaviour
         set {
             this.isSFXMuted = value;
             if(this.isSFXMuted) {
-
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(0);
             } else {
-
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(1);
             }
         }
     }
@@ -42,9 +42,9 @@ public class AudioController:MonoBehaviour
         set {
             this.isDubMuted = value;
             if(this.isDubMuted) {
-
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(0);
             } else {
-
+                FMODUnity.RuntimeManager.GetVCA("").setVolume(1);
             }
         }
     }
